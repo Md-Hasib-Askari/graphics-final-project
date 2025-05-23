@@ -9,13 +9,37 @@ using namespace std;
 int windowWidth = 1280;
 int windowHeight = 720;
 
-void drawWindow(float offX = 0.0f, float offY = 0.0f) {
+//glBegin(GL_POLYGON);
+
+//glEnd();
+
+void drawWindowB1(float offX = 0.0f, float offY = 0.0f) {
     glColor3f(0.180f, 0.059f, 0.012f);
     glBegin(GL_POLYGON);
         glVertex2f(-0.742f+offX, 0.293f+offY);
         glVertex2f(-0.704f+offX, 0.292f+offY);
         glVertex2f(-0.703f+offX, 0.243f+offY);
         glVertex2f(-0.742f+offX, 0.243f+offY);
+    glEnd();
+}
+
+void drawWindowB2(float offX = 0.0f, float offY = 0.0f) {
+    glColor3f(0.761f, 0.145f, 0.008f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.558f+offX, 0.028f+offY);
+        glVertex2f(0.628f+offX, 0.028f+offY);
+        glVertex2f(0.628f+offX, -0.019f+offY);
+        glVertex2f(0.559f+offX, -0.020f+offY);
+    glEnd();
+}
+
+void drawDoorB2(float offX = 0.0f, float offY = 0.0f) {
+    glColor3f(0.761f, 0.145f, 0.008f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.667f+offX, 0.030f+offY);
+        glVertex2f(0.741f+offX, 0.028f+offY);
+        glVertex2f(0.741f+offX, -0.062f+offY);
+        glVertex2f(0.667f+offX, -0.061f+offY);
     glEnd();
 }
 
@@ -58,22 +82,56 @@ void brokenBuilding1() {
         glVertex2f(-0.497f, 0.294f);
     glEnd();
 
-    drawWindow();
-    drawWindow(0.081f);
-    drawWindow(0.157f);
+    drawWindowB1();
+    drawWindowB1(0.081f);
+    drawWindowB1(0.157f);
 
-    drawWindow(0.0f, -0.083f);
-    drawWindow(0.081f, -0.083f);
-    drawWindow(0.157f, -0.083f);
+    drawWindowB1(0.0f, -0.083f);
+    drawWindowB1(0.081f, -0.083f);
+    drawWindowB1(0.157f, -0.083f);
 
-    drawWindow(0.0f, -0.167f);
-    drawWindow(0.081f, -0.167f);
-    drawWindow(0.157f, -0.167f);
+    drawWindowB1(0.0f, -0.167f);
+    drawWindowB1(0.081f, -0.167f);
+    drawWindowB1(0.157f, -0.167f);
 
-    drawWindow(0.0f, -0.251f);
-    drawWindow(0.081f, -0.251f);
-    drawWindow(0.157f, -0.251f);
+    drawWindowB1(0.0f, -0.251f);
+    drawWindowB1(0.081f, -0.251f);
+    drawWindowB1(0.157f, -0.251f);
 
+}
+
+void brokenBuilding2() {
+    glColor3f(0.388f, 0.051f, 0.000f);
+    glBegin(GL_POLYGON);
+        glColor3f(0.435f, 0.043f, 0.000f);
+        glVertex2f(0.502f, 0.073f);
+        glVertex2f(0.594f, 0.158f);
+
+        glColor3f(0.290f, 0.027f, 0.000f);
+        glVertex2f(1.000f, 0.158f);
+        glVertex2f(1.000f, 0.073f);
+    glEnd();
+
+    glColor3f(0.118f, 0.043f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.502f, 0.073f);
+        glVertex2f(0.498f, 0.052f);
+        glVertex2f(1.000f, 0.052f);
+        glVertex2f(1.000f, 0.073f);
+    glEnd();
+
+    glColor3f(0.145f, 0.071f, 0.012f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.521f, 0.056f);
+        glVertex2f(0.518f, -0.06f);
+        glVertex2f(1.000f, -0.06f);
+        glVertex2f(1.000f, 0.052f);
+    glEnd();
+
+    drawWindowB2();
+    drawWindowB2(0.219f);
+    drawWindowB2(0.32f);
+    drawDoorB2();
 }
 
 void drawTree() {
@@ -201,6 +259,7 @@ void mergeComponents() {
     drawBackground();
     drawTree();
     brokenBuilding1();
+    brokenBuilding2();
 }
 
 // Initialization

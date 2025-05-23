@@ -3,15 +3,172 @@
 #include <GL/glut.h>
 #include <cmath>
 
+#define PI 3.14159265
+
 using namespace std;
 
 // Window size
 int windowWidth = 1280;
 int windowHeight = 720;
 
-//glBegin(GL_POLYGON);
+void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(centerX, centerY); // center of fan
 
-//glEnd();
+    for (float angle = startAngle; angle <= endAngle; angle += 1.0f) {
+        float rad = angle * PI / 180.0f;
+        float x = centerX + cos(rad) * radius;
+        float y = centerY + sin(rad) * radius;
+        glVertex2f(x, y);
+    }
+
+    glEnd();
+}
+
+void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2f, float radiusY = 0.3f) {
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(centerX, centerY); // center
+
+    for (float angle = 0; angle <= 360; angle += 1.0f) {
+        float rad = angle * PI / 180.0f;
+        float x = centerX + cos(rad) * radiusX;
+        float y = centerY + sin(rad) * radiusY;
+        glVertex2f(x, y);
+    }
+
+    glEnd();
+}
+
+
+
+    //glBegin(GL_POLYGON);
+
+    //glEnd();
+
+void drawTree1() {
+    glColor3f(0.149f, 0.051f, 0.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-0.869f, 0.248f);
+        glVertex2f(-0.818f, 0.147f);
+        glVertex2f(-0.927f, 0.150f);
+
+        glVertex2f(-0.872f, 0.183f);
+        glVertex2f(-0.798f, 0.081f);
+        glVertex2f(-0.941f, 0.085f);
+
+        glVertex2f(-0.870f, 0.129f);
+        glVertex2f(-0.782f, 0.010f);
+        glVertex2f(-0.966f, 0.013f);
+    glEnd();
+
+    glBegin(GL_QUADS);
+        glVertex2f(-0.882f, 0.014f);
+        glVertex2f(-0.859f, 0.014f);
+        glVertex2f(-0.856f, -0.045f);
+        glVertex2f(-0.884f, -0.045f);
+    glEnd();
+}
+
+void drawTree2() {
+    // Tree Leafs
+    glColor3f(0.290f, 0.059f, 0.000f);
+    drawFilledCurve(0.187f, -0.025f, 0.03f);
+    drawFilledCurve(0.250f, -0.010f, 0.048f);
+    drawFilledCurve(0.261f, 0.044f, 0.023f);
+    drawFilledCurve(0.280f, 0.080f, 0.036f);
+    drawFilledCurve(0.313f, 0.112f, 0.04f);
+    drawFilledCurve(0.343f, 0.127f, 0.034f);
+    drawFilledCurve(0.398f, 0.139f, 0.047f);
+    drawFilledCurve(0.450f, 0.183f, 0.041f);
+    drawFilledCurve(0.507f, 0.178f, 0.028f);
+    drawFilledCurve(0.533f, 0.149f, 0.035f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.231f, -0.034f);
+        glVertex2f(0.309f, 0.127f);
+        glVertex2f(0.507f, 0.178f);
+        glVertex2f(0.549f, 0.110f);
+        glVertex2f(0.551f, -0.034f);
+    glEnd();
+
+    glColor3f(0.549f, 0.071f, 0.004f);
+    glLineWidth(4.5f);
+    glBegin(GL_LINES);
+        glVertex2f(0.347f, 0.138f);
+        glVertex2f(0.346f, -0.035f);
+        glVertex2f(0.298f, 0.092f);
+        glVertex2f(0.310f, 0.059f);
+
+        glVertex2f(0.463f, 0.191f);
+        glVertex2f(0.464f, -0.035f);
+        glVertex2f(0.464f, 0.157f);
+        glVertex2f(0.481f, 0.168f);
+        glVertex2f(0.422f, 0.123f);
+        glVertex2f(0.408f, 0.079f);
+        glVertex2f(0.485f, 0.111f);
+        glVertex2f(0.513f, 0.113f);
+        glVertex2f(0.374f, 0.088f);
+        glVertex2f(0.408f, 0.079f);
+
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(0.313f, 0.112f);
+        glVertex2f(0.345f, 0.092f);
+        glVertex2f(0.366f, 0.110f);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(0.287f, 0.065f);
+        glVertex2f(0.310f, 0.059f);
+        glVertex2f(0.347f, 0.030f);
+        glVertex2f(0.350f, 0.050f);
+        glVertex2f(0.372f, 0.061f);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(0.420f, 0.147f);
+        glVertex2f(0.433f, 0.119f);
+        glVertex2f(0.465f, 0.094f);
+        glVertex2f(0.485f, 0.111f);
+        glVertex2f(0.503f, 0.134f);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(0.391f, 0.118f);
+        glVertex2f(0.408f, 0.079f);
+        glVertex2f(0.463f, 0.037f);
+        glVertex2f(0.464f, 0.018f);
+        glVertex2f(0.498f, 0.052f);
+    glEnd();
+}
+
+void drawTree3() {
+    // Tree Leafs
+    glColor3f(0.149f, 0.055f, 0.004f);
+    drawFilledCurve(-0.932f, -0.178f, 0.047f);
+    drawFilledCurve(-0.890f, -0.214f, 0.067f);
+    drawFilledCurve(-0.843f, -0.208f, 0.053f);
+    drawFilledCurve(-0.880f, -0.140f, 0.051f);
+
+    glColor3f(0.388f, 0.094f, 0.004f);
+    drawFilledEllipse(-0.879, -0.345, 0.058, 0.009);
+
+    glColor3f(0.549f, 0.071f, 0.004f);
+    glLineWidth(12.0f);
+    glBegin(GL_LINES);
+        glVertex2f(-0.880f, -0.187f);
+        glVertex2f(-0.881f, -0.342f);
+    glEnd();
+
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(-0.925f, -0.209f);
+        glVertex2f(-0.881f, -0.251f);
+        glVertex2f(-0.834f, -0.201f);
+    glEnd();
+
+}
+
 
 void drawWindowB1(float offX = 0.0f, float offY = 0.0f) {
     glColor3f(0.180f, 0.059f, 0.012f);
@@ -170,28 +327,65 @@ void brokenBuilding3() {
     drawWindowB3(0.117f, -0.066f);
 }
 
-void drawTree() {
-    glColor3f(0.149f, 0.051f, 0.0f);
-    glBegin(GL_TRIANGLES);
-        glVertex2f(-0.869f, 0.248f);
-        glVertex2f(-0.818f, 0.147f);
-        glVertex2f(-0.927f, 0.150f);
-
-        glVertex2f(-0.872f, 0.183f);
-        glVertex2f(-0.798f, 0.081f);
-        glVertex2f(-0.941f, 0.085f);
-
-        glVertex2f(-0.870f, 0.129f);
-        glVertex2f(-0.782f, 0.010f);
-        glVertex2f(-0.966f, 0.013f);
+void brokenBuilding4(float offX=0, float offY=0) {
+    glColor3f(0.239f, 0.067f, 0.004f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.158f + offX, 0.110f + offY);
+        glVertex2f(-0.102f + offX, 0.055f + offY);
+        glVertex2f(-0.100f + offX, -0.026f + offY);
+        glVertex2f(-0.218f + offX, -0.024f + offY);
+        glVertex2f(-0.220f + offX, 0.056f + offY);
     glEnd();
 
-    glBegin(GL_QUADS);
-        glVertex2f(-0.882f, 0.014f);
-        glVertex2f(-0.859f, 0.014f);
-        glVertex2f(-0.856f, -0.045f);
-        glVertex2f(-0.884f, -0.045f);
+    glColor3f(0.188f, 0.051f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.268f + offX, 0.115f + offY);
+        glVertex2f(-0.336f + offX, 0.040f + offY);
+        glVertex2f(-0.371f + offX, 0.041f + offY);
+        glVertex2f(-0.283f + offX, 0.147f + offY);
+        glVertex2f(-0.180f + offX, 0.042f + offY);
+        glVertex2f(-0.197f + offX, 0.041f + offY);
     glEnd();
+
+    glColor3f(0.529f, 0.071f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.268f + offX, 0.115f + offY);
+        glVertex2f(-0.197f + offX, 0.040f + offY);
+        glVertex2f(-0.197f + offX, -0.040f + offY);
+        glVertex2f(-0.333f + offX, -0.041f + offY);
+        glVertex2f(-0.336f + offX, 0.040f + offY);
+    glEnd();
+
+    // door
+    glColor3f(0.271f, 0.067f, 0.008f + offY);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.284f + offX, 0.013f + offY);
+        glVertex2f(-0.213f + offX, 0.014f + offY);
+        glVertex2f(-0.212f + offX, -0.038f + offY);
+        glVertex2f(-0.285f + offX, -0.039f + offY);
+    glEnd();
+    drawFilledCurve(-0.249 + offX, 0.013 + offY, 0.035, 0, 180);
+
+    glColor3f(0.239f, 0.067f, 0.004f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.283f + offX, 0.147f + offY);
+        glVertex2f(-0.227f + offX, 0.124f + offY);
+        glVertex2f(-0.203f + offX, 0.078f + offY);
+        glVertex2f(-0.182f + offX, 0.065f + offY);
+        glVertex2f(-0.168f + offX, 0.044f + offY);
+        glVertex2f(-0.180f + offX, 0.042f + offY);
+    glEnd();
+
+    glColor3f(0.57f, 0.074f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.197f + offX, 0.041f + offY);
+        glVertex2f(-0.102f + offX, 0.055f + offY);
+        glVertex2f(-0.100f + offX, -0.026f + offY);
+        glVertex2f(-0.197f + offX, -0.040f + offY);
+    glEnd();
+
+
+
 }
 
 void drawBackground() {
@@ -236,37 +430,38 @@ void drawBackground() {
     // walking road
     glColor3f(0.94f, 0.25f, 0.0f);
     glBegin(GL_QUADS);
-        glVertex2f(-0.080f, -0.18f);
-        glVertex2f(0.002f, -0.18f);
-        glVertex2f(0.018f, -0.191f);
-        glVertex2f(-0.065f, -0.198f);
+        glVertex2f(-0.080f, -0.213f);
+        glVertex2f(0.002f, -0.213f);
+        glVertex2f(0.018f, -0.224f);
+        glVertex2f(-0.065f, -0.231f);
 
-        glVertex2f(0.018f, -0.191f);
-        glVertex2f(-0.065f, -0.198f);
-        glVertex2f(-0.06f, -0.219f);
-        glVertex2f(0.03f, -0.208f);
+        glVertex2f(0.018f, -0.224f);
+        glVertex2f(-0.065f, -0.231f);
+        glVertex2f(-0.06f, -0.252f);
+        glVertex2f(0.03f, -0.241f);
 
-        glVertex2f(-0.058f, -0.217f);
-        glVertex2f(0.029f, -0.206f);
-        glVertex2f(0.039f, -0.224f);
-        glVertex2f(-0.060f, -0.235f);
+        glVertex2f(-0.058f, -0.250f);
+        glVertex2f(0.029f, -0.239f);
+        glVertex2f(0.039f, -0.257f);
+        glVertex2f(-0.060f, -0.268f);
 
-        glVertex2f(-0.089f, -0.279f);
-        glVertex2f(0.026f, -0.282f);
-        glVertex2f(-0.179f, -0.5625f);
-        glVertex2f(-0.376f, -0.5625f);
+        glVertex2f(-0.089f, -0.312f);
+        glVertex2f(0.026f, -0.315f);
+        glVertex2f(-0.179f, -0.595f);
+        glVertex2f(-0.376f, -0.595f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.038f, -0.224f);
-        glVertex2f(-0.060f, -0.235f);
-        glVertex2f(-0.074f, -0.263f);
-        glVertex2f(-0.089f, -0.279f);
-        glVertex2f(0.026f, -0.282f);
-        glVertex2f(0.035f, -0.262f);
-        glVertex2f(0.038f, -0.244f);
-        glVertex2f(0.039f, -0.224f);
+        glVertex2f(0.038f, -0.257f);
+        glVertex2f(-0.060f, -0.268f);
+        glVertex2f(-0.074f, -0.296f);
+        glVertex2f(-0.089f, -0.312f);
+        glVertex2f(0.026f, -0.315f);
+        glVertex2f(0.035f, -0.295f);
+        glVertex2f(0.038f, -0.277f);
+        glVertex2f(0.039f, -0.257f);
     glEnd();
+
 
     // Hills
     glColor3f(0.44f, 0.11f, 0.00f);
@@ -293,10 +488,14 @@ void drawBackground() {
 
 void mergeComponents() {
     drawBackground();
-    drawTree();
+    drawTree1();
+    drawTree2();
+    drawTree3();
     brokenBuilding1();
     brokenBuilding2();
     brokenBuilding3();
+    brokenBuilding4();
+    brokenBuilding4(0.28);
 }
 
 // Initialization

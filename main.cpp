@@ -33,6 +33,16 @@ void drawWindowB2(float offX = 0.0f, float offY = 0.0f) {
     glEnd();
 }
 
+void drawWindowB3(float offX = 0.0f, float offY = 0.0f) {
+    glColor3f(0.188f, 0.051f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.644f+offX, 0.285f+offY);
+        glVertex2f(0.672f+offX, 0.284f+offY);
+        glVertex2f(0.673f+offX, 0.247f+offY);
+        glVertex2f(0.644f+offX, 0.246f+offY);
+    glEnd();
+}
+
 void drawDoorB2(float offX = 0.0f, float offY = 0.0f) {
     glColor3f(0.761f, 0.145f, 0.008f);
     glBegin(GL_POLYGON);
@@ -132,6 +142,32 @@ void brokenBuilding2() {
     drawWindowB2(0.219f);
     drawWindowB2(0.32f);
     drawDoorB2();
+}
+
+void brokenBuilding3() {
+    glColor3f(0.890f, 0.235f, 0.035f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.611f, 0.317f);
+        glVertex2f(0.822f, 0.318f);
+        glVertex2f(0.822f, 0.153f);
+        glVertex2f(0.611f, 0.156f);
+    glEnd();
+
+    glColor3f(0.180f, 0.051f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.822f, 0.318f);
+        glVertex2f(0.822f, 0.153f);
+        glVertex2f(0.873f, 0.155f);
+        glVertex2f(0.872f, 0.296f);
+    glEnd();
+
+    drawWindowB3();
+    drawWindowB3(0.058f);
+    drawWindowB3(0.117f);
+
+    drawWindowB3(0.0f, -0.066f);
+    drawWindowB3(0.058f, -0.066f);
+    drawWindowB3(0.117f, -0.066f);
 }
 
 void drawTree() {
@@ -260,6 +296,7 @@ void mergeComponents() {
     drawTree();
     brokenBuilding1();
     brokenBuilding2();
+    brokenBuilding3();
 }
 
 // Initialization

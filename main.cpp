@@ -45,6 +45,34 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
 
     //glEnd();
 
+void drawCloud1(float offX=0, float offY=0) {
+    glColor3f(0.871f, 0.216f, 0.0f);
+    drawFilledCurve(-0.884 + offX, 0.392 + offY, 0.041, 0, 180);
+    drawFilledCurve(-0.829 + offX, 0.421 + offY, 0.037, 0, 180);
+    drawFilledCurve(-0.741 + offX, 0.436 + offY, 0.071, 0, 180);
+    drawFilledCurve(-0.645 + offX, 0.415 + offY, 0.043, 0, 180);
+    drawFilledCurve(-0.589 + offX, 0.401 + offY, 0.028, -13, 180);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.747f + offX, 0.477f + offY);
+        glVertex2f(-0.561f + offX, 0.393f + offY);
+        glVertex2f(-0.925f + offX, 0.394f + offY);
+    glEnd();
+}
+
+void drawCloud2(float offX=0, float offY=0) {
+    glColor3f(0.871f, 0.216f, 0.0f);
+    drawFilledCurve(-0.926 + offX, 0.293 + offY, 0.037, 0, 180);
+    drawFilledCurve(-0.869 + offX, 0.329 + offY, 0.041, -40, 210);
+    drawFilledCurve(-0.817 + offX, 0.293 + offY, 0.051, 0, 180);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.869f + offX, 0.330f + offY);
+        glVertex2f(-0.926f + offX, 0.293f + offY);
+        glVertex2f(-0.817f + offX, 0.293f + offY);
+    glEnd();
+}
+
 void drawTree1() {
     glColor3f(0.149f, 0.051f, 0.0f);
     glBegin(GL_TRIANGLES);
@@ -169,6 +197,34 @@ void drawTree3() {
 
 }
 
+void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.3f, float petalWidth = 0.1f, int petalCount = 6) {
+    float angleStep = 360.0f / petalCount;
+
+    for (int i = 0; i < petalCount; ++i) {
+        float angle = i * angleStep;
+
+        // Save transformation state
+        glPushMatrix();
+
+        // Move to flower center and rotate
+        glTranslatef(centerX, centerY, 0.0f);
+        glRotatef(angle, 0.0f, 0.0f, 1.0f);
+
+        // Move outward and draw petal as rotated ellipse
+        glTranslatef(0.0f, petalLength / 2.0f, 0.0f);
+        glColor3f(0.969f, 0.306f, 0.0f); // red petals
+        drawFilledEllipse(0, 0, petalWidth, petalLength / 2.0f);
+
+        // Restore transformation state
+        glPopMatrix();
+    }
+
+    // Draw flower center
+    glColor3f(0.639f, 0.133f, 0.008f); // yellow center
+    drawFilledEllipse(centerX, centerY, 0.07f, 0.07f);
+}
+
+
 
 void drawWindowB1(float offX = 0.0f, float offY = 0.0f) {
     glColor3f(0.180f, 0.059f, 0.012f);
@@ -214,7 +270,7 @@ void brokenBuilding1() {
     glColor3f(0.922f, 0.275f, 0.0f);
     glBegin(GL_POLYGON);
         glVertex2f(-0.780f, -0.039f);
-        glVertex2f(-0.510f, -0.037f);
+        glVertex2f(-0.510f, -0.039f);
         glVertex2f(-0.510f, 0.253f);
         glVertex2f(-0.516f, 0.254f);
         glVertex2f(-0.523f, 0.235f);
@@ -264,6 +320,14 @@ void brokenBuilding1() {
     drawWindowB1(0.0f, -0.251f);
     drawWindowB1(0.081f, -0.251f);
     drawWindowB1(0.157f, -0.251f);
+
+    glColor3f(0.188f, 0.039f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.509f, 0.252f);
+        glVertex2f(-0.466f, 0.262f);
+        glVertex2f(-0.463f, -0.025f);
+        glVertex2f(-0.509f, -0.039f);
+    glEnd();
 
 }
 
@@ -488,6 +552,9 @@ void drawBackground() {
 
 void mergeComponents() {
     drawBackground();
+    drawCloud1();
+    drawCloud1(1.2, -0.05);
+    drawCloud2(0.7);
     drawTree1();
     drawTree2();
     drawTree3();
@@ -495,7 +562,11 @@ void mergeComponents() {
     brokenBuilding2();
     brokenBuilding3();
     brokenBuilding4();
-    brokenBuilding4(0.28);
+    brokenBuilding4(0.24);
+
+//    drawFlower(0.0f, 0.0f, 0.3f, 0.1f, 8);
+
+
 }
 
 // Initialization

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <GL/glut.h>
 #include <cmath>
+#include <vector>
 
 #define PI 3.14159265
 
@@ -10,6 +11,13 @@ using namespace std;
 // Window size
 int windowWidth = 1280;
 int windowHeight = 720;
+
+// Color
+struct Color {
+    float r;
+    float g;
+    float b;
+};
 
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
     glBegin(GL_TRIANGLE_FAN);
@@ -44,9 +52,98 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
     //glBegin(GL_POLYGON);
 
     //glEnd();
+void drawSmallGrass(float offX=0, float offY=0) {
 
-void drawCloud1(float offX=0, float offY=0) {
-    glColor3f(0.871f, 0.216f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.537f +offX, -0.439f +offY);
+        glVertex2f(-0.526f +offX, -0.442f +offY);
+        glVertex2f(-0.513f +offX, -0.457f +offY);
+        glVertex2f(-0.524f +offX, -0.457f +offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.518f +offX, -0.419f +offY);
+        glVertex2f(-0.505f +offX, -0.436f +offY);
+        glVertex2f(-0.504f +offX, -0.457f +offY);
+        glVertex2f(-0.513f +offX, -0.457f +offY);
+        glVertex2f(-0.519f +offX, -0.439f +offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.504f +offX, -0.457f +offY);
+        glVertex2f(-0.500f +offX, -0.436f +offY);
+        glVertex2f(-0.488f +offX, -0.423f +offY);
+        glVertex2f(-0.488f +offX, -0.451f +offY);
+        glVertex2f(-0.492f +offX, -0.457f +offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.488f +offX, -0.451f +offY);
+        glVertex2f(-0.468f +offX, -0.432f +offY);
+        glVertex2f(-0.475f +offX, -0.451f +offY);
+        glVertex2f(-0.484f +offX, -0.458f +offY);
+        glVertex2f(-0.492f +offX, -0.457f +offY);
+    glEnd();
+
+
+
+}
+
+
+
+void drawBrokenFence(float offX=0, float offY=0) {
+    glColor3f(0.160f, 0.051f, 0.000f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.727f, -0.341f);
+        glVertex2f(-0.669f, -0.366f);
+        glVertex2f(-0.456f, -0.364f);
+        glVertex2f(-0.394f, -0.341f);
+        glVertex2f(-0.428f, -0.322f);
+        glVertex2f(-0.690f, -0.324f);
+    glEnd();
+
+
+    glLineWidth(12.0f);
+    glBegin(GL_LINES);
+        glColor3f(0.310f, 0.043f, 0.016f);
+        glVertex2f(-0.666f +offX, -0.324f +offY);
+        glVertex2f(-0.476f +offX, -0.321f +offY);
+
+        glColor3f(0.152f, 0.047f, 0.012f);
+        glVertex2f(-0.651f +offX, -0.235f +offY);
+        glVertex2f(-0.669f +offX, -0.337f +offY);
+        glVertex2f(-0.500f +offX, -0.250f +offY);
+        glVertex2f(-0.470f +offX, -0.332f +offY);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        glColor3f(0.310f, 0.043f, 0.016f);
+        glVertex2f(-0.463f +offX, -0.291f +offY);
+        glVertex2f(-0.686f +offX, -0.260f +offY);
+
+        glColor3f(0.251f, 0.047f, 0.000f);
+        glVertex2f(-0.481f +offX, -0.240f +offY);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        glColor3f(0.310f, 0.043f, 0.016f);
+        glVertex2f(-0.686f +offX, -0.286f +offY);
+        glVertex2f(-0.447f +offX, -0.316f +offY);
+
+        glColor3f(0.251f, 0.047f, 0.000f);
+        glVertex2f(-0.420f +offX, -0.334f +offY);
+    glEnd();
+
+}
+
+
+void drawCloud1(float offX=0, float offY=0, const vector<Color>& colors = {}) {
+    if (colors.empty()) {
+        glColor3f(0.871f, 0.216f, 0.0f);
+    } else {
+        Color c1 = colors[0];
+        glColor3f(c1.r, c1.g, c1.b);
+    }
     drawFilledCurve(-0.884 + offX, 0.392 + offY, 0.041, 0, 180);
     drawFilledCurve(-0.829 + offX, 0.421 + offY, 0.037, 0, 180);
     drawFilledCurve(-0.741 + offX, 0.436 + offY, 0.071, 0, 180);
@@ -197,34 +294,124 @@ void drawTree3() {
 
 }
 
-void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.3f, float petalWidth = 0.1f, int petalCount = 6) {
-    float angleStep = 360.0f / petalCount;
-
+void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.1f, int petalCount = 6) {
+    glColor3f(0.949f, 0.290f, 0.0078f);
     for (int i = 0; i < petalCount; ++i) {
-        float angle = i * angleStep;
+        float angle = 2 * PI * i / petalCount;
 
-        // Save transformation state
-        glPushMatrix();
-
-        // Move to flower center and rotate
-        glTranslatef(centerX, centerY, 0.0f);
-        glRotatef(angle, 0.0f, 0.0f, 1.0f);
-
-        // Move outward and draw petal as rotated ellipse
-        glTranslatef(0.0f, petalLength / 2.0f, 0.0f);
-        glColor3f(0.969f, 0.306f, 0.0f); // red petals
-        drawFilledEllipse(0, 0, petalWidth, petalLength / 2.0f);
-
-        // Restore transformation state
-        glPopMatrix();
+        float x = centerX + petalLength * cos(angle);
+        float y = centerY + petalLength * sin(angle);
+        drawFilledCurve(x, y, petalLength);
     }
 
     // Draw flower center
     glColor3f(0.639f, 0.133f, 0.008f); // yellow center
-    drawFilledEllipse(centerX, centerY, 0.07f, 0.07f);
+    drawFilledCurve(centerX, centerY, 0.02f);
 }
 
+void drawFlowerGrass(float offX=0, float offY=0) {
+    glColor3f(0.1608f, 0.0471f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.135f + offX, -0.473f + offY);
+        glVertex2f(0.076f + offX, -0.454f + offY);
+        glVertex2f(0.029f + offX, -0.416f + offY);
+        glVertex2f(0.095f + offX, -0.431f + offY);
+        glVertex2f(0.128f + offX, -0.453f + offY);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+    glEnd();
 
+    glBegin(GL_POLYGON);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.128f + offX, -0.453f + offY);
+        glVertex2f(0.092f + offX, -0.400f + offY);
+        glVertex2f(0.070f + offX, -0.331f + offY);
+        glVertex2f(0.125f + offX, -0.391f + offY);
+        glVertex2f(0.143f + offX, -0.428f + offY);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.167f + offX, -0.450f + offY);
+        glVertex2f(0.143f + offX, -0.428f + offY);
+        glVertex2f(0.127f + offX, -0.367f + offY);
+        glVertex2f(0.095f + offX, -0.279f + offY);
+        glVertex2f(0.142f + offX, -0.344f + offY);
+        glVertex2f(0.160f + offX, -0.397f + offY);
+        glVertex2f(0.167f + offX, -0.450f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.167f + offX, -0.450f + offY);
+        glVertex2f(0.178f + offX, -0.400f + offY);
+        glVertex2f(0.209f + offX, -0.338f + offY);
+        glVertex2f(0.178f + offX, -0.400f + offY);
+        glVertex2f(0.182f + offX, -0.450f + offY);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.167f + offX, -0.450f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.182f + offX, -0.450f + offY);
+        glVertex2f(0.204f + offX, -0.420f + offY);
+        glVertex2f(0.229f + offX, -0.398f + offY);
+        glVertex2f(0.225f + offX, -0.425f + offY);
+        glVertex2f(0.215f + offX, -0.445f + offY);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.215f + offX, -0.445f + offY);
+        glVertex2f(0.261f + offX, -0.406f + offY);
+        glVertex2f(0.298f + offX, -0.384f + offY);
+        glVertex2f(0.277f + offX, -0.423f + offY);
+        glVertex2f(0.221f + offX, -0.472f + offY);
+        glVertex2f(0.185f + offX, -0.477f + offY);
+    glEnd();
+
+}
+
+void drawFlowerGrass2(float offX=0, float offY=0) {
+    glColor3f(0.1608f, 0.0471f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.3581f + offX, -0.4850f + offY);
+        glVertex2f(0.3403f + offX, -0.4827f + offY);
+        glVertex2f(0.3163f + offX, -0.4584f + offY);
+        glVertex2f(0.3106f + offX, -0.4394f + offY);
+        glVertex2f(0.3300f + offX, -0.4493f + offY);
+        glVertex2f(0.3513f + offX, -0.4698f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.3581f + offX, -0.4850f + offY);
+        glVertex2f(0.3631f + offX, -0.4572f + offY);
+        glVertex2f(0.3752f + offX, -0.4158f + offY);
+        glVertex2f(0.3729f + offX, -0.4508f + offY);
+        glVertex2f(0.3729f + offX, -0.4857f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.3729f + offX, -0.4857f + offY);
+        glVertex2f(0.3800f + offX, -0.4600f + offY);
+        glVertex2f(0.3942f + offX, -0.4420f + offY);
+        glVertex2f(0.3840f + offX, -0.4766f + offY);
+        glVertex2f(0.3729f + offX, -0.4857f + offY);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.3729f + offX, -0.4857f + offY);
+        glVertex2f(0.4064f + offX, -0.4709f + offY);
+        glVertex2f(0.4132f + offX, -0.4542f + offY);
+        glVertex2f(0.4280f + offX, -0.4257f + offY);
+        glVertex2f(0.4299f + offX, -0.4447f + offY);
+        glVertex2f(0.4276f + offX, -0.4683f + offY);
+        glVertex2f(0.4075f + offX, -0.4861f + offY);
+        glVertex2f(0.3729f + offX, -0.4857f + offY);
+    glEnd();
+
+}
 
 void drawWindowB1(float offX = 0.0f, float offY = 0.0f) {
     glColor3f(0.180f, 0.059f, 0.012f);
@@ -564,7 +751,24 @@ void mergeComponents() {
     brokenBuilding4();
     brokenBuilding4(0.24);
 
-//    drawFlower(0.0f, 0.0f, 0.3f, 0.1f, 8);
+    drawBrokenFence();
+
+    vector<Color> cloudGrass = {
+        { 0.153f, 0.047f, 0.000f }
+    };
+    drawCloud1(0, -0.9, cloudGrass);
+
+    // flower 1
+    glColor3f(0.361f, 0.082f, 0.0039f);
+    drawFilledEllipse(0.164, -0.472, 0.127, 0.017);
+    drawFlowerGrass();
+    drawFlower(0.229f, -0.317f, 0.03f, 5);
+
+    // flower 2
+    drawFlowerGrass2();
+
+    drawSmallGrass();
+    drawSmallGrass(0.3, 0.15);
 
 
 }

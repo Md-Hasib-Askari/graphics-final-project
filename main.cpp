@@ -84,9 +84,6 @@ void drawSmallGrass(float offX=0, float offY=0) {
         glVertex2f(-0.484f +offX, -0.458f +offY);
         glVertex2f(-0.492f +offX, -0.457f +offY);
     glEnd();
-
-
-
 }
 
 
@@ -144,29 +141,29 @@ void drawCloud1(float offX=0, float offY=0, const vector<Color>& colors = {}) {
         Color c1 = colors[0];
         glColor3f(c1.r, c1.g, c1.b);
     }
-    drawFilledCurve(-0.884 + offX, 0.392 + offY, 0.041, 0, 180);
-    drawFilledCurve(-0.829 + offX, 0.421 + offY, 0.037, 0, 180);
-    drawFilledCurve(-0.741 + offX, 0.436 + offY, 0.071, 0, 180);
-    drawFilledCurve(-0.645 + offX, 0.415 + offY, 0.043, 0, 180);
-    drawFilledCurve(-0.589 + offX, 0.401 + offY, 0.028, -13, 180);
+    drawFilledCurve(-0.884, 0.392, 0.041, 0, 180);
+    drawFilledCurve(-0.829, 0.421, 0.037, 0, 180);
+    drawFilledCurve(-0.741, 0.436, 0.071, 0, 180);
+    drawFilledCurve(-0.645, 0.415, 0.043, 0, 180);
+    drawFilledCurve(-0.589, 0.401, 0.028, -13, 180);
 
     glBegin(GL_POLYGON);
-        glVertex2f(-0.747f + offX, 0.477f + offY);
-        glVertex2f(-0.561f + offX, 0.393f + offY);
-        glVertex2f(-0.925f + offX, 0.394f + offY);
+        glVertex2f(-0.747f, 0.477f);
+        glVertex2f(-0.561f, 0.393f);
+        glVertex2f(-0.925f, 0.394f);
     glEnd();
 }
 
 void drawCloud2(float offX=0, float offY=0) {
     glColor3f(0.871f, 0.216f, 0.0f);
-    drawFilledCurve(-0.926 + offX, 0.293 + offY, 0.037, 0, 180);
-    drawFilledCurve(-0.869 + offX, 0.329 + offY, 0.041, -40, 210);
-    drawFilledCurve(-0.817 + offX, 0.293 + offY, 0.051, 0, 180);
+    drawFilledCurve(-0.926, 0.293, 0.037, 0, 180);
+    drawFilledCurve(-0.869, 0.329, 0.041, -40, 210);
+    drawFilledCurve(-0.817, 0.293, 0.051, 0, 180);
 
     glBegin(GL_POLYGON);
-        glVertex2f(-0.869f + offX, 0.330f + offY);
-        glVertex2f(-0.926f + offX, 0.293f + offY);
-        glVertex2f(-0.817f + offX, 0.293f + offY);
+        glVertex2f(-0.869f, 0.330f);
+        glVertex2f(-0.926f, 0.293f);
+        glVertex2f(-0.817f, 0.293f);
     glEnd();
 }
 
@@ -309,106 +306,106 @@ void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.1f, 
     drawFilledCurve(centerX, centerY, 0.02f);
 }
 
-void drawFlowerGrass(float offX=0, float offY=0) {
+void drawFlowerGrass() {
     glColor3f(0.1608f, 0.0471f, 0.0f);
     glBegin(GL_POLYGON);
-        glVertex2f(0.185f + offX, -0.477f + offY);
-        glVertex2f(0.135f + offX, -0.473f + offY);
-        glVertex2f(0.076f + offX, -0.454f + offY);
-        glVertex2f(0.029f + offX, -0.416f + offY);
-        glVertex2f(0.095f + offX, -0.431f + offY);
-        glVertex2f(0.128f + offX, -0.453f + offY);
-        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.185f, -0.477f);
+        glVertex2f(0.135f, -0.473f);
+        glVertex2f(0.076f, -0.454f);
+        glVertex2f(0.029f, -0.416f);
+        glVertex2f(0.095f, -0.431f);
+        glVertex2f(0.128f, -0.453f);
+        glVertex2f(0.185f, -0.477f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.185f + offX, -0.477f + offY);
-        glVertex2f(0.128f + offX, -0.453f + offY);
-        glVertex2f(0.092f + offX, -0.400f + offY);
-        glVertex2f(0.070f + offX, -0.331f + offY);
-        glVertex2f(0.125f + offX, -0.391f + offY);
-        glVertex2f(0.143f + offX, -0.428f + offY);
-        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.185f, -0.477f);
+        glVertex2f(0.128f, -0.453f);
+        glVertex2f(0.092f, -0.400f);
+        glVertex2f(0.070f, -0.331f);
+        glVertex2f(0.125f, -0.391f);
+        glVertex2f(0.143f, -0.428f);
+        glVertex2f(0.185f, -0.477f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.167f + offX, -0.450f + offY);
-        glVertex2f(0.143f + offX, -0.428f + offY);
-        glVertex2f(0.127f + offX, -0.367f + offY);
-        glVertex2f(0.095f + offX, -0.279f + offY);
-        glVertex2f(0.142f + offX, -0.344f + offY);
-        glVertex2f(0.160f + offX, -0.397f + offY);
-        glVertex2f(0.167f + offX, -0.450f + offY);
+        glVertex2f(0.167f, -0.450f);
+        glVertex2f(0.143f, -0.428f);
+        glVertex2f(0.127f, -0.367f);
+        glVertex2f(0.095f, -0.279f);
+        glVertex2f(0.142f, -0.344f);
+        glVertex2f(0.160f, -0.397f);
+        glVertex2f(0.167f, -0.450f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.167f + offX, -0.450f + offY);
-        glVertex2f(0.178f + offX, -0.400f + offY);
-        glVertex2f(0.209f + offX, -0.338f + offY);
-        glVertex2f(0.178f + offX, -0.400f + offY);
-        glVertex2f(0.182f + offX, -0.450f + offY);
-        glVertex2f(0.185f + offX, -0.477f + offY);
-        glVertex2f(0.167f + offX, -0.450f + offY);
+        glVertex2f(0.167f, -0.450f);
+        glVertex2f(0.178f, -0.400f);
+        glVertex2f(0.209f, -0.338f);
+        glVertex2f(0.178f, -0.400f);
+        glVertex2f(0.182f, -0.450f);
+        glVertex2f(0.185f, -0.477f);
+        glVertex2f(0.167f, -0.450f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.185f + offX, -0.477f + offY);
-        glVertex2f(0.182f + offX, -0.450f + offY);
-        glVertex2f(0.204f + offX, -0.420f + offY);
-        glVertex2f(0.229f + offX, -0.398f + offY);
-        glVertex2f(0.225f + offX, -0.425f + offY);
-        glVertex2f(0.215f + offX, -0.445f + offY);
-        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.185f, -0.477f);
+        glVertex2f(0.182f, -0.450f);
+        glVertex2f(0.204f, -0.420f);
+        glVertex2f(0.229f, -0.398f);
+        glVertex2f(0.225f, -0.425f);
+        glVertex2f(0.215f, -0.445f);
+        glVertex2f(0.185f, -0.477f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.185f + offX, -0.477f + offY);
-        glVertex2f(0.215f + offX, -0.445f + offY);
-        glVertex2f(0.261f + offX, -0.406f + offY);
-        glVertex2f(0.298f + offX, -0.384f + offY);
-        glVertex2f(0.277f + offX, -0.423f + offY);
-        glVertex2f(0.221f + offX, -0.472f + offY);
-        glVertex2f(0.185f + offX, -0.477f + offY);
+        glVertex2f(0.185f, -0.477f);
+        glVertex2f(0.215f, -0.445f);
+        glVertex2f(0.261f, -0.406f);
+        glVertex2f(0.298f, -0.384f);
+        glVertex2f(0.277f, -0.423f);
+        glVertex2f(0.221f, -0.472f);
+        glVertex2f(0.185f, -0.477f);
     glEnd();
 
 }
 
-void drawFlowerGrass2(float offX=0, float offY=0) {
+void drawFlowerGrass2() {
     glColor3f(0.1608f, 0.0471f, 0.0f);
     glBegin(GL_POLYGON);
-        glVertex2f(0.3581f + offX, -0.4850f + offY);
-        glVertex2f(0.3403f + offX, -0.4827f + offY);
-        glVertex2f(0.3163f + offX, -0.4584f + offY);
-        glVertex2f(0.3106f + offX, -0.4394f + offY);
-        glVertex2f(0.3300f + offX, -0.4493f + offY);
-        glVertex2f(0.3513f + offX, -0.4698f + offY);
+        glVertex2f(0.3581f, -0.4850f);
+        glVertex2f(0.3403f, -0.4827f);
+        glVertex2f(0.3163f, -0.4584f);
+        glVertex2f(0.3106f, -0.4394f);
+        glVertex2f(0.3300f, -0.4493f);
+        glVertex2f(0.3513f, -0.4698f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.3581f + offX, -0.4850f + offY);
-        glVertex2f(0.3631f + offX, -0.4572f + offY);
-        glVertex2f(0.3752f + offX, -0.4158f + offY);
-        glVertex2f(0.3729f + offX, -0.4508f + offY);
-        glVertex2f(0.3729f + offX, -0.4857f + offY);
+        glVertex2f(0.3581f, -0.4850f);
+        glVertex2f(0.3631f, -0.4572f);
+        glVertex2f(0.3752f, -0.4158f);
+        glVertex2f(0.3729f, -0.4508f);
+        glVertex2f(0.3729f, -0.4857f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.3729f + offX, -0.4857f + offY);
-        glVertex2f(0.3800f + offX, -0.4600f + offY);
-        glVertex2f(0.3942f + offX, -0.4420f + offY);
-        glVertex2f(0.3840f + offX, -0.4766f + offY);
-        glVertex2f(0.3729f + offX, -0.4857f + offY);
+        glVertex2f(0.3729f, -0.4857f);
+        glVertex2f(0.3800f, -0.4600f);
+        glVertex2f(0.3942f, -0.4420f);
+        glVertex2f(0.3840f, -0.4766f);
+        glVertex2f(0.3729f, -0.4857f);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex2f(0.3729f + offX, -0.4857f + offY);
-        glVertex2f(0.4064f + offX, -0.4709f + offY);
-        glVertex2f(0.4132f + offX, -0.4542f + offY);
-        glVertex2f(0.4280f + offX, -0.4257f + offY);
-        glVertex2f(0.4299f + offX, -0.4447f + offY);
-        glVertex2f(0.4276f + offX, -0.4683f + offY);
-        glVertex2f(0.4075f + offX, -0.4861f + offY);
-        glVertex2f(0.3729f + offX, -0.4857f + offY);
+        glVertex2f(0.3729f, -0.4857f);
+        glVertex2f(0.4064f, -0.4709f);
+        glVertex2f(0.4132f, -0.4542f);
+        glVertex2f(0.4280f, -0.4257f);
+        glVertex2f(0.4299f, -0.4447f);
+        glVertex2f(0.4276f, -0.4683f);
+        glVertex2f(0.4075f, -0.4861f);
+        glVertex2f(0.3729f, -0.4857f);
     glEnd();
 
 }
@@ -578,61 +575,61 @@ void brokenBuilding3() {
     drawWindowB3(0.117f, -0.066f);
 }
 
-void brokenBuilding4(float offX=0, float offY=0) {
+void brokenBuilding4() {
     glColor3f(0.239f, 0.067f, 0.004f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.158f + offX, 0.110f + offY);
-        glVertex2f(-0.102f + offX, 0.055f + offY);
-        glVertex2f(-0.100f + offX, -0.026f + offY);
-        glVertex2f(-0.218f + offX, -0.024f + offY);
-        glVertex2f(-0.220f + offX, 0.056f + offY);
+        glVertex2f(-0.158f, 0.110f);
+        glVertex2f(-0.102f, 0.055f);
+        glVertex2f(-0.100f, -0.026f);
+        glVertex2f(-0.218f, -0.024f);
+        glVertex2f(-0.220f, 0.056f);
     glEnd();
 
     glColor3f(0.188f, 0.051f, 0.000f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.268f + offX, 0.115f + offY);
-        glVertex2f(-0.336f + offX, 0.040f + offY);
-        glVertex2f(-0.371f + offX, 0.041f + offY);
-        glVertex2f(-0.283f + offX, 0.147f + offY);
-        glVertex2f(-0.180f + offX, 0.042f + offY);
-        glVertex2f(-0.197f + offX, 0.041f + offY);
+        glVertex2f(-0.268f, 0.115f);
+        glVertex2f(-0.336f, 0.040f);
+        glVertex2f(-0.371f, 0.041f);
+        glVertex2f(-0.283f, 0.147f);
+        glVertex2f(-0.180f, 0.042f);
+        glVertex2f(-0.197f, 0.041f);
     glEnd();
 
     glColor3f(0.529f, 0.071f, 0.0f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.268f + offX, 0.115f + offY);
-        glVertex2f(-0.197f + offX, 0.040f + offY);
-        glVertex2f(-0.197f + offX, -0.040f + offY);
-        glVertex2f(-0.333f + offX, -0.041f + offY);
-        glVertex2f(-0.336f + offX, 0.040f + offY);
+        glVertex2f(-0.268f, 0.115f);
+        glVertex2f(-0.197f, 0.040f);
+        glVertex2f(-0.197f, -0.040f);
+        glVertex2f(-0.333f, -0.041f);
+        glVertex2f(-0.336f, 0.040f);
     glEnd();
 
     // door
-    glColor3f(0.271f, 0.067f, 0.008f + offY);
+    glColor3f(0.271f, 0.067f, 0.008f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.284f + offX, 0.013f + offY);
-        glVertex2f(-0.213f + offX, 0.014f + offY);
-        glVertex2f(-0.212f + offX, -0.038f + offY);
-        glVertex2f(-0.285f + offX, -0.039f + offY);
+        glVertex2f(-0.284f, 0.013f);
+        glVertex2f(-0.213f, 0.014f);
+        glVertex2f(-0.212f, -0.038f);
+        glVertex2f(-0.285f, -0.039f);
     glEnd();
-    drawFilledCurve(-0.249 + offX, 0.013 + offY, 0.035, 0, 180);
+    drawFilledCurve(-0.249, 0.013, 0.035, 0, 180);
 
     glColor3f(0.239f, 0.067f, 0.004f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.283f + offX, 0.147f + offY);
-        glVertex2f(-0.227f + offX, 0.124f + offY);
-        glVertex2f(-0.203f + offX, 0.078f + offY);
-        glVertex2f(-0.182f + offX, 0.065f + offY);
-        glVertex2f(-0.168f + offX, 0.044f + offY);
-        glVertex2f(-0.180f + offX, 0.042f + offY);
+        glVertex2f(-0.283f, 0.147f);
+        glVertex2f(-0.227f, 0.124f);
+        glVertex2f(-0.203f, 0.078f);
+        glVertex2f(-0.182f, 0.065f);
+        glVertex2f(-0.168f, 0.044f);
+        glVertex2f(-0.180f, 0.042f);
     glEnd();
 
     glColor3f(0.57f, 0.074f, 0.0f);
     glBegin(GL_POLYGON);
-        glVertex2f(-0.197f + offX, 0.041f + offY);
-        glVertex2f(-0.102f + offX, 0.055f + offY);
-        glVertex2f(-0.100f + offX, -0.026f + offY);
-        glVertex2f(-0.197f + offX, -0.040f + offY);
+        glVertex2f(-0.197f, 0.041f);
+        glVertex2f(-0.102f, 0.055f);
+        glVertex2f(-0.100f, -0.026f);
+        glVertex2f(-0.197f, -0.040f);
     glEnd();
 
 
@@ -739,24 +736,47 @@ void drawBackground() {
 
 void mergeComponents() {
     drawBackground();
+
+    // clouds
     drawCloud1();
-    drawCloud1(1.2, -0.05);
-    drawCloud2(0.7);
+    glTranslatef(1.2, -0.05, 0);
+    drawCloud1();
+    glLoadIdentity();
+
+    glTranslatef(0.7, 0, 0);
+    drawCloud2();
+    glLoadIdentity();
+
+    // trees
     drawTree1();
     drawTree2();
     drawTree3();
+
+    // buildings
     brokenBuilding1();
     brokenBuilding2();
     brokenBuilding3();
     brokenBuilding4();
-    brokenBuilding4(0.24);
 
+    glTranslatef(0.24, 0, 0);
+    brokenBuilding4();
+    glLoadIdentity();
+
+    // broken fence
     drawBrokenFence();
 
+    // grass
     vector<Color> cloudGrass = {
         { 0.153f, 0.047f, 0.000f }
     };
-    drawCloud1(0, -0.9, cloudGrass);
+    glTranslatef(0, -0.9, 0);
+    drawCloud1(0, 0, cloudGrass);
+    glLoadIdentity();
+
+    drawSmallGrass();
+    glTranslatef(0.3, 0.15, 0);
+    drawSmallGrass();
+    glLoadIdentity();
 
     // flower 1
     glColor3f(0.361f, 0.082f, 0.0039f);
@@ -765,10 +785,10 @@ void mergeComponents() {
     drawFlower(0.229f, -0.317f, 0.03f, 5);
 
     // flower 2
+    glColor3f(0.361f, 0.082f, 0.0039f);
+    drawFilledEllipse(0.386, -0.49, 0.1, 0.017);
     drawFlowerGrass2();
-
-    drawSmallGrass();
-    drawSmallGrass(0.3, 0.15);
+    drawFlower(0.376f, -0.401f, 0.02f, 5);
 
 
 }

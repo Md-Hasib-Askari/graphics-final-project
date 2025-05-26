@@ -220,11 +220,28 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1748270353 source:c:\users\askar\desktop\graphics\graphics-final-project\main.cpp
+1748278781 source:c:\users\askar\desktop\graphics\graphics-final-project\main.cpp
 	<windows.h>
 	<iostream>
 	<GL/glut.h>
 	<cmath>
 	<ctime>
 	<vector>
+
+1748278696 source:c:\users\askar\desktop\graphics\graphics-final-project\marshmallow_cloud.cpp
+	<GL/glut.h>
+	<iostream>
+	"utils.h"
+	"marshmallow_cloud.h"
+
+1748277612 c:\users\askar\desktop\graphics\graphics-final-project\utils.h
+
+1748278301 c:\users\askar\desktop\graphics\graphics-final-project\marshmallow_cloud.h
+	<vector>
+	"utils.h"
+
+1748276691 source:c:\users\askar\desktop\graphics\graphics-final-project\utils.cpp
+	<GL/glut.h>
+	<cmath>
+	"utils.h"
 

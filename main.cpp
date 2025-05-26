@@ -13,6 +13,12 @@ using namespace std;
 int windowWidth = 1280;
 int windowHeight = 720;
 
+// Points
+struct Point {
+    double x;
+    double y;
+};
+
 // Color
 struct Color {
     float r;
@@ -53,6 +59,9 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
     //glBegin(GL_POLYGON);
 
     //glEnd();
+
+Point mClouds[4][20];
+
 void marshCloud() {
     glColor3f(0.25f, 0.06f, 0.01f);
     glBegin(GL_POLYGON);
@@ -109,6 +118,7 @@ void marshCloud() {
     drawFilledCurve(0.265f, 0.258f, 0.07);
     drawFilledCurve(0.3f, 0.3f, 0.07);
 
+    glPushMatrix();
     glTranslatef(0.02, 0.02, 0);
     glColor3f(0.7725f, 0.1451f, 0.0f);
     drawFilledCurve(-0.289f, 0.3f, 0.07);
@@ -119,7 +129,7 @@ void marshCloud() {
     drawFilledCurve(0.159f, 0.233f, 0.07);
     drawFilledCurve(0.265f, 0.258f, 0.07);
     drawFilledCurve(0.3f, 0.3f, 0.07);
-    glLoadIdentity();
+    glPopMatrix();
 
     glColor3f(0.952f, 0.251f, 0.0f);
     drawFilledCurve(-0.258f, 0.37f, 0.07);
@@ -127,52 +137,32 @@ void marshCloud() {
     drawFilledCurve(0.2f, 0.4f, 0.07);
     drawFilledCurve(0.262f, 0.349f, 0.07);
 
-
-    // random generated circles
-    double minX = -0.20;
-    double maxX = 0.31387585808908;
-    double minY = 0.29273640942807;
-    double maxY = 0.45480551582913;
-
-    srand(1748270319); // seed
-//    cout << time(0) << endl;
-
-
-    // rand() / RAND_MAX -> random value between 0 - 1
     glColor3f(0.705f, 0.078f, 0.000f); // #B41400
     for (int i = 0; i < 20; i++) {
-        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-        double y = minY + (rand() / (double)RAND_MAX) * (0.3 - minY);
+        double x = mClouds[0][i].x;
+        double y = mClouds[0][i].y;
         drawFilledCurve(x, y, 0.07);
-
-        // cout << x << " " << y << endl;
     }
 
     glColor3f(0.984f, 0.733f, 0.106f);
     for (int i = 0; i < 20; i++) {
-        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        double x = mClouds[1][i].x;
+        double y = mClouds[1][i].y;
         drawFilledCurve(x, y, 0.07);
-
-        cout << x << " " << y << endl;
     }
 
     glColor3f(0.992f, 0.278f, 0.008f);
     for (int i = 0; i < 20; i++) {
-        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        double x = mClouds[2][i].x;
+        double y = mClouds[2][i].y;
         drawFilledCurve(x, y, 0.07);
-
-        // cout << x << " " << y << endl;
     }
 
     glColor3f(0.984f, 0.733f, 0.106f);
     for (int i = 0; i < 20; i++) {
-        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        double x = mClouds[3][i].x;
+        double y = mClouds[3][i].y;
         drawFilledCurve(x, y, 0.07);
-
-        cout << x << " " << y << endl;
     }
 
     glColor3f(0.2235f, 0.0392f, 0.0f);
@@ -900,9 +890,10 @@ void mergeComponents() {
 
     // clouds
     drawCloud1();
+    glPushMatrix();
     glTranslatef(1.2, -0.05, 0);
     drawCloud1();
-    glLoadIdentity();
+    glPopMatrix();
 
     glTranslatef(0.7, 0, 0);
     drawCloud2();
@@ -912,6 +903,11 @@ void mergeComponents() {
     drawTree1();
     drawTree2();
     drawTree3();
+
+    glPushMatrix();
+    glTranslatef(0.48, 0.33, 0);
+    drawTree3();
+    glPopMatrix();
 
     // buildings
     brokenBuilding1();
@@ -952,8 +948,11 @@ void mergeComponents() {
     drawFlower(0.376f, -0.401f, 0.02f, 5);
 
     // marshmallow cloud
+//    glPushMatrix();
+//    glTranslatef(0, -0.03, 0);
+//    glScalef(1.2, 1.2, 0);
     marshCloud();
-}
+//    glPopMatrix();}
 
 // Initialization
 void initGL() {
@@ -980,8 +979,30 @@ void reshape(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void initVariables() {
+    // random generated circles
+    double minX = -0.20;
+    double maxX = 0.31387585808908;
+    double minY = 0.29273640942807;
+    double maxY = 0.45480551582913;
+
+    srand(1748270319); // seed
+
+    // rand() / RAND_MAX -> random value between 0 - 1
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<20; j++) {
+            double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+            double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+            mClouds[i][j].x = x;
+            mClouds[i][j].y = y;
+        }
+    }
+}
+
 // Entry point
 int main(int argc, char** argv) {
+    initVariables();
+
     glutInit(&argc, argv);                      // Initialize GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);// Double buffer, RGB mode
     glutInitWindowSize(windowWidth, windowHeight);

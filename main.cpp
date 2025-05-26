@@ -2,6 +2,7 @@
 #include <iostream>
 #include <GL/glut.h>
 #include <cmath>
+#include <ctime>
 #include <vector>
 
 #define PI 3.14159265
@@ -52,6 +53,166 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
     //glBegin(GL_POLYGON);
 
     //glEnd();
+void marshCloud() {
+    glColor3f(0.25f, 0.06f, 0.01f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.0591f, -0.0695f);
+        glVertex2f(0.0889f, -0.0702f);
+        glVertex2f(0.1217f, 0.3257f);
+        glVertex2f(-0.1045f, 0.3349f);
+        glVertex2f(-0.0653f, 0.1018f);
+    glEnd();
+
+    glColor3f(0.929f, 0.165f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.0539f, -0.0892f);
+        glVertex2f(-0.0548f, 0.1909f);
+        glVertex2f(-0.0266f, 0.0990f);
+        glVertex2f(-0.0224f, 0.1562f);
+        glVertex2f(-0.0141f, 0.1101f);
+        glVertex2f(0.0759f, -0.0931f);
+    glEnd();
+    glBegin(GL_POLYGON);
+        glVertex2f(0.0759f, -0.0931f);
+        glVertex2f(-0.0266f, 0.0990f);
+        glVertex2f(-0.0087f, 0.2219f);
+        glVertex2f(0.0322f, 0.2265f);
+        glVertex2f(0.0408f, 0.1033f);
+        glVertex2f(0.0529f, 0.1764f);
+        glVertex2f(0.0569f, 0.1430f);
+        glVertex2f(0.0742f, 0.2092f);
+    glEnd();
+
+    glColor3f(0.9804f, 0.6627f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.0489125268f, -0.0919743524f);
+        glVertex2f(-0.0319801809f, 0.0854121291f);
+        glVertex2f(-0.0118226262f, 0.0313898824f);
+        glVertex2f(-0.0005343955f, 0.1112137991f);
+        glVertex2f(0.0655823839f, -0.0855239349f);
+    glEnd();
+    glBegin(GL_POLYGON);
+        glVertex2f(0.0655823839f, -0.0855239349f);
+        glVertex2f(0.0470374336f, 0.0837995247f);
+        glVertex2f(0.0309113898f, 0.0467096240f);
+        glVertex2f(0.0212357635f, 0.1434658866f);
+        glVertex2f(0.0075286263f, 0.0821869203f);
+    glEnd();
+
+    glColor3f(0.2431f, 0.0549f, 0.0039f);
+    drawFilledCurve(-0.289f, 0.3f, 0.07);
+    drawFilledCurve(-0.229f, 0.253f, 0.07);
+    drawFilledCurve(-0.135f, 0.233f, 0.07);
+    drawFilledCurve(0.0f, 0.275f, 0.07);
+    drawFilledCurve(0.099f, 0.282f, 0.07);
+    drawFilledCurve(0.159f, 0.233f, 0.07);
+    drawFilledCurve(0.265f, 0.258f, 0.07);
+    drawFilledCurve(0.3f, 0.3f, 0.07);
+
+    glTranslatef(0.02, 0.02, 0);
+    glColor3f(0.7725f, 0.1451f, 0.0f);
+    drawFilledCurve(-0.289f, 0.3f, 0.07);
+    drawFilledCurve(-0.229f, 0.253f, 0.07);
+    drawFilledCurve(-0.135f, 0.233f, 0.07);
+    drawFilledCurve(0.0f, 0.275f, 0.07);
+    drawFilledCurve(0.099f, 0.282f, 0.07);
+    drawFilledCurve(0.159f, 0.233f, 0.07);
+    drawFilledCurve(0.265f, 0.258f, 0.07);
+    drawFilledCurve(0.3f, 0.3f, 0.07);
+    glLoadIdentity();
+
+    glColor3f(0.952f, 0.251f, 0.0f);
+    drawFilledCurve(-0.258f, 0.37f, 0.07);
+    drawFilledCurve(-0.195f, 0.413f, 0.07);
+    drawFilledCurve(0.2f, 0.4f, 0.07);
+    drawFilledCurve(0.262f, 0.349f, 0.07);
+
+
+    // random generated circles
+    double minX = -0.20;
+    double maxX = 0.31387585808908;
+    double minY = 0.29273640942807;
+    double maxY = 0.45480551582913;
+
+    srand(1748270319); // seed
+//    cout << time(0) << endl;
+
+
+    // rand() / RAND_MAX -> random value between 0 - 1
+    glColor3f(0.705f, 0.078f, 0.000f); // #B41400
+    for (int i = 0; i < 20; i++) {
+        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+        double y = minY + (rand() / (double)RAND_MAX) * (0.3 - minY);
+        drawFilledCurve(x, y, 0.07);
+
+        // cout << x << " " << y << endl;
+    }
+
+    glColor3f(0.984f, 0.733f, 0.106f);
+    for (int i = 0; i < 20; i++) {
+        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        drawFilledCurve(x, y, 0.07);
+
+        cout << x << " " << y << endl;
+    }
+
+    glColor3f(0.992f, 0.278f, 0.008f);
+    for (int i = 0; i < 20; i++) {
+        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        drawFilledCurve(x, y, 0.07);
+
+        // cout << x << " " << y << endl;
+    }
+
+    glColor3f(0.984f, 0.733f, 0.106f);
+    for (int i = 0; i < 20; i++) {
+        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+        double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+        drawFilledCurve(x, y, 0.07);
+
+        cout << x << " " << y << endl;
+    }
+
+    glColor3f(0.2235f, 0.0392f, 0.0f);
+    drawFilledCurve(-0.224514f, -0.103923f, 0.05);    drawFilledCurve(-0.179434f, -0.064775f, 0.05);    drawFilledCurve(-0.108256f, -0.032744f, 0.08);    drawFilledCurve(0.117142f, 0.0f, 0.05, -50, 180);    drawFilledCurve(0.187134f, -0.035117f, 0.05);
+    drawFilledCurve(0.250008f, -0.082569f, 0.05);
+
+    glColor3f(0.9647f, 0.1961f, 0.0f);
+    drawFilledCurve(-0.224514f, -0.11, 0.04);    drawFilledCurve(-0.179434f, -0.07, 0.04);    drawFilledCurve(-0.108256f, -0.04, 0.07);    drawFilledCurve(0.117142f, 0.0f, 0.04);    drawFilledCurve(0.187134f, -0.04f, 0.04);
+    drawFilledCurve(0.250008f, -0.09f, 0.04);
+
+    glColor3f(0.9882f, 0.6863f, 0.0235f);
+    drawFilledCurve(-0.082f, -0.061f, 0.07);    drawFilledCurve(-0.022f, -0.075f, 0.04);    drawFilledCurve(0.04f, -0.054f, 0.06);
+    drawFilledCurve(0.12f, -0.051f, 0.06);
+
+
+    glColor3f(0.5686f, 0.0745f, 0.0f);
+    drawFilledCurve(-0.1456f, -0.1070f, 0.04);    drawFilledCurve(-0.0806f, -0.0869f, 0.04);    drawFilledCurve(0.1285f, -0.1008f, 0.04);    drawFilledCurve(0.2f, -0.1f, 0.04);    drawFilledCurve(0.2478f, -0.1117f, 0.04);
+
+
+    glColor3f(0.690f, 0.078f, 0.004f);
+    drawFilledCurve(-0.2766f, -0.1423f, 0.04);
+    drawFilledCurve(-0.2187f, -0.1320f, 0.04);
+    drawFilledCurve(-0.1462f, -0.1364f, 0.04);
+    drawFilledCurve(-0.0810f, -0.1298f, 0.04);
+    drawFilledCurve(-0.0210f, -0.1159f, 0.04);
+    drawFilledCurve(0.0399f, -0.1269f, 0.04);
+    drawFilledCurve(0.1094f, -0.1159f, 0.04);
+    drawFilledCurve(0.1673f, -0.1240f, 0.04);
+    drawFilledCurve(0.2076f, -0.1210f, 0.04);
+    drawFilledCurve(0.2567f, -0.1298f, 0.04);
+
+    glColor3f(0.23f, 0.06f, 0.0f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.320f, -0.129f);
+        glVertex2f(-0.323f, -0.190f);
+        glVertex2f(0.277f, -0.187f);
+        glVertex2f(0.378f, -0.122f);
+    glEnd();
+}
+
 void drawSmallGrass(float offX=0, float offY=0) {
 
     glBegin(GL_POLYGON);
@@ -790,7 +951,8 @@ void mergeComponents() {
     drawFlowerGrass2();
     drawFlower(0.376f, -0.401f, 0.02f, 5);
 
-
+    // marshmallow cloud
+    marshCloud();
 }
 
 // Initialization

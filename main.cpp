@@ -56,9 +56,194 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
 
 
 
+
     //glBegin(GL_POLYGON);
 
     //glEnd();
+
+void drawLake() {
+    // #541504
+    glColor3f(0.329f, 0.078f, 0.016f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.420f, -0.343f);
+        glVertex2f(0.403f, -0.322f);
+        glVertex2f(0.424f, -0.307f);
+        glVertex2f(0.497f, -0.294f);
+        glVertex2f(0.630f, -0.285f);
+        glVertex2f(0.788f, -0.290f);
+        glVertex2f(0.880f, -0.300f);
+        glVertex2f(0.962f, -0.335f);
+        glVertex2f(0.880f, -0.318f);
+        glVertex2f(0.786f, -0.306f);
+        glVertex2f(0.659f, -0.301f);
+        glVertex2f(0.583f, -0.303f);
+        glVertex2f(0.505f, -0.310f);
+        glVertex2f(0.448f, -0.319f);
+        glVertex2f(0.424f, -0.327f);
+        glVertex2f(0.420f, -0.343f);
+    glEnd();
+
+    // #3E220D
+    glColor3f(0.243f, 0.137f, 0.051f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.962f, -0.335f);
+        glVertex2f(0.880f, -0.318f);
+        glVertex2f(0.786f, -0.306f);
+        glVertex2f(0.659f, -0.301f);
+        glVertex2f(0.583f, -0.303f);
+        glVertex2f(0.505f, -0.310f);
+        glVertex2f(0.448f, -0.319f);
+        glVertex2f(0.424f, -0.327f);
+        glVertex2f(0.420f, -0.343f);
+        glVertex2f(0.510f, -0.362f);
+        glVertex2f(0.522f, -0.370f);
+        glVertex2f(0.523f, -0.380f);
+        glVertex2f(0.507f, -0.392f);
+        glVertex2f(0.510f, -0.399f);
+        glVertex2f(0.543f, -0.410f);
+        glVertex2f(0.620f, -0.420f);
+        glVertex2f(0.775f, -0.424f);
+        glVertex2f(0.962f, -0.335f);
+    glEnd();
+}
+
+void brokenBus() {
+    glColor3f(0.901f, 0.212f, 0.016f);
+    glBegin(GL_POLYGON);
+        glVertex2f(0.378f, -0.128f);
+        glVertex2f(0.369f, -0.092f);
+        glVertex2f(0.412f, -0.005f);
+        glVertex2f(0.892f, -0.094f);
+        glVertex2f(0.921f, -0.149f);
+        glVertex2f(0.871f, -0.238f);
+        glVertex2f(0.809f, -0.236f);
+        glVertex2f(0.505f, -0.174f);
+        glVertex2f(0.378f, -0.128f);
+    glEnd();
+
+    // windows
+    glColor3f(0.1647f, 0.0510f, 0.0000f);
+    glBegin(GL_QUADS);
+
+        glVertex2f(0.838f, -0.191f);
+        glVertex2f(0.884f, -0.11f);
+        glVertex2f(0.900f, -0.150f);
+        glVertex2f(0.860f, -0.213f);
+
+        glVertex2f(0.823f, -0.106f);
+        glVertex2f(0.857f, -0.114f);
+        glVertex2f(0.832f, -0.162f);
+        glVertex2f(0.796f, -0.156f);
+
+        glVertex2f(0.757f, -0.095f);
+        glVertex2f(0.807f, -0.106f);
+        glVertex2f(0.777f, -0.150f);
+        glVertex2f(0.737f, -0.140f);
+
+        glVertex2f(0.673f, -0.078f);
+        glVertex2f(0.742f, -0.091f);
+        glVertex2f(0.718f, -0.140f);
+        glVertex2f(0.653f, -0.127f);
+
+        glVertex2f(0.600f, -0.066f);
+        glVertex2f(0.657f, -0.079f);
+        glVertex2f(0.636f, -0.124f);
+        glVertex2f(0.578f, -0.108f);
+
+        glVertex2f(0.531f, -0.052f);
+        glVertex2f(0.585f, -0.064f);
+        glVertex2f(0.562f, -0.105f);
+        glVertex2f(0.515f, -0.096f);
+
+        glVertex2f(0.477f, -0.043f);
+        glVertex2f(0.516f, -0.050f);
+        glVertex2f(0.499f, -0.094f);
+        glVertex2f(0.459f, -0.086f);
+
+        glVertex2f(0.425f, -0.028f);
+        glVertex2f(0.462f, -0.039f);
+        glVertex2f(0.437f, -0.109f);
+        glVertex2f(0.387f, -0.116f);
+
+        glVertex2f(0.399f, -0.027f);
+        glVertex2f(0.410f, -0.026f);
+        glVertex2f(0.388f, -0.075f);
+        glVertex2f(0.376f, -0.074f);
+
+    glEnd();
+
+    
+    // wheels
+    glColor3f(0.1647f, 0.0510f, 0.0000f);
+    drawFilledCurve(0.47f, -0.155f, 0.04f, -30, 180);
+    drawFilledCurve(0.705f, -0.219f, 0.04f, -10, 170);
+    
+    glColor3f(0.1725f, 0.0549f, 0.0118f);
+    drawFilledCurve(0.47f, -0.155f, 0.03f);
+    drawFilledCurve(0.705f, -0.219f, 0.03f);
+
+    
+    glColor3f(0.3608f, 0.0627f, 0.0039f);
+    drawFilledCurve(0.47f, -0.155f, 0.015f);
+    drawFilledCurve(0.705f, -0.219f, 0.015f);
+}
+
+void brokenCar() {
+
+    // shadow
+    glColor3f(0.1647f, 0.0510f, 0.0000f);
+    drawFilledEllipse(-0.589f, -0.152f, 0.19f, 0.0183f);
+
+    glColor3f(0.901f, 0.212f, 0.016f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.768437f, -0.125288f);
+        glVertex2f(-0.759077f, -0.085766f);
+        glVertex2f(-0.685653f, -0.043708f);
+        glVertex2f(-0.590504f, -0.033366f);
+        glVertex2f(-0.549824f, -0.043708f);
+        glVertex2f(-0.509834f, -0.067840f);
+        glVertex2f(-0.437438f, -0.076803f);
+        glVertex2f(-0.416754f, -0.090593f);
+        glVertex2f(-0.407101f, -0.123688f);
+        glVertex2f(-0.440886f, -0.148509f);
+        glVertex2f(-0.476049f, -0.149199f);
+        glVertex2f(-0.680137f, -0.142304f);
+        glVertex2f(-0.749085f, -0.135409f);
+    glEnd();
+
+    // windows
+    glColor3f(0.1647f, 0.0510f, 0.0000f);
+    glBegin(GL_QUADS);
+        glVertex2f(-0.7041f, -0.0806f);
+        glVertex2f(-0.6842f, -0.0544f);
+        glVertex2f(-0.6469f, -0.0485f);
+        glVertex2f(-0.6507f, -0.0865f);
+
+        glVertex2f(-0.6350f, -0.0488f);
+        glVertex2f(-0.5824f, -0.0592f);
+        glVertex2f(-0.5587f, -0.0901f);
+        glVertex2f(-0.6370f, -0.0883f);
+
+        glVertex2f(-0.5714f, -0.0567f);
+        glVertex2f(-0.5498f, -0.0437f);
+        glVertex2f(-0.5042f, -0.0762f);
+        glVertex2f(-0.5361f, -0.0875f);
+    glEnd();
+
+    // wheels
+    glColor3f(0.1647f, 0.0510f, 0.0000f);
+    drawFilledCurve(-0.513f, -0.147f, 0.04f, 0, 180);
+    drawFilledCurve(-0.715f, -0.143f, 0.04f, 0, 170);
+    
+    glColor3f(0.1725f, 0.0549f, 0.0118f);
+    drawFilledCurve(-0.513f, -0.144f, 0.03f);
+    drawFilledCurve(-0.715f, -0.143f, 0.03f);
+
+    
+    glColor3f(0.3608f, 0.0627f, 0.0039f);
+    drawFilledCurve(-0.513f, -0.144f, 0.015f);
+    drawFilledCurve(-0.715f, -0.143f, 0.015f);
+}
 
 Point mClouds[4][20];
 
@@ -166,20 +351,34 @@ void marshCloud() {
     }
 
     glColor3f(0.2235f, 0.0392f, 0.0f);
-    drawFilledCurve(-0.224514f, -0.103923f, 0.05);    drawFilledCurve(-0.179434f, -0.064775f, 0.05);    drawFilledCurve(-0.108256f, -0.032744f, 0.08);    drawFilledCurve(0.117142f, 0.0f, 0.05, -50, 180);    drawFilledCurve(0.187134f, -0.035117f, 0.05);
+    drawFilledCurve(-0.224514f, -0.103923f, 0.05);
+    drawFilledCurve(-0.179434f, -0.064775f, 0.05);
+    drawFilledCurve(-0.108256f, -0.032744f, 0.08);
+    drawFilledCurve(0.117142f, 0.0f, 0.05, -50, 180);
+    drawFilledCurve(0.187134f, -0.035117f, 0.05);
     drawFilledCurve(0.250008f, -0.082569f, 0.05);
 
     glColor3f(0.9647f, 0.1961f, 0.0f);
-    drawFilledCurve(-0.224514f, -0.11, 0.04);    drawFilledCurve(-0.179434f, -0.07, 0.04);    drawFilledCurve(-0.108256f, -0.04, 0.07);    drawFilledCurve(0.117142f, 0.0f, 0.04);    drawFilledCurve(0.187134f, -0.04f, 0.04);
+    drawFilledCurve(-0.224514f, -0.11, 0.04);
+    drawFilledCurve(-0.179434f, -0.07, 0.04);
+    drawFilledCurve(-0.108256f, -0.04, 0.07);
+    drawFilledCurve(0.117142f, 0.0f, 0.04);
+    drawFilledCurve(0.187134f, -0.04f, 0.04);
     drawFilledCurve(0.250008f, -0.09f, 0.04);
 
     glColor3f(0.9882f, 0.6863f, 0.0235f);
-    drawFilledCurve(-0.082f, -0.061f, 0.07);    drawFilledCurve(-0.022f, -0.075f, 0.04);    drawFilledCurve(0.04f, -0.054f, 0.06);
+    drawFilledCurve(-0.082f, -0.061f, 0.07);
+    drawFilledCurve(-0.022f, -0.075f, 0.04);
+    drawFilledCurve(0.04f, -0.054f, 0.06);
     drawFilledCurve(0.12f, -0.051f, 0.06);
 
 
     glColor3f(0.5686f, 0.0745f, 0.0f);
-    drawFilledCurve(-0.1456f, -0.1070f, 0.04);    drawFilledCurve(-0.0806f, -0.0869f, 0.04);    drawFilledCurve(0.1285f, -0.1008f, 0.04);    drawFilledCurve(0.2f, -0.1f, 0.04);    drawFilledCurve(0.2478f, -0.1117f, 0.04);
+    drawFilledCurve(-0.1456f, -0.1070f, 0.04);
+    drawFilledCurve(-0.0806f, -0.0869f, 0.04);
+    drawFilledCurve(0.1285f, -0.1008f, 0.04);
+    drawFilledCurve(0.2f, -0.1f, 0.04);
+    drawFilledCurve(0.2478f, -0.1117f, 0.04);
 
 
     glColor3f(0.690f, 0.078f, 0.004f);
@@ -883,6 +1082,21 @@ void drawBackground() {
         glVertex2f(x, 0.0f);
     }
     glEnd();
+
+    // lake
+    drawLake();
+
+    // tree
+    glColor3f(0.141f, 0.047f, 0.0f);
+    drawFilledCurve(0.7f, -0.6f, 0.12f);
+    drawFilledCurve(0.8146f, -0.4705f, 0.12f);
+    drawFilledCurve(0.9430f, -0.4119f, 0.12f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0.7440f, -0.5787f);
+        glVertex2f(1.0050f, -0.5911f);
+        glVertex2f(1.0018f, -0.4377f);
+    glEnd();
 }
 
 void mergeComponents() {
@@ -952,7 +1166,11 @@ void mergeComponents() {
 //    glTranslatef(0, -0.03, 0);
 //    glScalef(1.2, 1.2, 0);
     marshCloud();
-//    glPopMatrix();}
+//    glPopMatrix();
+
+    brokenCar();
+    brokenBus();
+}
 
 // Initialization
 void initGL() {
@@ -989,13 +1207,23 @@ void initVariables() {
     srand(1748270319); // seed
 
     // rand() / RAND_MAX -> random value between 0 - 1
-    for (int i=0; i<4; i++) {
+
+    // yellow, orange circles
+    for (int i=0; i<3; i++) {
         for (int j=0; j<20; j++) {
             double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
             double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
             mClouds[i][j].x = x;
             mClouds[i][j].y = y;
         }
+    }
+
+    // shades
+    for (int j=0; j<20; j++) {
+        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
+        double y = minY + (rand() / (double)RAND_MAX) * (3.0 - minY);
+        mClouds[3][j].x = x;
+        mClouds[3][j].y = y;
     }
 }
 

@@ -220,7 +220,7 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1748353157 source:c:\users\askar\desktop\graphics\graphics-final-project\main.cpp
+1748426138 source:c:\users\askar\desktop\graphics\graphics-final-project\main.cpp
 	<windows.h>
 	<iostream>
 	<GL/glut.h>

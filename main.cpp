@@ -13,6 +13,15 @@ using namespace std;
 int windowWidth = 1280;
 int windowHeight = 720;
 
+// Data Structures
+// Particles
+struct Particle {
+    float x, y;
+    float r, g, b;
+    std::vector<float> angles;
+    float radius;
+};
+
 // Points
 struct Point {
     double x;
@@ -26,6 +35,8 @@ struct Color {
     float b;
 };
 
+
+// Utils
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(centerX, centerY); // center of fan
@@ -54,12 +65,73 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
     glEnd();
 }
 
+float randomFloat(float min, float max) {
+    return min + (float) ((rand()) / (float) (RAND_MAX / (max - min)));
+}
 
+const int NUM_PARTICLES1 = 10;
+const int NUM_PARTICLES2 = 50;
+const int MIN_SIDES = 5;
+const int MAX_SIDES = 6;
+const float MIN_RADIUS = 0.02f;
+const float MAX_RADIUS = 0.025f;
+vector<Particle> particles1;
+vector<Particle> particles2;
 
+void generateParticles(float xMin, float xMax, float yMin, float yMax, float NUM_PARTICLES, vector<Particle>& particles) {
+    // 1748421639
+    // 1748421869
+    srand(1748421869);
+    // cout << time(0) << endl;
 
-    //glBegin(GL_POLYGON);
+    // generate particles on road
+    for (int i = 0; i < NUM_PARTICLES; ++i) {
+        Particle p;
+        p.x = randomFloat(xMin,xMax);
+        p.y = randomFloat(yMin, yMax);
+        p.radius = randomFloat(MIN_RADIUS, MAX_RADIUS);
+        int sides = rand() % (MAX_SIDES - MIN_SIDES + 1) + MIN_SIDES;
 
-    //glEnd();
+        // Random angles for a broken shape
+        for (int j = 0; j < sides; ++j) {
+            float angle = randomFloat(0.3f, 2 * PI);
+            p.angles.push_back(angle);
+        }
+
+        particles.push_back(p);
+    }
+}
+
+void addParticles(vector<Particle>& particles, Color& color) {
+    glColor3f(color.r, color.g, color.b); // #2D0D00
+    for (const Particle& p : particles) {
+        glBegin(GL_POLYGON);
+        for (float angle : p.angles) {
+            float randRadius = p.radius * randomFloat(0.7f, 1.3f);
+            float x = p.x + cos(angle) * randRadius;
+            float y = p.y + sin(angle) * randRadius;
+            glVertex2f(x, y);
+        }
+        glEnd();
+    }
+}
+
+void drawParticles() {
+    // 1748421639
+    // 1748421869
+    srand(1748421869);
+    // cout << time(0) << endl;
+
+    // generate particles on road
+    generateParticles(-0.5f, 0.5f, -0.2f, -0.15f, NUM_PARTICLES1, particles1);
+    generateParticles(-0.8f, 0.8f, -.8f, -0.25f, NUM_PARTICLES2, particles2);
+
+    // draw particles
+    Color c1 = { 0.901f, 0.212f, 0.016f };
+    Color c2 = { 0.176f, 0.051f, 0.0f };
+    addParticles(particles1, c1);
+    addParticles(particles2, c2);
+}
 
 void drawLake() {
     // #541504
@@ -172,17 +244,17 @@ void brokenBus() {
 
     glEnd();
 
-    
+
     // wheels
     glColor3f(0.1647f, 0.0510f, 0.0000f);
     drawFilledCurve(0.47f, -0.155f, 0.04f, -30, 180);
     drawFilledCurve(0.705f, -0.219f, 0.04f, -10, 170);
-    
+
     glColor3f(0.1725f, 0.0549f, 0.0118f);
     drawFilledCurve(0.47f, -0.155f, 0.03f);
     drawFilledCurve(0.705f, -0.219f, 0.03f);
 
-    
+
     glColor3f(0.3608f, 0.0627f, 0.0039f);
     drawFilledCurve(0.47f, -0.155f, 0.015f);
     drawFilledCurve(0.705f, -0.219f, 0.015f);
@@ -234,12 +306,12 @@ void brokenCar() {
     glColor3f(0.1647f, 0.0510f, 0.0000f);
     drawFilledCurve(-0.513f, -0.147f, 0.04f, 0, 180);
     drawFilledCurve(-0.715f, -0.143f, 0.04f, 0, 170);
-    
+
     glColor3f(0.1725f, 0.0549f, 0.0118f);
     drawFilledCurve(-0.513f, -0.144f, 0.03f);
     drawFilledCurve(-0.715f, -0.143f, 0.03f);
 
-    
+
     glColor3f(0.3608f, 0.0627f, 0.0039f);
     drawFilledCurve(-0.513f, -0.144f, 0.015f);
     drawFilledCurve(-0.715f, -0.143f, 0.015f);
@@ -656,6 +728,7 @@ void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.1f, 
     drawFilledCurve(centerX, centerY, 0.02f);
 }
 
+
 void drawFlowerGrass() {
     glColor3f(0.1608f, 0.0471f, 0.0f);
     glBegin(GL_POLYGON);
@@ -861,6 +934,34 @@ void brokenBuilding1() {
         glVertex2f(-0.466f, 0.262f);
         glVertex2f(-0.463f, -0.025f);
         glVertex2f(-0.509f, -0.039f);
+    glEnd();
+
+    glColor3f(0.180f, 0.059f, 0.012f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.477f, 0.131f);
+        glVertex2f(-0.434f, 0.109f);
+        glVertex2f(-0.523f, -0.060f);
+        glVertex2f(-0.567f, -0.046f);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.559f, -0.060f);
+        glVertex2f(-0.426f, 0.071f);
+        glVertex2f(-0.371f, 0.025f);
+        glVertex2f(-0.529f, -0.077f);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.533f, -0.065f);
+        glVertex2f(-0.384f, 0.029f);
+        glVertex2f(-0.338f, -0.021f);
+        glVertex2f(-0.457f, -0.089f);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-0.553f, -0.085f);
+        glVertex2f(-0.400f, -0.100f);
+        glVertex2f(-0.450f, 0.100f);
     glEnd();
 
 }
@@ -1170,6 +1271,9 @@ void mergeComponents() {
 
     brokenCar();
     brokenBus();
+
+    // Particles
+    drawParticles();
 }
 
 // Initialization
@@ -1234,7 +1338,7 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);                      // Initialize GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);// Double buffer, RGB mode
     glutInitWindowSize(windowWidth, windowHeight);
-    glutCreateWindow("OpenGL GLUT Boilerplate"); // Create window
+    glutCreateWindow("Scene 3"); // Create window
 
     glutDisplayFunc(display);   // Register display callback
     glutReshapeFunc(reshape);   // Register reshape callback

@@ -42,6 +42,12 @@ float dxCloud1 = 0.0f;
 float dyCloud1 = 0.0f;
 float dxCloud2 = 0.0f;
 float dyCloud2 = 0.0f;
+float dxCloud3 = 0.0f;
+float dyCloud3 = 0.0f;
+
+// marsh clouds
+float sdxMClouds = 0.1f;
+float sdyMClouds = 0.1f;
 
 // Utils
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
@@ -384,15 +390,15 @@ void marshCloud() {
 
     glPushMatrix();
     glTranslatef(0.02, 0.02, 0);
-    glColor3f(0.7725f, 0.1451f, 0.0f);
-    drawFilledCurve(-0.289f, 0.3f, 0.07);
-    drawFilledCurve(-0.229f, 0.253f, 0.07);
-    drawFilledCurve(-0.135f, 0.233f, 0.07);
-    drawFilledCurve(0.0f, 0.275f, 0.07);
-    drawFilledCurve(0.099f, 0.282f, 0.07);
-    drawFilledCurve(0.159f, 0.233f, 0.07);
-    drawFilledCurve(0.265f, 0.258f, 0.07);
-    drawFilledCurve(0.3f, 0.3f, 0.07);
+        glColor3f(0.7725f, 0.1451f, 0.0f);
+        drawFilledCurve(-0.289f, 0.3f, 0.07);
+        drawFilledCurve(-0.229f, 0.253f, 0.07);
+        drawFilledCurve(-0.135f, 0.233f, 0.07);
+        drawFilledCurve(0.0f, 0.275f, 0.07);
+        drawFilledCurve(0.099f, 0.282f, 0.07);
+        drawFilledCurve(0.159f, 0.233f, 0.07);
+        drawFilledCurve(0.265f, 0.258f, 0.07);
+        drawFilledCurve(0.3f, 0.3f, 0.07);
     glPopMatrix();
 
     glColor3f(0.952f, 0.251f, 0.0f);
@@ -1219,16 +1225,20 @@ void mergeComponents() {
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(dxCloud2, dyCloud2, 0);
+    glTranslatef(1.2, -0.05, 0);
         glPushMatrix();
-        glTranslatef(1.2, -0.05, 0);
-        drawCloud1();
+        glTranslatef(dxCloud2, dyCloud2, 0);
+            drawCloud1();
         glPopMatrix();
-    glPushMatrix();
+    glPopMatrix();
 
-    glTranslatef(0.7, 0, 0);
-    drawCloud2();
-    glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(0.7, -0.1, 0);
+        glPushMatrix();
+        glTranslatef(dxCloud3, dyCloud3, 0);
+            drawCloud2();
+        glPopMatrix();
+    glPopMatrix();
 
     // trees
     drawTree1();
@@ -1279,11 +1289,13 @@ void mergeComponents() {
     drawFlower(0.376f, -0.401f, 0.02f, 5);
 
     // marshmallow cloud
-//    glPushMatrix();
-//    glTranslatef(0, -0.03, 0);
-//    glScalef(1.2, 1.2, 0);
-    marshCloud();
-//    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(0, 0, 0);
+    glTranslatef(0, -0.2f, 0);
+    glScalef(sdxMClouds, sdyMClouds, 0);
+    glTranslatef(0, 0.2f, 0);
+        marshCloud();
+    glPopMatrix();
 
     brokenCar();
     brokenBus();
@@ -1335,6 +1347,7 @@ void initVariables() {
             double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
             mClouds[i][j].x = x;
             mClouds[i][j].y = y;
+            cout << "mClouds[" << i << "][" << j << "] = (" << x << ", " << y << ")" << endl;
         }
     }
 
@@ -1353,13 +1366,26 @@ void update() {
     if (dxCloud1 > 2.0f) {
         dxCloud1 = -0.5f; // Reset position when it goes off screen
     }
-    cout << "dxCloud1: " << dxCloud1 << endl;
+    // cout << "dxCloud1: " << dxCloud1 << endl;
 
     dxCloud2 -= 0.0005f; // Move clouds to the left
     if (dxCloud2 < -2.0f) {
         dxCloud2 = 0.5f; // Reset position when it goes off screen
     }
-    cout << "dxCloud2: " << dxCloud2 << endl << endl;
+    // cout << "dxCloud2: " << dxCloud2 << endl << endl;
+
+    dxCloud3 += 0.0016f; // Move clouds to the right
+    if (dxCloud3 > 1.4f) {
+        dxCloud3 = -0.9f; // Reset position when it goes off screen
+    }
+    cout << "dxCloud3: " << dxCloud3 << endl;
+
+    // marshmallow cloud
+    if (sdxMClouds < 1.7f) {
+        sdxMClouds += 0.001f; // Move marshmallow cloud to the right
+        sdyMClouds += 0.001f; // Move marshmallow cloud to the right
+        cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
+    }
 
 
     glutPostRedisplay(); // Request a redraw

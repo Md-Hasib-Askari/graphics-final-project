@@ -9,9 +9,6 @@
 
 using namespace std;
 
-// Window size
-int windowWidth = 1280;
-int windowHeight = 720;
 
 // Data Structures
 // Particles
@@ -35,6 +32,16 @@ struct Color {
     float b;
 };
 
+// Global Variables
+// Window size
+int windowWidth = 1280;
+int windowHeight = 720;
+
+// Clouds
+float dxCloud1 = 0.0f;
+float dyCloud1 = 0.0f;
+float dxCloud2 = 0.0f;
+float dyCloud2 = 0.0f;
 
 // Utils
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
@@ -556,7 +563,8 @@ void drawBrokenFence(float offX=0, float offY=0) {
 }
 
 
-void drawCloud1(float offX=0, float offY=0, const vector<Color>& colors = {}) {
+void drawCloud1(const vector<Color>& colors = {}) {
+
     if (colors.empty()) {
         glColor3f(0.871f, 0.216f, 0.0f);
     } else {
@@ -574,9 +582,10 @@ void drawCloud1(float offX=0, float offY=0, const vector<Color>& colors = {}) {
         glVertex2f(-0.561f, 0.393f);
         glVertex2f(-0.925f, 0.394f);
     glEnd();
+
 }
 
-void drawCloud2(float offX=0, float offY=0) {
+void drawCloud2() {
     glColor3f(0.871f, 0.216f, 0.0f);
     drawFilledCurve(-0.926, 0.293, 0.037, 0, 180);
     drawFilledCurve(-0.869, 0.329, 0.041, -40, 210);
@@ -1204,11 +1213,18 @@ void mergeComponents() {
     drawBackground();
 
     // clouds
-    drawCloud1();
     glPushMatrix();
-    glTranslatef(1.2, -0.05, 0);
-    drawCloud1();
+    glTranslatef(dxCloud1, dyCloud1, 0);
+        drawCloud1();
     glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(dxCloud2, dyCloud2, 0);
+        glPushMatrix();
+        glTranslatef(1.2, -0.05, 0);
+        drawCloud1();
+        glPopMatrix();
+    glPushMatrix();
 
     glTranslatef(0.7, 0, 0);
     drawCloud2();
@@ -1242,7 +1258,7 @@ void mergeComponents() {
         { 0.153f, 0.047f, 0.000f }
     };
     glTranslatef(0, -0.9, 0);
-    drawCloud1(0, 0, cloudGrass);
+    drawCloud1(cloudGrass);
     glLoadIdentity();
 
     drawSmallGrass();
@@ -1331,6 +1347,31 @@ void initVariables() {
     }
 }
 
+void update() {
+    // Clouds
+    dxCloud1 += 0.001f; // Move clouds to the right
+    if (dxCloud1 > 2.0f) {
+        dxCloud1 = -0.5f; // Reset position when it goes off screen
+    }
+    cout << "dxCloud1: " << dxCloud1 << endl;
+
+    dxCloud2 -= 0.0005f; // Move clouds to the left
+    if (dxCloud2 < -2.0f) {
+        dxCloud2 = 0.5f; // Reset position when it goes off screen
+    }
+    cout << "dxCloud2: " << dxCloud2 << endl << endl;
+
+
+    glutPostRedisplay(); // Request a redraw
+}
+
+void handleKey(unsigned char key, int x, int y) {
+    // printf("Key pressed: %c at (%d, %d)\n", key, x, y);
+    if (key == 27) { // Escape key
+        exit(0); // Exit the program
+    }
+}
+
 // Entry point
 int main(int argc, char** argv) {
     initVariables();
@@ -1342,6 +1383,8 @@ int main(int argc, char** argv) {
 
     glutDisplayFunc(display);   // Register display callback
     glutReshapeFunc(reshape);   // Register reshape callback
+    glutKeyboardFunc(handleKey); // Register keyboard callback
+    glutIdleFunc(update);    // Register idle callback
 
     initGL();                   // Set initial OpenGL state
 

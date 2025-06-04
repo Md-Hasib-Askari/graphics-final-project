@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1748027987 source:c:\users\hypermech2.0\desktop\graphics\final-project\main.cpp
+1748964634 source:c:\users\hypermech2.0\desktop\graphics\final-project\main.cpp
 	<windows.h>
 	<iostream>
 	<GL/glut.h>
 	<cmath>
+	<ctime>
+	<vector>
 
 1301111162 e:\codeblocks\mingw\include\windows.h
 	<winresrc.h>

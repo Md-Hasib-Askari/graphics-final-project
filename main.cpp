@@ -33,6 +33,26 @@ struct Color {
 };
 
 // Global Variables
+
+// Animation control
+float xCloud1Speed = 0.001f;
+float xCloud2Speed = 0.0005f;
+float xCloud3Speed = 0.0016f;
+
+float sdxMCloudsSpeed = 0.004f;
+float sdyMCloudsSpeed = 0.004f;
+float MCloudShakeSpeed = 0.0002f;
+
+float backgroundShakeSpeed = 0.0005f;
+
+float dxParticlesSpeed = 0.0002f;
+float dyParticlesSpeed = 0.0005f;
+
+float dyBuilding1Speed = 0.0003f;
+float dyBuilding2Speed = 0.0005f;
+float rotateBuilding1Speed = 0.01f;
+float rotateBuilding2Speed = 0.03f;
+
 // Window size
 int windowWidth = 1280;
 int windowHeight = 720;
@@ -46,8 +66,36 @@ float dxCloud3 = 0.0f;
 float dyCloud3 = 0.0f;
 
 // marsh clouds
+bool toggleMClouds = false;
+float dxMClouds = 0.0f;
+float dyMClouds = 0.0f;
 float sdxMClouds = 0.1f;
 float sdyMClouds = 0.1f;
+
+// particles
+bool resetParticles = false;
+float dxParticles = 0.0f;
+float dyParticles = 0.0f;
+
+// grass
+float dxGrass = 0.0f;
+float dyGrass = 0.0f;
+
+// building collapse
+float rotateBuilding1 = 0.0f;
+float dxBuilding1 = 0.0f;
+float dyBuilding1 = 0.0f;
+
+float rotateBuilding2 = 0.0f;
+float dxBuilding2 = 0.0f;
+float dyBuilding2 = 0.0f;
+
+// background
+bool shakeBackground = false;
+bool toggleBackground = false;
+float dxBackground = 0.0f;
+float dyBackground = 0.0f;
+
 
 // Utils
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
@@ -82,6 +130,7 @@ float randomFloat(float min, float max) {
     return min + (float) ((rand()) / (float) (RAND_MAX / (max - min)));
 }
 
+bool initParticles = true;
 const int NUM_PARTICLES1 = 10;
 const int NUM_PARTICLES2 = 50;
 const int MIN_SIDES = 5;
@@ -100,7 +149,7 @@ void generateParticles(float xMin, float xMax, float yMin, float yMax, float NUM
     // generate particles on road
     for (int i = 0; i < NUM_PARTICLES; ++i) {
         Particle p;
-        p.x = randomFloat(xMin,xMax);
+        p.x = randomFloat(xMin, xMax);
         p.y = randomFloat(yMin, yMax);
         p.radius = randomFloat(MIN_RADIUS, MAX_RADIUS);
         int sides = rand() % (MAX_SIDES - MIN_SIDES + 1) + MIN_SIDES;
@@ -136,14 +185,20 @@ void drawParticles() {
     // cout << time(0) << endl;
 
     // generate particles on road
-    generateParticles(-0.5f, 0.5f, -0.2f, -0.15f, NUM_PARTICLES1, particles1);
-    generateParticles(-0.8f, 0.8f, -.8f, -0.25f, NUM_PARTICLES2, particles2);
+    if (initParticles) {
+        generateParticles(-0.5f, 0.5f, -0.2f, -0.15f, NUM_PARTICLES1, particles1);
+        generateParticles(-0.8f, 0.8f, -.8f, -0.25f, NUM_PARTICLES2, particles2);
+        initParticles = false;
+    }
 
     // draw particles
     Color c1 = { 0.901f, 0.212f, 0.016f };
     Color c2 = { 0.176f, 0.051f, 0.0f };
     addParticles(particles1, c1);
-    addParticles(particles2, c2);
+    glPushMatrix();
+    glTranslatef(dxParticles, dyParticles, 0);
+        addParticles(particles2, c2);
+    glPopMatrix();
 }
 
 void drawLake() {
@@ -1102,6 +1157,24 @@ void brokenBuilding4() {
 
 }
 
+void drawRoad() {
+    // road
+    glColor3f(0.23f, 0.06f, 0.0f);
+    glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -0.073f);
+        glVertex2f(1.0f, -0.073f);
+        glVertex2f(1.0f, -0.213f);
+        glVertex2f(-1.0f, -0.213f);
+    glEnd();
+
+    glColor3f(0.83f, 0.17f, 0.0f);
+    glLineWidth(7.0f);
+    glBegin(GL_LINES);
+        glVertex2f(-1.0f, -0.073f);
+        glVertex2f(1.0f, -0.073f);
+    glEnd();
+}
+
 void drawBackground() {
     // background
     glBegin(GL_QUADS);
@@ -1122,23 +1195,6 @@ void drawBackground() {
         glColor3f(0.61f, 0.14f, 0.03f);
         glVertex2f(1.0f, -0.5625f);
         glVertex2f(-1.0f, -0.5625f);
-    glEnd();
-
-
-    // road
-    glColor3f(0.23f, 0.06f, 0.0f);
-    glBegin(GL_QUADS);
-        glVertex2f(-1.0f, -0.073f);
-        glVertex2f(1.0f, -0.073f);
-        glVertex2f(1.0f, -0.213f);
-        glVertex2f(-1.0f, -0.213f);
-    glEnd();
-
-    glColor3f(0.83f, 0.17f, 0.0f);
-    glLineWidth(7.0f);
-    glBegin(GL_LINES);
-        glVertex2f(-1.0f, -0.073f);
-        glVertex2f(1.0f, -0.073f);
     glEnd();
 
     // walking road
@@ -1243,38 +1299,58 @@ void mergeComponents() {
     // trees
     drawTree1();
     drawTree2();
-    drawTree3();
-
+    
     glPushMatrix();
     glTranslatef(0.48, 0.33, 0);
     drawTree3();
     glPopMatrix();
 
     // buildings
-    brokenBuilding1();
-    brokenBuilding2();
-    brokenBuilding3();
+    glPushMatrix();
+    glRotatef(rotateBuilding1, 0, 0, 1);
+    glTranslatef(dxBuilding1, dyBuilding1, 0);
+        brokenBuilding1();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glRotatef(rotateBuilding2, 0, 0, 1);
+    glTranslatef(dxBuilding2, dyBuilding2, 0);
+        brokenBuilding3();
+        brokenBuilding2();
+    glPopMatrix();
+
     brokenBuilding4();
 
+    glPushMatrix();
     glTranslatef(0.24, 0, 0);
-    brokenBuilding4();
-    glLoadIdentity();
+        brokenBuilding4();
+    glPopMatrix();
 
-    // broken fence
-    drawBrokenFence();
+    // road
+    drawRoad();
 
-    // grass
-    vector<Color> cloudGrass = {
-        { 0.153f, 0.047f, 0.000f }
-    };
-    glTranslatef(0, -0.9, 0);
-    drawCloud1(cloudGrass);
-    glLoadIdentity();
+    // trees
+    drawTree3();
 
-    drawSmallGrass();
-    glTranslatef(0.3, 0.15, 0);
-    drawSmallGrass();
-    glLoadIdentity();
+
+    // marshmallow cloud
+    glPushMatrix();
+    glTranslatef(0, 0, 0);
+    glTranslatef(0, -0.2f, 0);
+    glScalef(sdxMClouds, sdyMClouds, 0);
+    glTranslatef(0, 0.2f, 0);
+    glTranslatef(dxMClouds, dyMClouds, 0);
+        marshCloud();
+    glPopMatrix();
+
+    brokenCar();
+    brokenBus();
+
+    // Particles
+    glPushMatrix();
+    glTranslatef(dxParticles, dyParticles, 0.0f);
+        drawParticles();
+    glPopMatrix();
 
     // flower 1
     glColor3f(0.361f, 0.082f, 0.0039f);
@@ -1288,20 +1364,23 @@ void mergeComponents() {
     drawFlowerGrass2();
     drawFlower(0.376f, -0.401f, 0.02f, 5);
 
-    // marshmallow cloud
+    // broken fence
+    drawBrokenFence();
+
+    // grass
+    vector<Color> cloudGrass = {
+        { 0.153f, 0.047f, 0.000f }
+    };
     glPushMatrix();
-    glTranslatef(0, 0, 0);
-    glTranslatef(0, -0.2f, 0);
-    glScalef(sdxMClouds, sdyMClouds, 0);
-    glTranslatef(0, 0.2f, 0);
-        marshCloud();
+    glTranslatef(0, -0.9, 0);
+        drawCloud1(cloudGrass);
     glPopMatrix();
 
-    brokenCar();
-    brokenBus();
-
-    // Particles
-    drawParticles();
+    drawSmallGrass();
+    glPushMatrix();
+    glTranslatef(0.3, 0.15, 0);
+        drawSmallGrass();
+    glPopMatrix();
 }
 
 // Initialization
@@ -1309,11 +1388,51 @@ void initGL() {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
 }
 
+// Plane
+void drawPlane() {
+    // Fuselage
+    glColor3f(0.0f, 0.0f, 1.0f); // Blue
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-0.8f, -0.1f); glVertex2f(-0.2f, -0.1f);
+    glVertex2f(0.0f, 0.0f); glVertex2f(-0.2f, 0.1f);
+    glVertex2f(-0.8f, 0.1f);
+    glEnd();
+
+    // Left Wing
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-0.6f, 0.1f); glVertex2f(-1.0f, 0.3f);
+    glVertex2f(-1.0f, 0.2f); glVertex2f(-0.6f, 0.0f);
+    glEnd();
+
+    // Right Wing
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-0.6f, 0.0f); glVertex2f(-1.0f, -0.2f);
+    glVertex2f(-1.0f, -0.3f); glVertex2f(-0.6f, 0.1f);
+    glEnd();
+
+    // Tail
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-0.8f, 0.1f); glVertex2f(-0.9f, 0.3f);
+    glVertex2f(-0.9f, 0.2f); glVertex2f(-0.8f, 0.0f);
+    glEnd();
+
+    // Cockpit
+    glColor3f(0.0f, 1.0f, 0.0f); // Green
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-0.3f, 0.05f); glVertex2f(-0.1f, 0.1f);
+    glVertex2f(-0.1f, 0.0f); glVertex2f(-0.3f, -0.05f);
+    glEnd();
+}
+
 // Display callback
 void display() {
     glClear(GL_COLOR_BUFFER_BIT); // Clear the screen
 
-    mergeComponents(); // Merge all the components into 1 scene
+    glPushMatrix();
+    glTranslatef(dxBackground, dyBackground, 0.0f); //  shake background
+        mergeComponents(); // Merge all the components into 1 scene
+    glPopMatrix();
+    // drawPlane(); // Draw the plane
 
     glutSwapBuffers(); // Swap buffers (double buffering)
 }
@@ -1361,20 +1480,21 @@ void initVariables() {
 }
 
 void update() {
+
     // Clouds
-    dxCloud1 += 0.001f; // Move clouds to the right
+    dxCloud1 += xCloud1Speed; // Move clouds to the right
     if (dxCloud1 > 2.0f) {
         dxCloud1 = -0.5f; // Reset position when it goes off screen
     }
     // cout << "dxCloud1: " << dxCloud1 << endl;
 
-    dxCloud2 -= 0.0005f; // Move clouds to the left
+    dxCloud2 -= xCloud2Speed; // Move clouds to the left
     if (dxCloud2 < -2.0f) {
         dxCloud2 = 0.5f; // Reset position when it goes off screen
     }
     // cout << "dxCloud2: " << dxCloud2 << endl << endl;
 
-    dxCloud3 += 0.0016f; // Move clouds to the right
+    dxCloud3 += xCloud3Speed; // Move clouds to the right
     if (dxCloud3 > 1.4f) {
         dxCloud3 = -0.9f; // Reset position when it goes off screen
     }
@@ -1382,11 +1502,60 @@ void update() {
 
     // marshmallow cloud
     if (sdxMClouds < 1.7f) {
-        sdxMClouds += 0.001f; // Move marshmallow cloud to the right
-        sdyMClouds += 0.001f; // Move marshmallow cloud to the right
+        shakeBackground = true;
+        sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
+        sdyMClouds += sdyMCloudsSpeed; // Move marshmallow cloud to the right
         cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
+    } else {
+        shakeBackground = false;
+        if (toggleMClouds) {
+            dxMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
+            dyMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
+            toggleMClouds = false; // Toggle to false to reset position
+        } else {
+            dxMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
+            dyMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
+            toggleMClouds = true; // Toggle to true to reset position
+        }
     }
 
+    // shake background
+    if (shakeBackground) {
+        if (toggleBackground) {
+            dxBackground = backgroundShakeSpeed; 
+            dyBackground = backgroundShakeSpeed; 
+            toggleBackground = false;
+        } else {
+            dxBackground = -backgroundShakeSpeed; 
+            dyBackground = -backgroundShakeSpeed; 
+            toggleBackground = true;
+        }
+    }
+
+    // Particles
+    if (!resetParticles) {
+        dxParticles += dxParticlesSpeed; // Move particles to the right
+        dyParticles += dxParticlesSpeed; // Move particles down
+    }
+
+    if (dxParticles > 0.05f || dyParticles > 0.05f) {
+        resetParticles = true; // Reset particles
+    }
+
+    if (resetParticles && (dxParticles > 0.0f || dyParticles > 0.0f)) {
+        dxParticles -= (dxParticlesSpeed - 0.0001f);
+        dyParticles -= (dxParticlesSpeed - 0.0002f); 
+    }
+
+    // buildings collapse
+    if (dyBuilding1 > -0.08f) {
+        dyBuilding1 -= dyBuilding1Speed; // Move building down
+        rotateBuilding1 -= rotateBuilding1Speed; // Rotate building
+    }
+    if (dyBuilding2 > -0.07f) {
+        dyBuilding2 -= dyBuilding2Speed; // Move building down
+        rotateBuilding2 += rotateBuilding2Speed; // Rotate building
+    }
 
     glutPostRedisplay(); // Request a redraw
 }
@@ -1395,6 +1564,51 @@ void handleKey(unsigned char key, int x, int y) {
     // printf("Key pressed: %c at (%d, %d)\n", key, x, y);
     if (key == 27) { // Escape key
         exit(0); // Exit the program
+    }
+}
+
+void increaseSpeed() {
+    // Increase speeds
+    // Increase speeds with maximum limits
+    xCloud1Speed = min(0.01f, xCloud1Speed + 0.001f);
+    xCloud2Speed = min(0.01f, xCloud2Speed + 0.001f);
+    xCloud3Speed = min(0.01f, xCloud3Speed + 0.001f);
+    sdxMCloudsSpeed = min(0.01f, sdxMCloudsSpeed + 0.001f);
+    sdyMCloudsSpeed = min(0.01f, sdyMCloudsSpeed + 0.001f);
+    dxParticlesSpeed = min(0.001f, dxParticlesSpeed + 0.0001f);
+    dyParticlesSpeed = min(0.001f, dyParticlesSpeed + 0.0001f);
+    dyBuilding1Speed = min(0.001f, dyBuilding1Speed + 0.0001f);
+    dyBuilding2Speed = min(0.001f, dyBuilding2Speed + 0.0001f);
+}
+
+void decreaseSpeed() {
+    // Decrease speeds with minimum limits
+    xCloud1Speed = max(0.001f, xCloud1Speed - 0.001f);
+    xCloud2Speed = max(0.001f, xCloud2Speed - 0.001f);
+    xCloud3Speed = max(0.001f, xCloud3Speed - 0.001f);
+    sdxMCloudsSpeed = max(0.001f, sdxMCloudsSpeed - 0.001f);
+    sdyMCloudsSpeed = max(0.001f, sdyMCloudsSpeed - 0.001f);
+    dxParticlesSpeed = max(0.0001f, dxParticlesSpeed - 0.0001f);
+    dyParticlesSpeed = max(0.0001f, dyParticlesSpeed - 0.0001f);
+    dyBuilding1Speed = max(0.0001f, dyBuilding1Speed - 0.0001f);
+    dyBuilding2Speed = max(0.0001f, dyBuilding2Speed - 0.0001f);
+}
+
+void handleSpecialKey(int key, int x, int y) {
+    // printf("Special key pressed: %d at (%d, %d)\n", key, x, y);
+    switch (key) {
+        case GLUT_KEY_LEFT:
+            break;
+        case GLUT_KEY_RIGHT:
+            break;
+        case GLUT_KEY_UP:
+            increaseSpeed(); // Increase speeds
+            break;
+        case GLUT_KEY_DOWN:
+            decreaseSpeed(); // Decrease speeds
+            break;
+        default:
+            break;
     }
 }
 
@@ -1410,6 +1624,7 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display);   // Register display callback
     glutReshapeFunc(reshape);   // Register reshape callback
     glutKeyboardFunc(handleKey); // Register keyboard callback
+    glutSpecialFunc(handleSpecialKey); // Register special key callback
     glutIdleFunc(update);    // Register idle callback
 
     initGL();                   // Set initial OpenGL state

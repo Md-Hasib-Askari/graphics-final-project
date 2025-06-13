@@ -35,6 +35,10 @@ struct Color {
 
 // Global Variables
 
+// Sound
+bool soundPlayed = false; // Flag to check if sound is played
+bool soundAlarm = false; // Flag to check if alarm sound is played
+
 // Animation control
 float xCloud1Speed = 0.001f;
 float xCloud2Speed = 0.0005f;
@@ -43,6 +47,8 @@ float xCloud3Speed = 0.0016f;
 float sdxMCloudsSpeed = 0.001f;
 float sdyMCloudsSpeed = 0.001f;
 float MCloudShakeSpeed = 0.0002f;
+
+float nukeSpeed = 0.0005f;
 
 float backgroundShakeSpeed = 0.0005f;
 
@@ -97,6 +103,10 @@ bool toggleBackground = false;
 float dxBackground = 0.0f;
 float dyBackground = 0.0f;
 
+// nuke
+float dyNuke = 0.0f;
+bool toggleNuke = true;
+
 
 // Utils
 void playSound(int value) {
@@ -148,6 +158,63 @@ void drawFilledEllipse(float centerX = 0, float centerY = 0, float radiusX = 0.2
 
 float randomFloat(float min, float max) {
     return min + (float) ((rand()) / (float) (RAND_MAX / (max - min)));
+}
+
+void drawNuke() {
+    glBegin(GL_POLYGON);
+        glColor3f(0.510f, 0.584f, 0.345f);  // #829558
+        glVertex2f(-0.249f, 0.419f);
+        glVertex2f(-0.242f, 0.419f);
+
+        glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
+        glVertex2f(-0.242f, 0.413f);
+        glVertex2f(-0.249f, 0.413f);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glColor3f(0.510f, 0.584f, 0.345f);  // #829558
+        glVertex2f(-0.238f, 0.395f);
+        glVertex2f(-0.253f, 0.395f);
+        
+        glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
+        glVertex2f(-0.264f, 0.401f);
+        glVertex2f(-0.264f, 0.421f);
+
+        glColor3f(0.510f, 0.584f, 0.345f);  // #829558
+        glVertex2f(-0.249f, 0.413f);
+        glVertex2f(-0.242f, 0.413f);
+
+        glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
+        glVertex2f(-0.227f, 0.421f);
+        glVertex2f(-0.227f, 0.401f);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+        glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
+        glVertex2f(-0.227f, 0.333f);
+        glVertex2f(-0.265f, 0.333f);
+
+        glColor3f(0.510f, 0.584f, 0.345f);  // #829558
+        glVertex2f(-0.265f, 0.369f);
+        glVertex2f(-0.253f, 0.395f);
+
+        glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
+        glVertex2f(-0.238f, 0.395f);
+        glVertex2f(-0.227f, 0.369f);
+    glEnd();
+
+    drawFilledCurve(-0.246f, 0.333f, 0.019f, 0, 360);
+
+    drawFilledCurve(-0.246f, 0.419f, 0.0034f, 0, 360);
+    
+    glColor3f(1.0f, 1.0f, 1.0f); // white
+    drawFilledCurve(-0.246f, 0.351f, 0.015f, 0, 60);
+    drawFilledCurve(-0.246f, 0.351f, 0.015f, 120, 180);
+    drawFilledCurve(-0.246f, 0.351f, 0.015f, 240, 300);
+    glColor3f(0.0f, 0.0f, 0.0f); // black
+    drawFilledCurve(-0.246f, 0.351f, 0.0034f, 0, 360); 
+    glColor3f(1.0f, 1.0f, 1.0f); // white
+    drawFilledCurve(-0.246f, 0.351f, 0.002f, 0, 360);
 }
 
 bool initParticles = true;
@@ -1352,15 +1419,18 @@ void mergeComponents() {
 
 
     // marshmallow cloud
-    glPushMatrix();
-    glTranslatef(0, 0, 0);
-    glTranslatef(0, -0.2f, 0);
-    glScalef(sdxMClouds, sdyMClouds, 0);
-    glTranslatef(0, 0.2f, 0);
-    glTranslatef(dxMClouds, dyMClouds, 0);
-        marshCloud();
-    glPopMatrix();
+    if (!toggleNuke) {
+        glPushMatrix();
+        glTranslatef(0, 0, 0);
+        glTranslatef(0, -0.2f, 0);
+        glScalef(sdxMClouds, sdyMClouds, 0);
+        glTranslatef(0, 0.2f, 0);
+        glTranslatef(dxMClouds, dyMClouds, 0);
+            marshCloud();
+        glPopMatrix();
+    }
 
+    // vehicles 
     brokenCar();
     brokenBus();
 
@@ -1399,53 +1469,25 @@ void mergeComponents() {
     glTranslatef(0.3, 0.15, 0);
         drawSmallGrass();
     glPopMatrix();
-}
 
-// Initialization
-void initGL() {
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
-}
-
-// Plane
-void drawPlane() {
-    // Fuselage
-    glColor3f(0.0f, 0.0f, 1.0f); // Blue
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(-0.8f, -0.1f); glVertex2f(-0.2f, -0.1f);
-    glVertex2f(0.0f, 0.0f); glVertex2f(-0.2f, 0.1f);
-    glVertex2f(-0.8f, 0.1f);
-    glEnd();
-
-    // Left Wing
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(-0.6f, 0.1f); glVertex2f(-1.0f, 0.3f);
-    glVertex2f(-1.0f, 0.2f); glVertex2f(-0.6f, 0.0f);
-    glEnd();
-
-    // Right Wing
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(-0.6f, 0.0f); glVertex2f(-1.0f, -0.2f);
-    glVertex2f(-1.0f, -0.3f); glVertex2f(-0.6f, 0.1f);
-    glEnd();
-
-    // Tail
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(-0.8f, 0.1f); glVertex2f(-0.9f, 0.3f);
-    glVertex2f(-0.9f, 0.2f); glVertex2f(-0.8f, 0.0f);
-    glEnd();
-
-    // Cockpit
-    glColor3f(0.0f, 1.0f, 0.0f); // Green
-    glBegin(GL_LINE_LOOP);
-    glVertex2f(-0.3f, 0.05f); glVertex2f(-0.1f, 0.1f);
-    glVertex2f(-0.1f, 0.0f); glVertex2f(-0.3f, -0.05f);
-    glEnd();
+    // nuke
+    // change: 0.2 -> -0.51
+    // glTranslatef(0.25f, -0.51f, 0.0f);
+    if (toggleNuke) {
+        glPushMatrix();
+        glTranslatef(0.0f, dyNuke, 0.0f);
+            glPushMatrix();
+            glTranslatef(0.25f, 0.2f, 0.0f);
+                drawNuke();
+            glPopMatrix();
+        glPopMatrix();
+    }
 }
 
 // Display 1 callback
 void display1()
 {
-    // glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
     glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
 
     glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // Set text color to black
@@ -1460,6 +1502,8 @@ void display1()
 
     renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
     renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 3: The Fall");
+    renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Md Hasib Askari");
+    renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow' to continue");
 
 
     glFlush(); // Render now
@@ -1469,6 +1513,7 @@ void display1()
 
 // Display callback
 void display2() {
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
     glClear(GL_COLOR_BUFFER_BIT); // Clear the screen
 
     glPushMatrix();
@@ -1543,62 +1588,76 @@ void update() {
     }
     // cout << "dxCloud3: " << dxCloud3 << endl;
 
-    // marshmallow cloud
-    if (sdxMClouds < 1.7f) {
-        shakeBackground = true;
-        sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
-        sdyMClouds += sdyMCloudsSpeed; // Move marshmallow cloud to the right
-        // cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
+    if (toggleNuke) {
+        dyNuke -= nukeSpeed; // Move nuke down
+        if (dyNuke <= -0.71f) {
+            toggleNuke = false; // Toggle to false to reset position
+        }
     } else {
-        shakeBackground = false;
-        if (toggleMClouds) {
-            dxMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
-            dyMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
-            toggleMClouds = false; // Toggle to false to reset position
-        } else {
-            dxMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
-            dyMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
-            toggleMClouds = true; // Toggle to true to reset position
+        if (!soundPlayed) {
+            glutTimerFunc(0, playSound, 0);
+            glutTimerFunc(15000, playSound, 1);
+            soundPlayed = true;
         }
-    }
 
-    // shake background
-    if (shakeBackground) {
-        if (toggleBackground) {
-            dxBackground = backgroundShakeSpeed;
-            dyBackground = backgroundShakeSpeed;
-            toggleBackground = false;
+
+        // marshmallow cloud
+        if (sdxMClouds < 1.7f) {
+            shakeBackground = true;
+            sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
+            sdyMClouds += sdyMCloudsSpeed; // Move marshmallow cloud to the right
+            // cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
         } else {
-            dxBackground = -backgroundShakeSpeed;
-            dyBackground = -backgroundShakeSpeed;
-            toggleBackground = true;
+            shakeBackground = false;
+            if (toggleMClouds) {
+                dxMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
+                dyMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
+                toggleMClouds = false; // Toggle to false to reset position
+            } else {
+                dxMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
+                dyMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
+                toggleMClouds = true; // Toggle to true to reset position
+            }
         }
-    }
 
-    // Particles
-    if (!resetParticles) {
-        dxParticles += dxParticlesSpeed; // Move particles to the right
-        dyParticles += dyParticlesSpeed; // Move particles down
-    }
+        // shake background
+        if (shakeBackground) {
+            if (toggleBackground) {
+                dxBackground = backgroundShakeSpeed;
+                dyBackground = backgroundShakeSpeed;
+                toggleBackground = false;
+            } else {
+                dxBackground = -backgroundShakeSpeed;
+                dyBackground = -backgroundShakeSpeed;
+                toggleBackground = true;
+            }
+        }
 
-    if (dxParticles > 0.05f || dyParticles > 0.05f) {
-        resetParticles = true; // Reset particles
-    }
+        // Particles
+        if (!resetParticles) {
+            dxParticles += dxParticlesSpeed; // Move particles to the right
+            dyParticles += dyParticlesSpeed; // Move particles down
+        }
 
-    if (resetParticles && (dxParticles > 0.0f && dyParticles > 0.0f)) {
-        dxParticles -= (dxParticlesSpeed - 0.0001f);
-        dyParticles -= (dyParticlesSpeed - 0.0002f);
-    }
-    cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
+        if (dxParticles > 0.05f || dyParticles > 0.05f) {
+            resetParticles = true; // Reset particles
+        }
 
-    // buildings collapse
-    if (dyBuilding1 > -0.08f) {
-        dyBuilding1 -= dyBuilding1Speed; // Move building down
-        rotateBuilding1 -= rotateBuilding1Speed; // Rotate building
-    }
-    if (dyBuilding2 > -0.07f) {
-        dyBuilding2 -= dyBuilding2Speed; // Move building down
-        rotateBuilding2 += rotateBuilding2Speed; // Rotate building
+        if (resetParticles && (dxParticles > 0.0f && dyParticles > 0.0f)) {
+            dxParticles -= (dxParticlesSpeed - 0.0001f);
+            dyParticles -= (dyParticlesSpeed - 0.0002f);
+        }
+        cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
+
+        // buildings collapse
+        if (dyBuilding1 > -0.08f) {
+            dyBuilding1 -= dyBuilding1Speed; // Move building down
+            rotateBuilding1 -= rotateBuilding1Speed; // Rotate building
+        }
+        if (dyBuilding2 > -0.07f) {
+            dyBuilding2 -= dyBuilding2Speed; // Move building down
+            rotateBuilding2 += rotateBuilding2Speed; // Rotate building
+        }
     }
 
     glutPostRedisplay(); // Request a redraw
@@ -1638,6 +1697,7 @@ void decreaseSpeed() {
     dyBuilding2Speed = max(0.0001f, dyBuilding2Speed - 0.0001f);
 }
 
+
 void handleSpecialKey(int key, int x, int y) {
     // printf("Special key pressed: %d at (%d, %d)\n", key, x, y);
     switch (key) {
@@ -1653,8 +1713,6 @@ void handleSpecialKey(int key, int x, int y) {
         case GLUT_KEY_RIGHT:
             glutDisplayFunc(display2);   // Register display callback
             glutIdleFunc(update);    // Register idle callback
-            glutTimerFunc(0, playSound, 0);
-            glutTimerFunc(19000, playSound, 1);
 
             glutPostRedisplay(); // Request a redraw
             break;
@@ -1683,8 +1741,6 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(handleKey); // Register keyboard callback
     glutSpecialFunc(handleSpecialKey); // Register special key callback
     
-    initGL();                   // Set initial OpenGL state
-
     glutMainLoop();             // Start main loop
     return 0;
 }

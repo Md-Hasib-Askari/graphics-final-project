@@ -12,7 +12,8 @@ using namespace std;
 
 
 // Data Structures
-// Particles
+
+// 1. Particles
 struct Particle {
     float x, y;
     float r, g, b;
@@ -20,13 +21,13 @@ struct Particle {
     float radius;
 };
 
-// Points
+// 2. Points
 struct Point {
     double x;
     double y;
 };
 
-// Color
+// 3. Color
 struct Color {
     float r;
     float g;
@@ -35,12 +36,12 @@ struct Color {
 
 // Global Variables
 
-// Sound
+// 1. Sound
 bool soundPlayed = false; // Flag to check if sound is played
 bool soundAlarm = false; // Flag to check if alarm sound is played
 bool nukeSoundPlayed = false; // Flag to check if nuke sound is played
 
-// Animation control
+// 2. Animation control
 float xCloud1Speed = 0.001f;
 float xCloud2Speed = 0.0005f;
 float xCloud3Speed = 0.0016f;
@@ -61,11 +62,11 @@ float dyBuilding2Speed = 0.00005f;
 float rotateBuilding1Speed = 0.005f;
 float rotateBuilding2Speed = 0.003f;
 
-// Window size
+// 3. Window size
 int windowWidth = 1280;
 int windowHeight = 720;
 
-// Clouds
+// 4. Clouds
 float dxCloud1 = 0.0f;
 float dyCloud1 = 0.0f;
 float dxCloud2 = 0.0f;
@@ -73,23 +74,23 @@ float dyCloud2 = 0.0f;
 float dxCloud3 = 0.0f;
 float dyCloud3 = 0.0f;
 
-// marsh clouds
+// 5. marsh clouds
 bool toggleMClouds = false;
 float dxMClouds = 0.0f;
 float dyMClouds = 0.0f;
 float sdxMClouds = 0.1f;
 float sdyMClouds = 0.1f;
 
-// particles
+// 6. particles
 bool resetParticles = false;
 float dxParticles = 0.0f;
 float dyParticles = 0.0f;
 
-// grass
+// 7. grass
 float dxGrass = 0.0f;
 float dyGrass = 0.0f;
 
-// building collapse
+// 8. building collapse
 float rotateBuilding1 = 0.0f;
 float dxBuilding1 = 0.0f;
 float dyBuilding1 = 0.0f;
@@ -98,13 +99,13 @@ float rotateBuilding2 = 0.0f;
 float dxBuilding2 = 0.0f;
 float dyBuilding2 = 0.0f;
 
-// background
+// 9. background
 bool shakeBackground = false;
 bool toggleBackground = false;
 float dxBackground = 0.0f;
 float dyBackground = 0.0f;
 
-// nuke
+// 10. nuke
 float dyNuke = 0.0f;
 bool toggleNuke = true;
 

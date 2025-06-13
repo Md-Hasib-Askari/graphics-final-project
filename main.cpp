@@ -99,6 +99,25 @@ float dyBackground = 0.0f;
 
 
 // Utils
+void playSound(int value) {
+    // Play sound after 19 seconds
+    if (value == 0) {
+        PlaySound(TEXT("blast.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    } else if (value == 1) {
+        PlaySound(TEXT("alarm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    }
+}
+
+void renderBitmapString(float x, float y, float z, void *font, char *string)
+{
+    char *c;
+    glRasterPos3f(x, y,z);
+    for (c=string; *c != '\0'; c++)
+    {
+        glutBitmapCharacter(font, *c);
+    }
+}
+
 void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(centerX, centerY); // center of fan
@@ -1423,8 +1442,33 @@ void drawPlane() {
     glEnd();
 }
 
+// Display 1 callback
+void display1()
+{
+    // glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+    glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
+
+    glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // Set text color to black
+    glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -1.0f); // Bottom left
+        glVertex2f(1.0f, -1.0f);  // Bottom right
+        glVertex2f(1.0f, 1.0f);   // Top right
+        glVertex2f(-1.0f, 1.0f);  // Top left
+    glEnd();
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
+    renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 3: The Fall");
+
+
+    glFlush(); // Render now
+
+    glutSwapBuffers(); // Swap buffers (double buffering)
+}
+
 // Display callback
-void display() {
+void display2() {
     glClear(GL_COLOR_BUFFER_BIT); // Clear the screen
 
     glPushMatrix();
@@ -1598,8 +1642,21 @@ void handleSpecialKey(int key, int x, int y) {
     // printf("Special key pressed: %d at (%d, %d)\n", key, x, y);
     switch (key) {
         case GLUT_KEY_LEFT:
+            glutDisplayFunc(display1);   // Register display callback
+
+            // Reset variables
+            PlaySound(NULL, NULL, SND_ASYNC | SND_PURGE); // Stop sound
+
+            glutIdleFunc(NULL);    // Unregister idle callback
+            glutPostRedisplay(); // Request a redraw
             break;
         case GLUT_KEY_RIGHT:
+            glutDisplayFunc(display2);   // Register display callback
+            glutIdleFunc(update);    // Register idle callback
+            glutTimerFunc(0, playSound, 0);
+            glutTimerFunc(19000, playSound, 1);
+
+            glutPostRedisplay(); // Request a redraw
             break;
         case GLUT_KEY_UP:
             increaseSpeed(); // Increase speeds
@@ -1612,15 +1669,6 @@ void handleSpecialKey(int key, int x, int y) {
     }
 }
 
-void playSound(int value) {
-    // Play sound after 19 seconds
-    if (value == 0) {
-        PlaySound(TEXT("blast.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    } else if (value == 1) {
-        PlaySound(TEXT("alarm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-    }
-}
-
 // Entry point
 int main(int argc, char** argv) {
     initVariables();
@@ -1628,16 +1676,13 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);                      // Initialize GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);// Double buffer, RGB mode
     glutInitWindowSize(windowWidth, windowHeight);
-    glutCreateWindow("Scene 3"); // Create window
+    glutCreateWindow("Scene 3: The Fall"); // Create window
 
-    glutDisplayFunc(display);   // Register display callback
+    glutDisplayFunc(display1);   // Register display callback
     glutReshapeFunc(reshape);   // Register reshape callback
     glutKeyboardFunc(handleKey); // Register keyboard callback
     glutSpecialFunc(handleSpecialKey); // Register special key callback
-    glutIdleFunc(update);    // Register idle callback
-    glutTimerFunc(0, playSound, 0);
-    glutTimerFunc(19000, playSound, 1);
-
+    
     initGL();                   // Set initial OpenGL state
 
     glutMainLoop();             // Start main loop

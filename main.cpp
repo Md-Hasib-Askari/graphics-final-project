@@ -172,6 +172,8 @@ float randomFloat(float min, float max) {
     return min + (float) ((rand()) / (float) (RAND_MAX / (max - min)));
 }
 
+
+// Drawing Functions
 void drawNuke() {
     glBegin(GL_POLYGON);
         glColor3f(0.510f, 0.584f, 0.345f);  // #829558
@@ -1548,6 +1550,7 @@ void reshape(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+// variables for marshmallow cloud
 void initVariables() {
     // random generated circles
     float minX = -0.20;
@@ -1580,8 +1583,7 @@ void initVariables() {
 }
 
 void update() {
-
-    // Clouds
+    // =====> Clouds
     dxCloud1 += xCloud1Speed; // Move clouds to the right
     if (dxCloud1 > 2.0f) {
         dxCloud1 = -0.5f; // Reset position when it goes off screen
@@ -1601,8 +1603,9 @@ void update() {
     // cout << "dxCloud3: " << dxCloud3 << endl;
 
     if (toggleNuke) {
+        // =====> Nuke
         if (!nukeSoundPlayed) {
-            glutTimerFunc(0, playSound, 0);
+            playSound(0);
             nukeSoundPlayed = true; // Play sound only once
         }
 
@@ -1618,7 +1621,7 @@ void update() {
         }
 
 
-        // marshmallow cloud
+        // =====> marshmallow cloud
         if (sdxMClouds < 1.7f) {
             shakeBackground = true;
             sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
@@ -1637,7 +1640,7 @@ void update() {
             }
         }
 
-        // shake background
+        // =====> shake background
         if (shakeBackground) {
             if (toggleBackground) {
                 dxBackground = backgroundShakeSpeed;
@@ -1650,7 +1653,7 @@ void update() {
             }
         }
 
-        // Particles
+        // =====> Particles
         if (!resetParticles) {
             dxParticles += dxParticlesSpeed; // Move particles to the right
             dyParticles += dyParticlesSpeed; // Move particles down
@@ -1666,7 +1669,7 @@ void update() {
         }
         cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
 
-        // buildings collapse
+        // =====> buildings collapse
         if (dyBuilding1 > -0.08f) {
             dyBuilding1 -= dyBuilding1Speed; // Move building down
             rotateBuilding1 -= rotateBuilding1Speed; // Rotate building

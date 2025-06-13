@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <iostream>
+#include <GL/gl.h>
 #include <GL/glut.h>
 #include <cmath>
 #include <ctime>
@@ -39,8 +40,8 @@ float xCloud1Speed = 0.001f;
 float xCloud2Speed = 0.0005f;
 float xCloud3Speed = 0.0016f;
 
-float sdxMCloudsSpeed = 0.004f;
-float sdyMCloudsSpeed = 0.004f;
+float sdxMCloudsSpeed = 0.001f;
+float sdyMCloudsSpeed = 0.001f;
 float MCloudShakeSpeed = 0.0002f;
 
 float backgroundShakeSpeed = 0.0005f;
@@ -48,10 +49,10 @@ float backgroundShakeSpeed = 0.0005f;
 float dxParticlesSpeed = 0.0002f;
 float dyParticlesSpeed = 0.0005f;
 
-float dyBuilding1Speed = 0.0003f;
-float dyBuilding2Speed = 0.0005f;
-float rotateBuilding1Speed = 0.01f;
-float rotateBuilding2Speed = 0.03f;
+float dyBuilding1Speed = 0.0001f;
+float dyBuilding2Speed = 0.00005f;
+float rotateBuilding1Speed = 0.005f;
+float rotateBuilding2Speed = 0.003f;
 
 // Window size
 int windowWidth = 1280;
@@ -385,7 +386,7 @@ void brokenCar() {
     drawFilledCurve(-0.715f, -0.143f, 0.015f);
 }
 
-Point mClouds[4][20];
+Point mClouds[3][20];
 
 void marshCloud() {
     glColor3f(0.25f, 0.06f, 0.01f);
@@ -462,32 +463,30 @@ void marshCloud() {
     drawFilledCurve(0.2f, 0.4f, 0.07);
     drawFilledCurve(0.262f, 0.349f, 0.07);
 
-    glColor3f(0.705f, 0.078f, 0.000f); // #B41400
+    glColor3f(0.705f, 0.078f, 0.000f); // #B41400 (brown)
     for (int i = 0; i < 20; i++) {
         double x = mClouds[0][i].x;
         double y = mClouds[0][i].y;
         drawFilledCurve(x, y, 0.07);
     }
 
-    glColor3f(0.984f, 0.733f, 0.106f);
+    glColor3f(0.984f, 0.733f, 0.106f); // #F9BB1A (yellow)
     for (int i = 0; i < 20; i++) {
         double x = mClouds[1][i].x;
         double y = mClouds[1][i].y;
         drawFilledCurve(x, y, 0.07);
+
     }
 
-    glColor3f(0.992f, 0.278f, 0.008f);
+    glColor3f(0.992f, 0.278f, 0.008f); // #FC4702 (red)
     for (int i = 0; i < 20; i++) {
         double x = mClouds[2][i].x;
         double y = mClouds[2][i].y;
         drawFilledCurve(x, y, 0.07);
-    }
-
-    glColor3f(0.984f, 0.733f, 0.106f);
-    for (int i = 0; i < 20; i++) {
-        double x = mClouds[3][i].x;
-        double y = mClouds[3][i].y;
-        drawFilledCurve(x, y, 0.07);
+           // 0.4548
+        if (mClouds[0][i].y > 0.4548) {
+            cout << "Cloud 0 y: " << mClouds[0][i].y << endl;
+        }
     }
 
     glColor3f(0.2235f, 0.0392f, 0.0f);
@@ -1299,7 +1298,7 @@ void mergeComponents() {
     // trees
     drawTree1();
     drawTree2();
-    
+
     glPushMatrix();
     glTranslatef(0.48, 0.33, 0);
     drawTree3();
@@ -1311,7 +1310,7 @@ void mergeComponents() {
     glTranslatef(dxBuilding1, dyBuilding1, 0);
         brokenBuilding1();
     glPopMatrix();
-    
+
     glPushMatrix();
     glRotatef(rotateBuilding2, 0, 0, 1);
     glTranslatef(dxBuilding2, dyBuilding2, 0);
@@ -1450,10 +1449,10 @@ void reshape(int width, int height) {
 
 void initVariables() {
     // random generated circles
-    double minX = -0.20;
-    double maxX = 0.31387585808908;
-    double minY = 0.29273640942807;
-    double maxY = 0.45480551582913;
+    float minX = -0.20;
+    float maxX = 0.3138;
+    float minY = 0.2927;
+    float maxY = 0.4548;
 
     srand(1748270319); // seed
 
@@ -1462,8 +1461,8 @@ void initVariables() {
     // yellow, orange circles
     for (int i=0; i<3; i++) {
         for (int j=0; j<20; j++) {
-            double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-            double y = minY + (rand() / (double)RAND_MAX) * (maxY - minY);
+            float x = minX + (rand() / (float)RAND_MAX) * (maxX - minX);
+            float y = minY + (rand() / (float)RAND_MAX) * (maxY - minY);
             mClouds[i][j].x = x;
             mClouds[i][j].y = y;
             cout << "mClouds[" << i << "][" << j << "] = (" << x << ", " << y << ")" << endl;
@@ -1472,8 +1471,8 @@ void initVariables() {
 
     // shades
     for (int j=0; j<20; j++) {
-        double x = minX + (rand() / (double)RAND_MAX) * (maxX - minX);
-        double y = minY + (rand() / (double)RAND_MAX) * (3.0 - minY);
+        float x = minX + (rand() / (float)RAND_MAX) * (maxX - minX);
+        float y = minY + (rand() / (float)RAND_MAX) * (3.0 - minY);
         mClouds[3][j].x = x;
         mClouds[3][j].y = y;
     }
@@ -1498,14 +1497,14 @@ void update() {
     if (dxCloud3 > 1.4f) {
         dxCloud3 = -0.9f; // Reset position when it goes off screen
     }
-    cout << "dxCloud3: " << dxCloud3 << endl;
+    // cout << "dxCloud3: " << dxCloud3 << endl;
 
     // marshmallow cloud
     if (sdxMClouds < 1.7f) {
         shakeBackground = true;
         sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
         sdyMClouds += sdyMCloudsSpeed; // Move marshmallow cloud to the right
-        cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
+        // cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
     } else {
         shakeBackground = false;
         if (toggleMClouds) {
@@ -1522,12 +1521,12 @@ void update() {
     // shake background
     if (shakeBackground) {
         if (toggleBackground) {
-            dxBackground = backgroundShakeSpeed; 
-            dyBackground = backgroundShakeSpeed; 
+            dxBackground = backgroundShakeSpeed;
+            dyBackground = backgroundShakeSpeed;
             toggleBackground = false;
         } else {
-            dxBackground = -backgroundShakeSpeed; 
-            dyBackground = -backgroundShakeSpeed; 
+            dxBackground = -backgroundShakeSpeed;
+            dyBackground = -backgroundShakeSpeed;
             toggleBackground = true;
         }
     }
@@ -1535,17 +1534,18 @@ void update() {
     // Particles
     if (!resetParticles) {
         dxParticles += dxParticlesSpeed; // Move particles to the right
-        dyParticles += dxParticlesSpeed; // Move particles down
+        dyParticles += dyParticlesSpeed; // Move particles down
     }
 
     if (dxParticles > 0.05f || dyParticles > 0.05f) {
         resetParticles = true; // Reset particles
     }
 
-    if (resetParticles && (dxParticles > 0.0f || dyParticles > 0.0f)) {
+    if (resetParticles && (dxParticles > 0.0f && dyParticles > 0.0f)) {
         dxParticles -= (dxParticlesSpeed - 0.0001f);
-        dyParticles -= (dxParticlesSpeed - 0.0002f); 
+        dyParticles -= (dyParticlesSpeed - 0.0002f);
     }
+    cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
 
     // buildings collapse
     if (dyBuilding1 > -0.08f) {
@@ -1612,6 +1612,15 @@ void handleSpecialKey(int key, int x, int y) {
     }
 }
 
+void playSound(int value) {
+    // Play sound after 19 seconds
+    if (value == 0) {
+        PlaySound(TEXT("blast.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    } else if (value == 1) {
+        PlaySound(TEXT("alarm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    }
+}
+
 // Entry point
 int main(int argc, char** argv) {
     initVariables();
@@ -1626,6 +1635,8 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(handleKey); // Register keyboard callback
     glutSpecialFunc(handleSpecialKey); // Register special key callback
     glutIdleFunc(update);    // Register idle callback
+    glutTimerFunc(0, playSound, 0);
+    glutTimerFunc(19000, playSound, 1);
 
     initGL();                   // Set initial OpenGL state
 

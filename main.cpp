@@ -38,6 +38,7 @@ struct Color {
 // Sound
 bool soundPlayed = false; // Flag to check if sound is played
 bool soundAlarm = false; // Flag to check if alarm sound is played
+bool nukeSoundPlayed = false; // Flag to check if nuke sound is played
 
 // Animation control
 float xCloud1Speed = 0.001f;
@@ -110,11 +111,21 @@ bool toggleNuke = true;
 
 // Utils
 void playSound(int value) {
-    // Play sound after 19 seconds
-    if (value == 0) {
+    switch (value) {
+    case 0:
+        PlaySound(NULL, NULL, SND_PURGE); // Stop any previous sound
+        PlaySound(TEXT("drop.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        break;
+    case 1:
+        PlaySound(NULL, NULL, SND_PURGE); // Stop any previous sound
         PlaySound(TEXT("blast.wav"), NULL, SND_FILENAME | SND_ASYNC);
-    } else if (value == 1) {
+        break;
+    case 2:
+        PlaySound(NULL, NULL, SND_PURGE); // Stop any previous sound
         PlaySound(TEXT("alarm.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+        break;
+    default:
+        break;
     }
 }
 
@@ -1589,14 +1600,19 @@ void update() {
     // cout << "dxCloud3: " << dxCloud3 << endl;
 
     if (toggleNuke) {
+        if (!nukeSoundPlayed) {
+            glutTimerFunc(0, playSound, 0);
+            nukeSoundPlayed = true; // Play sound only once
+        }
+
         dyNuke -= nukeSpeed; // Move nuke down
         if (dyNuke <= -0.71f) {
             toggleNuke = false; // Toggle to false to reset position
         }
     } else {
         if (!soundPlayed) {
-            glutTimerFunc(0, playSound, 0);
-            glutTimerFunc(15000, playSound, 1);
+            glutTimerFunc(0, playSound, 1);
+            glutTimerFunc(10000, playSound, 2);
             soundPlayed = true;
         }
 
@@ -1678,6 +1694,7 @@ void increaseSpeed() {
     xCloud3Speed = min(0.01f, xCloud3Speed + 0.001f);
     sdxMCloudsSpeed = min(0.01f, sdxMCloudsSpeed + 0.001f);
     sdyMCloudsSpeed = min(0.01f, sdyMCloudsSpeed + 0.001f);
+    nukeSpeed = min(0.01f, nukeSpeed + 0.001f);
     dxParticlesSpeed = min(0.001f, dxParticlesSpeed + 0.0001f);
     dyParticlesSpeed = min(0.001f, dyParticlesSpeed + 0.0001f);
     dyBuilding1Speed = min(0.001f, dyBuilding1Speed + 0.0001f);
@@ -1691,6 +1708,7 @@ void decreaseSpeed() {
     xCloud3Speed = max(0.001f, xCloud3Speed - 0.001f);
     sdxMCloudsSpeed = max(0.001f, sdxMCloudsSpeed - 0.001f);
     sdyMCloudsSpeed = max(0.001f, sdyMCloudsSpeed - 0.001f);
+    nukeSpeed = max(0.001f, nukeSpeed - 0.001f);
     dxParticlesSpeed = max(0.0001f, dxParticlesSpeed - 0.0001f);
     dyParticlesSpeed = max(0.0001f, dyParticlesSpeed - 0.0001f);
     dyBuilding1Speed = max(0.0001f, dyBuilding1Speed - 0.0001f);

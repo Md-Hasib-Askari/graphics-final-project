@@ -89,6 +89,7 @@ public:
 
     bool pause = false;
 
+    // static Scene1* instance;
     static Scene1* instance;
 
     void sound() {
@@ -1421,6 +1422,12 @@ public:
         }
         instance->update(value);
     }
+};
+
+class Scene2 : SceneManager {
+public:
+    // static Scene2* instance;
+    static Scene2* instance;
 };
 
 class Scene3 : SceneManager {
@@ -6370,13 +6377,6 @@ public:
     }
 
     // static methods
-    static void IdleWrapper() {
-        if (instance == nullptr) {
-            cerr << "Scene4 instance is null, cannot call Idle." << endl;
-            return;
-        } 
-        instance->Idle();
-     }
     static void displayWrapper() { 
         if (instance == nullptr) {
             cerr << "Scene4 instance is null, cannot call display." << endl;
@@ -6414,6 +6414,11 @@ public:
     }
 };
 
+class Scene5 : SceneManager {
+public:
+    // static Scene2* instance;
+    static Scene5* instance;
+};
 
 bool SceneManager::scene1Sound = false;
 bool SceneManager::scene2Sound = false;
@@ -6422,10 +6427,10 @@ bool SceneManager::scene4Sound = false;
 bool SceneManager::scene5Sound = false;
 
 Scene1* Scene1::instance = nullptr;
-// Scene2* Scene2::instance = nullptr;
+Scene2* Scene2::instance = nullptr;
 Scene3* Scene3::instance = nullptr;
 Scene4* Scene4::instance = nullptr;
-// Scene5* Scene5::instance = nullptr;
+Scene5* Scene5::instance = nullptr;
 
 void displayScene(int sceneKey) {
     cout << "Displaying Scene: " << sceneKey << endl;

@@ -3546,7 +3546,6 @@ public:
         glutPostRedisplay();
         glutTimerFunc(100, Scene4::updateWrapper, 0);
 
-
     }
 
     void Idle()

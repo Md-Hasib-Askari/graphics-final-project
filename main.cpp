@@ -60,6 +60,7 @@ public:
     float dxCloud1 = 0.0f, dyCloud1 = 0.0f;
     float dxCloud2 = 0.0f, dyCloud2 = 0.0f;
     float dxCloud3 = 0.0f, dyCloud3 = 0.0f;
+    bool initVars = false;
     bool toggleMClouds = false;
     float dxMClouds = 0.0f, dyMClouds = 0.0f;
     float sdxMClouds = 0.1f, sdyMClouds = 0.1f;
@@ -169,7 +170,7 @@ public:
             glColor3f(0.510f, 0.584f, 0.345f);  // #829558
             glVertex2f(-0.238f, 0.395f);
             glVertex2f(-0.253f, 0.395f);
-            
+
             glColor3f(0.302f, 0.357f, 0.180f);  // #4D5B2E
             glVertex2f(-0.264f, 0.401f);
             glVertex2f(-0.264f, 0.421f);
@@ -200,13 +201,13 @@ public:
         drawFilledCurve(-0.246f, 0.333f, 0.019f, 0, 360);
 
         drawFilledCurve(-0.246f, 0.419f, 0.0034f, 0, 360);
-        
+
         glColor3f(1.0f, 1.0f, 1.0f); // white
         drawFilledCurve(-0.246f, 0.351f, 0.015f, 0, 60);
         drawFilledCurve(-0.246f, 0.351f, 0.015f, 120, 180);
         drawFilledCurve(-0.246f, 0.351f, 0.015f, 240, 300);
         glColor3f(0.0f, 0.0f, 0.0f); // black
-        drawFilledCurve(-0.246f, 0.351f, 0.0034f, 0, 360); 
+        drawFilledCurve(-0.246f, 0.351f, 0.0034f, 0, 360);
         glColor3f(1.0f, 1.0f, 1.0f); // white
         drawFilledCurve(-0.246f, 0.351f, 0.002f, 0, 360);
     }
@@ -1405,7 +1406,7 @@ public:
             glPopMatrix();
         }
 
-        // vehicles 
+        // vehicles
         brokenCar();
         brokenBus();
 
@@ -1512,33 +1513,36 @@ public:
 
     // variables for marshmallow cloud
     void initVariables() {
-        // random generated circles
-        float minX = -0.20;
-        float maxX = 0.3138;
-        float minY = 0.2927;
-        float maxY = 0.4548;
+        if (!initVars) {
+            // random generated circles
+            float minX = -0.20;
+            float maxX = 0.3138;
+            float minY = 0.2927;
+            float maxY = 0.4548;
 
-        srand(1748270319); // seed
+            srand(1748270319); // seed
 
-        // rand() / RAND_MAX -> random value between 0 - 1
+            // rand() / RAND_MAX -> random value between 0 - 1
 
-        // yellow, orange circles
-        for (int i=0; i<3; i++) {
+            // yellow, orange circles
+            for (int i=0; i<3; i++) {
+                for (int j=0; j<20; j++) {
+                    float x = minX + (rand() / (float)RAND_MAX) * (maxX - minX);
+                    float y = minY + (rand() / (float)RAND_MAX) * (maxY - minY);
+                    mClouds[i][j].x = x;
+                    mClouds[i][j].y = y;
+                    // cout << "mClouds[" << i << "][" << j << "] = (" << x << ", " << y << ")" << endl;
+                }
+            }
+
+            // shades
             for (int j=0; j<20; j++) {
                 float x = minX + (rand() / (float)RAND_MAX) * (maxX - minX);
-                float y = minY + (rand() / (float)RAND_MAX) * (maxY - minY);
-                mClouds[i][j].x = x;
-                mClouds[i][j].y = y;
-                cout << "mClouds[" << i << "][" << j << "] = (" << x << ", " << y << ")" << endl;
+                float y = minY + (rand() / (float)RAND_MAX) * (3.0 - minY);
+                mClouds[3][j].x = x;
+                mClouds[3][j].y = y;
             }
-        }
-
-        // shades
-        for (int j=0; j<20; j++) {
-            float x = minX + (rand() / (float)RAND_MAX) * (maxX - minX);
-            float y = minY + (rand() / (float)RAND_MAX) * (3.0 - minY);
-            mClouds[3][j].x = x;
-            mClouds[3][j].y = y;
+            initVars = true; // Set to true to avoid re-initialization
         }
     }
 
@@ -1695,20 +1699,53 @@ public:
 
 
     // Entry point (static methods) - Singleton pattern
-    static void display1Wrapper() { instance->display1(); }
-    static void display2Wrapper() { instance->display2(); }
-    static void reshapeWrapper(int w, int h) { instance->reshape(w, h); }
-    static void updateWrapper() { instance->update(); }
-    static void handleKeyWrapper(unsigned char key, int x, int y) { instance->handleKey(key, x, y); }
+    static void display1Wrapper() { 
+        if (instance == nullptr) {
+            cerr << "Scene3 instance is not initialized, display1 cannot be called!" << endl;
+            return;
+        }
+        instance->display1(); 
+    }
+    static void display2Wrapper() { 
+        if (instance == nullptr) {
+            cerr << "Scene3 instance is not initialized, display2 cannot be called!" << endl;
+            return;
+        }
+        instance->display2(); 
+    }
+    static void reshapeWrapper(int w, int h) { 
+        if (instance == nullptr) {
+            cerr << "Scene3 instance is not initialized, reshape cannot be called!" << endl;
+            return;
+        }
+        instance->reshape(w, h); 
+    }
+    static void updateWrapper() { 
+        if (instance == nullptr) {
+            cerr << "Scene3 instance is not initialized, update cannot be called!" << endl;
+            return;
+        }
+        instance->update(); 
+    }
+    static void handleKeyWrapper(unsigned char key, int x, int y) { 
+        if (instance == nullptr) {
+            cerr << "Scene3 instance is not initialized, handleKey cannot be called!" << endl;
+            return;
+        }
+        instance->handleKey(key, x, y); 
+    }
 
 };
 
 class Scene4 {
 public:
     //Global variables
+    // animation control
+    bool pause = false;
+
     //cloud
     GLfloat cloudPosition = 0.0f;
-    GLfloat cloudSpeed = 0.001f;
+    GLfloat cloudSpeed = 0.005f;
 
     //Smoke1
     float smoke1Speed = 0.005f;
@@ -4974,7 +5011,7 @@ public:
 
 
 
-    
+
     //House 1 Smoke
     void drawHouse1Smoke()
     {
@@ -5166,9 +5203,7 @@ public:
                     float dy = tempYBuilding1Smoke[i] - YBuilding1Smoke[i];
 
                     float dist = sqrt(dx*dx + dy*dy);
-                    if (dist == 0) {
-                        dist = 1.0f; // Avoid division by zero
-                    }
+
 
                     XBuilding1Smoke[i] += Building1SmokeSpeed * dx / dist;
                     YBuilding1Smoke[i] += Building1SmokeSpeed * dy / dist;
@@ -5200,10 +5235,6 @@ public:
 
                     float dist = sqrt(dx*dx + dy*dy);
 
-                    if (dist == 0) {
-                        dist = 1.0f; // Avoid division by zero
-                    }
-
                     XSmoke1[i] += smoke1Speed * dx / dist;
                     YSmoke1[i] += smoke1Speed * dy / dist;
                 }
@@ -5234,10 +5265,6 @@ public:
 
                     float dist = sqrt(dx*dx + dy*dy);
 
-                    if (dist == 0) {
-                        dist = 1.0f; // Avoid division by zero
-                    }
-
                     XSmoke2[i] += smoke2Speed * dx / dist;
                     YSmoke2[i] += smoke2Speed * dy / dist;
                 }
@@ -5251,9 +5278,11 @@ public:
 
         cout << "Updating Scene 4: Memory Pulse" << endl;
         // glutPostRedisplay();
-        // glutTimerFunc(100, Scene4::updateWrapper, 0);
-
-
+        if (!pause) {
+            glutTimerFunc(200, Scene4::updateWrapper, 0);
+            // glutIdleFunc(Scene4::updateWrapper);
+            glutPostRedisplay();
+        }
     }
 
     void Idle()
@@ -5267,56 +5296,56 @@ public:
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
         glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
 
-        // drawSky();
+        drawSky();
 
-        // drawSun(0.440f, 0.410f, 0.06f);
+        drawSun(0.440f, 0.410f, 0.06f);
 
-        // drawCloud();
+        drawCloud();
 
-        // drawGround();
+        drawGround();
 
-        // drawHill();
+        drawHill();
 
-        // drawSideRoad();
+        drawSideRoad();
 
-        // drawRoad();
+        drawRoad();
 
-        // drawShrub3();
+        drawShrub3();
 
-        // drawTree();
+        drawTree();
 
-        // drawShrub2();
+        drawShrub2();
 
-        // drawSmoke1();
+        drawSmoke1();
 
-        // drawSmoke2();
+        drawSmoke2();
 
-        // glPushMatrix();
-        // glTranslatef(1.40f, 0.0f, 0.0f);
-        //     drawBuilding1Smoke();
-        // glPopMatrix();
+        glPushMatrix();
+        glTranslatef(1.40f, 0.0f, 0.0f);
+            drawBuilding1Smoke();
+        glPopMatrix();
 
-        // drawBuildings();
+        drawBuildings();
 
-        // // drawHouse1Smoke();
+        drawHouse1Smoke();
 
-        // drawCrackedRoad();
+        drawCrackedRoad();
 
-        // drawFlower(0.53f, -0.32f, 0.015, 0.019f, 6.0f);
+        drawFlower(0.53f, -0.32f, 0.015, 0.019f, 6.0f);
 
-        // drawHole();
+        drawHole();
 
-        // drawGroundCorner();
+        drawGroundCorner();
 
-        // drawBrokenParticles();
+        drawBrokenParticles();
 
-        // drawRightSideVerticleFracture();
+        drawRightSideVerticleFracture();
 
-        // WaringBoard();
+        WaringBoard();
 
-        // WaringBarrier();
+        WaringBarrier();
 
-        // drawShrubs();
+        drawShrubs();
 
 
 
@@ -5348,34 +5377,77 @@ public:
 
         if (key == 27) { // Escape key
             exit(0);
-        } else if (key == 'D' ||  key == 'd') { 
+        } else if (key == 'D' ||  key == 'd') {
+
+            cout << "D key pressed" << endl;
+            pause = false; // Set pause to false
             glutDisplayFunc(Scene4::displayWrapper);
             sound();
             // TODO: fix update function, it is crashing the program
+            glutTimerFunc(100, Scene4::updateWrapper, 0);
             // glutIdleFunc(Scene4::updateWrapper);
+            
         } else if (key == 'A' || key == 'a')  {
             PlaySound(NULL, NULL, SND_ASYNC | SND_PURGE);
             glutDisplayFunc(Scene4::SceneInfoDisplayWrapper);
-            glutIdleFunc(NULL); // Stop the idle function if it was running
+            // glutIdleFunc(NULL); // Stop the idle function if it was running
+            pause = true; // Set pause to true
         }
         glutPostRedisplay(); // Request a redraw of the current window
 
     }
 
     // static methods
-    static void IdleWrapper() { instance->Idle(); }
-    static void displayWrapper() { instance->display(); }
-    static void changeDisplayWrapper(unsigned char key, int x, int y) { instance->changeDisplay(key, x, y); }
-    static void SceneInfoDisplayWrapper() { instance->SceneInfoDisplay(); }
-    static void updateWrapper() { instance->update(); }
+    static void IdleWrapper() {
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call Idle." << endl;
+            return;
+        } 
+        instance->Idle();
+     }
+    static void displayWrapper() { 
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call display." << endl;
+            return;
+        }
+        instance->display();
+    }
+    static void changeDisplayWrapper(unsigned char key, int x, int y) { 
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call changeDisplay." << endl;
+            return;
+        }
+        instance->changeDisplay(key, x, y); 
+    }
+    static void SceneInfoDisplayWrapper() { 
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call SceneInfoDisplay." << endl;
+            return;
+        }
+        instance->SceneInfoDisplay(); 
+    }
+    static void updateWrapper() {
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call update." << endl;
+            return;
+        } 
+        instance->update(); 
+    }
+    static void updateWrapper(int value) { 
+        if (instance == nullptr) {
+            cerr << "Scene4 instance is null, cannot call update." << endl;
+            return;
+        }
+        instance->update(); 
+    }
 };
 
 
+// Scene1* Scene1::instance = nullptr;
+// Scene2* Scene2::instance = nullptr;
 Scene3* Scene3::instance = nullptr;
 Scene4* Scene4::instance = nullptr;
-// Scene3* Scene3::instance = nullptr;
-// Scene3* Scene3::instance = nullptr;
-// Scene3* Scene3::instance = nullptr;
+// Scene5* Scene5::instance = nullptr;
 
 void displayScene(int sceneKey) {
     cout << "Displaying Scene: " << sceneKey << endl;
@@ -5389,14 +5461,20 @@ void displayScene(int sceneKey) {
         break;
     case 3:
         // Rename the window
-        glutSetWindowTitle("Scene 3: The Fall"); 
+        glutSetWindowTitle("Scene 3: The Fall");
 
         // Set up the scene
         static Scene3 scene3;
-        Scene3::instance = &scene3; // Set the instance
+        if (Scene3::instance == nullptr) {
+            Scene3::instance = &scene3; // Set the instance only if it's not already set
+        } else {
+            cout << "Scene3 instance already exists, not reinitializing." << endl;
+        }
 
-        cout << "Scene 3: The Fall " << sizeof scene3 << endl;
-        scene3.initVariables();
+        // cout << "Scene 3: The Fall " << sizeof scene3 << endl;
+        if (Scene3::instance != nullptr) {
+            Scene3::instance->initVariables(); // Initialize variables only if the instance is not null
+        }
 
         // Register callbacks
         glutDisplayFunc(Scene3::display1Wrapper);
@@ -5407,10 +5485,16 @@ void displayScene(int sceneKey) {
         // Rename the window
         glutSetWindowTitle("Scene 4: Memory Pulse");
 
+        // Set up the scene
         static Scene4 scene4;
-        Scene4::instance = &scene4;
+        if (Scene4::instance == nullptr) { // Only set the instance if it's not already set
+            Scene4::instance = &scene4;
+        } else {
+            cout << "Scene4 instance already exists, not reinitializing." << endl;
+            Scene4::instance->pause = false; // Resume the scene if it was paused
+        }
         cout << "Scene 4: Memory Pulse " << sizeof scene4 << endl;
-        // scene4.init();
+
         glutDisplayFunc(Scene4::SceneInfoDisplayWrapper); // Register display callback handler for window re-paint
         // glutIdleFunc(Scene4::IdleWrapper);
         glutKeyboardFunc(Scene4::changeDisplayWrapper); // Register special key callback handler
@@ -5426,7 +5510,6 @@ void displayScene(int sceneKey) {
 
 int sceneKey = 0; // Global variable to track the scene
 void changeScene(int key, int x, int y) {
-    glutPostRedisplay(); // Request a redraw of the current window
     if (key == GLUT_KEY_RIGHT) {
         sceneKey++;
         sceneKey = min(sceneKey, 5);
@@ -5435,7 +5518,7 @@ void changeScene(int key, int x, int y) {
         glutKeyboardFunc(NULL); // Clear the keyboard function to avoid conflicts
         // Reset the scene display
         displayScene(sceneKey);
-        
+
     } else if (key == GLUT_KEY_LEFT) {
         sceneKey--;
         sceneKey = max(sceneKey, 1);
@@ -5444,7 +5527,12 @@ void changeScene(int key, int x, int y) {
         glutKeyboardFunc(NULL); // Clear the keyboard function to avoid conflicts
         // Reset the scene display
         displayScene(sceneKey);
+
+        if (Scene4::instance != nullptr) {
+            Scene4::instance->pause = true; // Pause the scene when going back
+        }
     }
+    glutPostRedisplay(); // Request a redraw of the current window
 }
 
 void mainScene() {

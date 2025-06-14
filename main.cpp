@@ -156,8 +156,7 @@ public:
             glutTimerFunc(100, Scene1::updateWrapper, 0);
         }
     }
-    void car1()
-    {
+    void car1() {
         glBegin(GL_POLYGON);
         glColor3f(0.772f, 0.502f, 0.082f);
         glVertex2f(-0.679, -0.203);
@@ -1368,6 +1367,8 @@ public:
         glColor3f(1.0f, 1.0f, 1.0f);
         renderBitmapString(-0.155f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
         renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 1:Peaceful vibrations");
+        renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Fahim");
+        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'D' to continue");
 
         glFlush(); // Render now
         glutSwapBuffers();
@@ -1516,16 +1517,6 @@ public:
         }
     }
 
-    // void renderBitmapString(float x, float y, float z, void *font, char *string)
-    // {
-    //     char *c;
-    //     glRasterPos3f(x, y,z);
-    //     for (c=string; *c != '\0'; c++)
-    //     {
-    //         glutBitmapCharacter(font, *c);
-    //     }
-    // }
-
     void drawFilledCurve(float centerX = 0, float centerY = 0, float radius = 0.1f, float startAngle = 0, float endAngle = 360) {
         glBegin(GL_TRIANGLE_FAN);
         glVertex2f(centerX, centerY); // center of fan
@@ -1557,7 +1548,6 @@ public:
     float randomFloat(float min, float max) {
         return min + (float) ((rand()) / (float) (RAND_MAX / (max - min)));
     }
-
 
     // Drawing Functions
     void drawNuke() {
@@ -1636,7 +1626,6 @@ public:
                 float angle = randomFloat(0.3f, 2 * PI);
                 p.angles.push_back(angle);
             }
-
             particles.push_back(p);
         }
     }
@@ -1789,7 +1778,6 @@ public:
 
         glEnd();
 
-
         // wheels
         glColor3f(0.1647f, 0.0510f, 0.0000f);
         drawFilledCurve(0.47f, -0.155f, 0.04f, -30, 180);
@@ -1799,14 +1787,12 @@ public:
         drawFilledCurve(0.47f, -0.155f, 0.03f);
         drawFilledCurve(0.705f, -0.219f, 0.03f);
 
-
         glColor3f(0.3608f, 0.0627f, 0.0039f);
         drawFilledCurve(0.47f, -0.155f, 0.015f);
         drawFilledCurve(0.705f, -0.219f, 0.015f);
     }
 
     void brokenCar() {
-
         // shadow
         glColor3f(0.1647f, 0.0510f, 0.0000f);
         drawFilledEllipse(-0.589f, -0.152f, 0.19f, 0.0183f);
@@ -1949,7 +1935,6 @@ public:
             double x = mClouds[1][i].x;
             double y = mClouds[1][i].y;
             drawFilledCurve(x, y, 0.07);
-
         }
 
         glColor3f(0.992f, 0.278f, 0.008f); // #FC4702 (red)
@@ -1985,14 +1970,12 @@ public:
         drawFilledCurve(0.04f, -0.054f, 0.06);
         drawFilledCurve(0.12f, -0.051f, 0.06);
 
-
         glColor3f(0.5686f, 0.0745f, 0.0f);
         drawFilledCurve(-0.1456f, -0.1070f, 0.04);
         drawFilledCurve(-0.0806f, -0.0869f, 0.04);
         drawFilledCurve(0.1285f, -0.1008f, 0.04);
         drawFilledCurve(0.2f, -0.1f, 0.04);
         drawFilledCurve(0.2478f, -0.1117f, 0.04);
-
 
         glColor3f(0.690f, 0.078f, 0.004f);
         drawFilledCurve(-0.2766f, -0.1423f, 0.04);
@@ -2015,41 +1998,40 @@ public:
         glEnd();
     }
 
-    void drawSmallGrass(float offX=0, float offY=0) {
-
+    void drawSmallGrass() {
         glBegin(GL_POLYGON);
-            glVertex2f(-0.537f +offX, -0.439f +offY);
-            glVertex2f(-0.526f +offX, -0.442f +offY);
-            glVertex2f(-0.513f +offX, -0.457f +offY);
-            glVertex2f(-0.524f +offX, -0.457f +offY);
+            glVertex2f(-0.537f, -0.439f);
+            glVertex2f(-0.526f, -0.442f);
+            glVertex2f(-0.513f, -0.457f);
+            glVertex2f(-0.524f, -0.457f);
         glEnd();
 
         glBegin(GL_POLYGON);
-            glVertex2f(-0.518f +offX, -0.419f +offY);
-            glVertex2f(-0.505f +offX, -0.436f +offY);
-            glVertex2f(-0.504f +offX, -0.457f +offY);
-            glVertex2f(-0.513f +offX, -0.457f +offY);
-            glVertex2f(-0.519f +offX, -0.439f +offY);
+            glVertex2f(-0.518f, -0.419f);
+            glVertex2f(-0.505f, -0.436f);
+            glVertex2f(-0.504f, -0.457f);
+            glVertex2f(-0.513f, -0.457f);
+            glVertex2f(-0.519f, -0.439f);
         glEnd();
 
         glBegin(GL_POLYGON);
-            glVertex2f(-0.504f +offX, -0.457f +offY);
-            glVertex2f(-0.500f +offX, -0.436f +offY);
-            glVertex2f(-0.488f +offX, -0.423f +offY);
-            glVertex2f(-0.488f +offX, -0.451f +offY);
-            glVertex2f(-0.492f +offX, -0.457f +offY);
+            glVertex2f(-0.504f, -0.457f);
+            glVertex2f(-0.500f, -0.436f);
+            glVertex2f(-0.488f, -0.423f);
+            glVertex2f(-0.488f, -0.451f);
+            glVertex2f(-0.492f, -0.457f);
         glEnd();
 
         glBegin(GL_POLYGON);
-            glVertex2f(-0.488f +offX, -0.451f +offY);
-            glVertex2f(-0.468f +offX, -0.432f +offY);
-            glVertex2f(-0.475f +offX, -0.451f +offY);
-            glVertex2f(-0.484f +offX, -0.458f +offY);
-            glVertex2f(-0.492f +offX, -0.457f +offY);
+            glVertex2f(-0.488f, -0.451f);
+            glVertex2f(-0.468f, -0.432f);
+            glVertex2f(-0.475f, -0.451f);
+            glVertex2f(-0.484f, -0.458f);
+            glVertex2f(-0.492f, -0.457f);
         glEnd();
     }
 
-    void drawBrokenFence(float offX=0, float offY=0) {
+    void drawBrokenFence() {
         glColor3f(0.160f, 0.051f, 0.000f);
         glBegin(GL_POLYGON);
             glVertex2f(-0.727f, -0.341f);
@@ -2064,38 +2046,37 @@ public:
         glLineWidth(12.0f);
         glBegin(GL_LINES);
             glColor3f(0.310f, 0.043f, 0.016f);
-            glVertex2f(-0.666f +offX, -0.324f +offY);
-            glVertex2f(-0.476f +offX, -0.321f +offY);
+            glVertex2f(-0.666f, -0.324f);
+            glVertex2f(-0.476f, -0.321f);
 
             glColor3f(0.152f, 0.047f, 0.012f);
-            glVertex2f(-0.651f +offX, -0.235f +offY);
-            glVertex2f(-0.669f +offX, -0.337f +offY);
-            glVertex2f(-0.500f +offX, -0.250f +offY);
-            glVertex2f(-0.470f +offX, -0.332f +offY);
+            glVertex2f(-0.651f, -0.235f);
+            glVertex2f(-0.669f, -0.337f);
+            glVertex2f(-0.500f, -0.250f);
+            glVertex2f(-0.470f, -0.332f);
         glEnd();
 
         glBegin(GL_LINE_LOOP);
             glColor3f(0.310f, 0.043f, 0.016f);
-            glVertex2f(-0.463f +offX, -0.291f +offY);
-            glVertex2f(-0.686f +offX, -0.260f +offY);
+            glVertex2f(-0.463f, -0.291f);
+            glVertex2f(-0.686f, -0.260f);
 
             glColor3f(0.251f, 0.047f, 0.000f);
-            glVertex2f(-0.481f +offX, -0.240f +offY);
+            glVertex2f(-0.481f, -0.240f);
         glEnd();
 
         glBegin(GL_LINE_LOOP);
             glColor3f(0.310f, 0.043f, 0.016f);
-            glVertex2f(-0.686f +offX, -0.286f +offY);
-            glVertex2f(-0.447f +offX, -0.316f +offY);
+            glVertex2f(-0.686f, -0.286f);
+            glVertex2f(-0.447f, -0.316f);
 
             glColor3f(0.251f, 0.047f, 0.000f);
-            glVertex2f(-0.420f +offX, -0.334f +offY);
+            glVertex2f(-0.420f, -0.334f);
         glEnd();
-
     }
 
     void drawCloud1(const vector<Color>& colors = {}) {
-
+        // If colors provided -> grass, otherwise -> cloud
         if (colors.empty()) {
             glColor3f(0.871f, 0.216f, 0.0f);
         } else {
@@ -2113,7 +2094,6 @@ public:
             glVertex2f(-0.561f, 0.393f);
             glVertex2f(-0.925f, 0.394f);
         glEnd();
-
     }
 
     void drawCloud2() {
@@ -2193,7 +2173,6 @@ public:
             glVertex2f(0.513f, 0.113f);
             glVertex2f(0.374f, 0.088f);
             glVertex2f(0.408f, 0.079f);
-
         glEnd();
 
         glBegin(GL_LINE_STRIP);
@@ -2250,7 +2229,6 @@ public:
             glVertex2f(-0.881f, -0.251f);
             glVertex2f(-0.834f, -0.201f);
         glEnd();
-
     }
 
     void drawFlower(float centerX = 0, float centerY = 0, float petalLength = 0.1f, int petalCount = 6) {
@@ -2329,7 +2307,6 @@ public:
             glVertex2f(0.221f, -0.472f);
             glVertex2f(0.185f, -0.477f);
         glEnd();
-
     }
 
     void drawFlowerGrass2() {
@@ -2369,7 +2346,6 @@ public:
             glVertex2f(0.4075f, -0.4861f);
             glVertex2f(0.3729f, -0.4857f);
         glEnd();
-
     }
 
     void drawWindowB1(float offX = 0.0f, float offY = 0.0f) {
@@ -2502,7 +2478,6 @@ public:
             glVertex2f(-0.400f, -0.100f);
             glVertex2f(-0.450f, 0.100f);
         glEnd();
-
     }
 
     void brokenBuilding2() {
@@ -2698,7 +2673,6 @@ public:
             glVertex2f(0.039f, -0.257f);
         glEnd();
 
-
         // Hills
         glColor3f(0.44f, 0.11f, 0.00f);
         glBegin(GL_TRIANGLE_STRIP);
@@ -2706,8 +2680,9 @@ public:
             float frequency = 5.0f;
             int loop = (int)floorf((x + 1.0f) * frequency / 2.0f); // loop index
 
-            // Use a better seed to avoid same height per frame
-            srand(loop * 9301 + 49297);
+            // adjust seed with loop index for different hill sizes
+            // time(0) -> 1749925882
+            srand(1749925882 + 10000 * loop);
 
             // Generate a more varied random height between 0 and 0.15
             float randAmp = ((rand() % 1000) / 1000.0f) * 0.15f;
@@ -2798,7 +2773,6 @@ public:
         // trees
         drawTree3();
 
-
         // marshmallow cloud
         if (!toggleNuke) {
             glPushMatrix();
@@ -2866,8 +2840,7 @@ public:
     }
 
     // Display 1 callback
-    void display1()
-    {
+    void display1() {
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
         glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
 
@@ -2884,8 +2857,7 @@ public:
         renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
         renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 3: The Fall");
         renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Md Hasib Askari");
-        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow' to continue");
-
+        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'D' to continue");
 
         glutSwapBuffers(); // Swap buffers (double buffering)
         glFlush(); // Render now
@@ -2917,7 +2889,6 @@ public:
             srand(1748270319); // seed
 
             // rand() / RAND_MAX -> random value between 0 - 1
-
             // yellow, orange circles
             for (int i=0; i<3; i++) {
                 for (int j=0; j<20; j++) {
@@ -2944,19 +2915,19 @@ public:
         // =====> Clouds
         dxCloud1 += xCloud1Speed; // Move clouds to the right
         if (dxCloud1 > 2.0f) {
-            dxCloud1 = -0.5f; // Reset position when it goes off screen
+            dxCloud1 = -0.5f; 
         }
         // cout << "dxCloud1: " << dxCloud1 << endl;
 
         dxCloud2 -= xCloud2Speed; // Move clouds to the left
         if (dxCloud2 < -2.0f) {
-            dxCloud2 = 0.5f; // Reset position when it goes off screen
+            dxCloud2 = 0.5f;
         }
         // cout << "dxCloud2: " << dxCloud2 << endl << endl;
 
         dxCloud3 += xCloud3Speed; // Move clouds to the right
         if (dxCloud3 > 1.4f) {
-            dxCloud3 = -0.9f; // Reset position when it goes off screen
+            dxCloud3 = -0.9f;
         }
         // cout << "dxCloud3: " << dxCloud3 << endl;
 
@@ -2970,7 +2941,7 @@ public:
 
             dyNuke -= nukeSpeed; // Move nuke down
             if (dyNuke <= -0.71f) {
-                toggleNuke = false; // Toggle to false to reset position
+                toggleNuke = false; // Nuke Visibility
             }
         } else {
             if (!soundPlayed) {
@@ -2979,24 +2950,26 @@ public:
                 soundPlayed = true;
             }
 
-
             // =====> marshmallow cloud
             if (sdxMClouds < 1.7f) {
                 shakeBackground = true;
-                sdxMClouds += sdxMCloudsSpeed; // Move marshmallow cloud to the right
-                sdyMClouds += sdyMCloudsSpeed; // Move marshmallow cloud to the right
+
+                // Scaling larger
+                sdxMClouds += sdxMCloudsSpeed;
+                sdyMClouds += sdyMCloudsSpeed;
                 // cout << "sdxMClouds: " << sdxMClouds << ", sdyMClouds: " << sdyMClouds << endl;
             } else {
                 shakeBackground = false;
+
+                // Shake Marshamallow Cloud
                 if (toggleMClouds) {
-                    dxMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
-                    dyMClouds = MCloudShakeSpeed; // Reset position when it goes off screen
-                    toggleMClouds = false; // Toggle to false to reset position
+                    dxMClouds = MCloudShakeSpeed;
+                    dyMClouds = MCloudShakeSpeed;
                 } else {
-                    dxMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
-                    dyMClouds = -MCloudShakeSpeed; // Reset position when it goes off screen
-                    toggleMClouds = true; // Toggle to true to reset position
+                    dxMClouds = -MCloudShakeSpeed;
+                    dyMClouds = -MCloudShakeSpeed;
                 }
+                toggleMClouds = !toggleMClouds; // Toggle for next shake
             }
 
             // =====> shake background
@@ -3004,38 +2977,38 @@ public:
                 if (toggleBackground) {
                     dxBackground = backgroundShakeSpeed;
                     dyBackground = backgroundShakeSpeed;
-                    toggleBackground = false;
                 } else {
                     dxBackground = -backgroundShakeSpeed;
                     dyBackground = -backgroundShakeSpeed;
-                    toggleBackground = true;
                 }
+                toggleBackground = !toggleBackground;
             }
 
             // =====> Particles
-            if (!resetParticles) {
-                dxParticles += dxParticlesSpeed; // Move particles to the right
-                dyParticles += dyParticlesSpeed; // Move particles down
+            if (!resetParticles) { // Particles are moving up
+                dxParticles += dxParticlesSpeed;
+                dyParticles += dyParticlesSpeed;
             }
 
             if (dxParticles > 0.05f || dyParticles > 0.05f) {
                 resetParticles = true; // Reset particles
             }
 
+            // Particles are going down
             if (resetParticles && (dxParticles > 0.0f && dyParticles > 0.0f)) {
                 dxParticles -= (dxParticlesSpeed - 0.0001f);
                 dyParticles -= (dyParticlesSpeed - 0.0002f);
             }
-            cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
+            // cout << "dxParticles: " << dxParticles << ", dyParticles: " << dyParticles << endl;
 
             // =====> buildings collapse
             if (dyBuilding1 > -0.08f) {
-                dyBuilding1 -= dyBuilding1Speed; // Move building down
-                rotateBuilding1 -= rotateBuilding1Speed; // Rotate building
+                dyBuilding1 -= dyBuilding1Speed;
+                rotateBuilding1 -= rotateBuilding1Speed;
             }
             if (dyBuilding2 > -0.07f) {
-                dyBuilding2 -= dyBuilding2Speed; // Move building down
-                rotateBuilding2 += rotateBuilding2Speed; // Rotate building
+                dyBuilding2 -= dyBuilding2Speed;
+                rotateBuilding2 += rotateBuilding2Speed;
             }
         }
 
@@ -3043,8 +3016,6 @@ public:
     }
 
     void handleKey(unsigned char key, int x, int y) {
-        // printf("Key pressed: %c at (%d, %d)\n", key, x, y);
-
         if (key == 27) { // Escape key
             exit(0); // Exit the program
         } else if (key == 'd' || key == 'D') {
@@ -3064,7 +3035,6 @@ public:
     }
 
     void increaseSpeed() {
-        // Increase speeds
         // Increase speeds with maximum limits
         xCloud1Speed = min(0.01f, xCloud1Speed + 0.001f);
         xCloud2Speed = min(0.01f, xCloud2Speed + 0.001f);
@@ -3092,8 +3062,7 @@ public:
         dyBuilding2Speed = max(0.0001f, dyBuilding2Speed - 0.0001f);
     }
 
-
-    // Entry point (static methods) - Singleton pattern
+    // static methods - (Singleton pattern)
     static void display1Wrapper() { 
         if (instance == nullptr) {
             cerr << "Scene3 instance is not initialized, display1 cannot be called!" << endl;
@@ -3122,7 +3091,6 @@ public:
         }
         instance->handleKey(key, x, y); 
     }
-
 };
 
 class Scene4 : SceneManager {
@@ -3137,45 +3105,34 @@ public:
 
     //Smoke1
     float smoke1Speed = 0.005f;
-
     float minXSmoke1 = -0.374f;
-
     float minYSmoke1 = 0.101f;
     float maxYSmoke1 = 0.472f;
 
     vector<float> XSmoke1 = {-0.374f,-0.338f,-0.316f,-0.298f,-0.260f,-0.210f,-0.215f,-0.247f,-0.292f,-0.288f,-0.406f,-0.438f,-0.471f,-0.521f,-0.540f,-0.537f,-0.572f,-0.619f,-0.677f,-0.726f,-0.765f,-0.769f,-0.741f,-0.709f,-0.665f,-0.618f,-0.595f,-0.417f,-0.434f,-0.429f,-0.403f,-0.357f,-0.397f,-0.356f,-0.330f,-0.338f,-0.259f,-0.308f,-0.255f,-0.206f,-0.236f,-0.315f,-0.452f,-0.500f,-0.694f,-0.600f,-0.569f,-0.277f,-0.248f};
-
     vector<float> YSmoke1 = {0.101f,0.124f,0.162f,0.208f,0.253f,0.259f,0.209f,0.167f,0.134f,0.103f,0.116f,0.149f,0.188f,0.192f,0.220f,0.267f,0.320f,0.349f,0.344f,0.346f,0.325f,0.296f,0.307f,0.309f,0.312f,0.314f,0.276f,0.242f,0.276f,0.272f,0.317f,0.316f,0.356f,0.347f,0.368f,0.423f,0.420f,0.455f,0.472f,0.427f,0.440f,0.411f,0.236f,0.150f,0.326f,0.300f,0.286f,0.182f,0.217f};
-
     vector<float> tempXSmoke1 = {-0.374f,-0.338f,-0.316f,-0.298f,-0.260f,-0.210f,-0.215f,-0.247f,-0.292f,-0.288f,-0.406f,-0.438f,-0.471f,-0.521f,-0.540f,-0.537f,-0.572f,-0.619f,-0.677f,-0.726f,-0.765f,-0.769f,-0.741f,-0.709f,-0.665f,-0.618f,-0.595f,-0.417f,-0.434f,-0.429f,-0.403f,-0.357f,-0.397f,-0.356f,-0.330f,-0.338f,-0.259f,-0.308f,-0.255f,-0.206f,-0.236f,-0.315f,-0.452f,-0.500f,-0.694f,-0.600f,-0.569f,-0.277f,-0.248f};
-
     vector<float> tempYSmoke1 = {0.101f,0.124f,0.162f,0.208f,0.253f,0.259f,0.209f,0.167f,0.134f,0.103f,0.116f,0.149f,0.188f,0.192f,0.220f,0.267f,0.320f,0.349f,0.344f,0.346f,0.325f,0.296f,0.307f,0.309f,0.312f,0.314f,0.276f,0.242f,0.276f,0.272f,0.317f,0.316f,0.356f,0.347f,0.368f,0.423f,0.420f,0.455f,0.472f,0.427f,0.440f,0.411f,0.236f,0.150f,0.326f,0.300f,0.286f,0.182f,0.217f};
 
     //Smoke2
     float smoke2Speed = 0.005f;
-
     float minXSmoke2 = 0.173f;
-
     float minYSmoke2 = 0.07f;
     float maxYSmoke2 = 0.324f;
 
     vector<float> XSmoke2 = {0.173f, 0.207f, 0.239f, 0.278f, 0.246f, 0.301f, 0.295f, 0.335f, 0.307f, 0.376f, 0.362f, 0.177f, 0.270f, 0.266f, 0.217f, 0.328f, 0.317f};
     vector<float> YSmoke2 = {0.098f, 0.144f, 0.166f, 0.197f, 0.220f, 0.235f, 0.253f, 0.270f, 0.298f, 0.294f, 0.324f, 0.127f, 0.159f, 0.257f, 0.183f, 0.239f, 0.330f};
-
     vector<float> tempXSmoke2 = {0.173f, 0.207f, 0.239f, 0.278f, 0.246f, 0.301f, 0.295f, 0.335f, 0.307f, 0.376f, 0.362f, 0.177f, 0.270f, 0.266f, 0.217f, 0.328f, 0.317f};
     vector<float> tempYSmoke2 = {0.098f, 0.144f, 0.166f, 0.197f, 0.220f, 0.235f, 0.253f, 0.270f, 0.298f, 0.294f, 0.324f, 0.127f, 0.159f, 0.257f, 0.183f, 0.239f, 0.330f};
 
     //Building 1 Smoke
     float Building1SmokeSpeed = 0.005f;
-
     float minXBuilding1Smoke = -0.549f;
-
     float minYBuilding1Smoke = 0.143f;
     float maxYBuilding1Smoke = 0.230f;
 
     vector<float> XBuilding1Smoke = {-0.549f,-0.557f,-0.558f,-0.534f,-0.539f,-0.492f,-0.454f,-0.475f,-0.524f,-0.552f};
     vector<float> YBuilding1Smoke = {0.143f,0.165f,0.191f,0.202f,0.128f,0.111f,0.104f,0.071f,0.121f,0.230f};
-
     vector<float> tempXBuilding1Smoke = {-0.549f,-0.557f,-0.558f,-0.534f,-0.539f,-0.492f,-0.454f,-0.475f,-0.524f,-0.552f};
     vector<float> tempYBuilding1Smoke = {0.143f,0.165f,0.191f,0.202f,.128f,0.111f,0.104f,0.071f,0.121f,0.230f};
 
@@ -3183,47 +3140,26 @@ public:
     float House1SmokeXposition = 0.0f;
     float House1SmokeYposition = 0.0f;
     float House1SmokeSpeed = 0.005f;
-
     float minXHouse1Smoke = 0.800;
-
     float minYHouse1Smoke = 0.150f;
     float maxYHouse1Smoke = 0.282f;
 
     vector<float> XHouse1Smoke = {0.767f,0.802f,0.844f,0.947f,0.864f,0.954f,0.915f,0.988f};
     vector<float> YHouse1Smoke = {0.135f,0.197f,0.175f,0.182f,0.249f,0.281f,0.231f,0.227f};
-
     vector<float> tempXHouse1Smoke = {0.767f,0.802f,0.844f,0.947f,0.864f,0.954f,0.915f,0.988f};
     vector<float> tempYHouse1Smoke = {0.135f,0.197f,0.175f,0.182f,0.249f,0.281f,0.231f,0.227f};
 
-    // Scene4 instance
+    // Scene4 static instance
     static Scene4* instance;
 
-
-
-    /* Handler for window-repaint event. Call back when the window first appears and
-    whenever the window needs to be re-painted. */
-    // void renderBitmapString(float x, float y, float z, void *font, char *string)
-    // {
-    //     char *c;
-    //     glRasterPos3f(x, y,z);
-    //     for (c=string; *c != '\0'; c++)
-    //     {
-    //         glutBitmapCharacter(font, *c);
-    //     }
-    // }
-
     //Circle
-    void drawCircle(float x, float y, float radius, int triangleAmount, float r, float g, float b)
-    {
-
+    void drawCircle(float x, float y, float radius, int triangleAmount, float r, float g, float b) {
         GLfloat twicePi = 2.0f * PI;
 
         glColor3f(r,g,b);
-
         glBegin(GL_TRIANGLE_FAN);
             glVertex2f(x, y); // center of circle
-            for(int i = 0; i <= triangleAmount;i++)
-            {
+            for(int i = 0; i <= triangleAmount;i++) {
                 float angle = i *  twicePi / triangleAmount;
                 glVertex2f( x + (radius * cos(angle)), y + (radius * sin(angle)));
             }
@@ -3232,33 +3168,26 @@ public:
     }
 
     //Half Circle
-    void drawHalfCircle(float x, float y, float radius, int triangleAmount, float r, float g, float b)
-    {
-
+    void drawHalfCircle(float x, float y, float radius, int triangleAmount, float r, float g, float b) {
         glColor3f(r,g,b);
-
         glBegin(GL_TRIANGLE_FAN);
             glVertex2f(x, y); // center of circle
-            for(int i = 0; i <= triangleAmount;i++)
-            {
+            for(int i = 0; i <= triangleAmount;i++) {
                 float angle = i *  PI / triangleAmount;
                 glVertex2f( x + (radius * cos(angle)), y + (radius * sin(angle)));
             }
-
         glEnd();
     }
 
     //Wave
-    void drawWave(float frequency, float hight, float shift, float r, float g, float b)
-    {
+    void drawWave(float frequency, float hight, float shift, float r, float g, float b) {
         glColor3f(r,g,b);
         glBegin(GL_TRIANGLE_STRIP);
 
-        for (float x = -1.0f; x <= 1.0f; x += 0.01f)
-        {
+        for (float x = -1.0f; x <= 1.0f; x += 0.01f) {
             int loop = (int)floorf((x + shift + 1.0f) * frequency / 2.0f);
 
-            srand(loop * 16339 + 53753);
+            srand(loop * 10000 + 1749925882);
 
             float randAmp = ((rand() % 1000) / 1000.0f) * hight;
             randAmp += ((rand() % 500) / 1000.0f) * hight;
@@ -3293,11 +3222,9 @@ public:
         drawHalfCircle(x+0.06f, y-0.064f, radius-0.013f, triangles, r, g, b);
         drawHalfCircle(x-0.06f, y-0.064f, radius-0.012f, triangles, r, g, b);
         drawHalfCircle(x-0.088f, y-0.064f, radius-0.02f, triangles, r, g, b);
-
     }
 
-    void draw_Left_Cloud(float x, float y, float radius)
-    {
+    void draw_Left_Cloud(float x, float y, float radius) {
         float r = 243.0f/255.0f;
         float g = 225.0f/255.0f;
         float b = 147.0f/255.0f;
@@ -3315,11 +3242,9 @@ public:
         drawHalfCircle(x+0.06f, y-0.0688f, radius-0.013f, triangles, r, g, b);
         drawHalfCircle(x-0.06f, y-0.0685f, radius-0.012f, triangles, r, g, b);
         drawHalfCircle(x-0.088f, y-0.0685f, radius-0.02f, triangles, r, g, b);
-
     }
 
-    void draw_Right_Cloud(float x, float y, float radius)
-    {
+    void draw_Right_Cloud(float x, float y, float radius) {
         float r = 243.0f/255.0f;
         float g = 225.0f/255.0f;
         float b = 147.0f/255.0f;
@@ -3337,12 +3262,10 @@ public:
         drawHalfCircle(x+0.06f, y-0.061f, radius, triangles, r, g, b);
         drawHalfCircle(x-0.06f, y-0.061f, radius, triangles, r, g, b);
         drawHalfCircle(x-0.088f, y-0.061f, radius-0.02f, triangles, r, g, b);
-
     }
 
     //Side Road
-    void drawSideRoad()
-    {
+    void drawSideRoad() {
         glColor3f(205.0f/255.0f, 179.0f/255.0f, 82.0f/255.0f);
         glBegin(GL_QUADS);
         glVertex2f(-0.080f, -0.213f);
@@ -3379,23 +3302,20 @@ public:
     }
 
     //Hills
-    void drawHill()
-    {
+    void drawHill() {
         drawWave(2.5f, 0.12f, 0.6f, 93.0f/255.0f, 130.0f/255.0f, 13.0f/255.0f);
         drawWave(3.0f, 0.19f, 0.2f, 97.0f/255.0f, 135.0f/255.0f, 14.0f/255.0f);
     }
 
     //Sun
-    void drawSun(float sx, float sy, float sradius)
-    {
+    void drawSun(float sx, float sy, float sradius) {
         drawCircle(sx, sy, sradius, 100, 232.0f/255.0f, 173.0f/255.0f, 17.0f/255.0f);
 
         int sunRays = 10;
         float rayInterval = 360/sunRays;
 
         glBegin(GL_LINES);
-        for (int i = 0; i < 360; i += rayInterval)
-        {
+        for (int i = 0; i < 360; i += rayInterval) {
             float angle = 2 * PI * i / 360.0;
 
             float x1 = sx + (sradius + 0.01) * cos(angle);
@@ -3409,10 +3329,8 @@ public:
         glEnd();
     }
 
-
     //All Clouds
-    void drawCloud()
-    {
+    void drawCloud() {
         glPushMatrix();
         glTranslatef(cloudPosition, 0.0f, 0.0f);
             draw_Middle_Cloud(0.0f, 0.46f, 0.042f);
@@ -3422,8 +3340,7 @@ public:
     }
 
     //Main Ground
-    void drawGround()
-    {
+    void drawGround() {
         glColor3f(111.0f/255.0f, 133.0f/255.0f, 11.0f/255.0f);
         glBegin(GL_POLYGON);
         glVertex2f(-1.0f, 0.03f);
@@ -3436,11 +3353,9 @@ public:
     }
 
     //Main Road
-    void drawRoad()
-    {
+    void drawRoad() {
         glColor3f(38.0f/255.0f, 66.0f/255.0f, 28.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f( -1.0f, -0.20f);
         glVertex2f( 1.0f, -0.20f);
         glVertex2f(1.0f, -0.070f);
@@ -3450,12 +3365,10 @@ public:
     }
 
     //Ground Right side Corner
-    void drawShrub1()
-    {
+    void drawShrub1() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
-
 
         drawCircle(0.964f, -0.443f, 0.042f, 100, r,g,b);
         drawCircle(0.875f, -0.428f, 0.055f, 100, r,g,b);
@@ -3507,12 +3420,10 @@ public:
     }
 
     //Behind the right side house
-    void drawShrub2()
-    {
+    void drawShrub2() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
-
 
         drawCircle(0.974f, 0.159f, 0.026f, 100, r,g,b);
         drawCircle(0.932f, 0.179f, 0.029f, 100, r,g,b);
@@ -3536,8 +3447,7 @@ public:
     }
 
     //Infront of all buildings
-    void drawShrub3()
-    {
+    void drawShrub3() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
@@ -3545,7 +3455,6 @@ public:
         drawHalfCircle(-1.0f, 0.006f, 0.019f, 100, r,g,b);
         drawHalfCircle(-0.957f, 0.006f, 0.028f, 100, r,g,b); //O
         drawHalfCircle(-0.910f, 0.001f, 0.023f, 100, r,g,b); //P
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-1.0f, 0.006f);
@@ -3555,8 +3464,7 @@ public:
         glEnd();
     }
 
-    void drawShrub4()
-    {
+    void drawShrub4() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
@@ -3564,7 +3472,6 @@ public:
         drawHalfCircle(-0.915f, -0.020f, 0.018f, 100, r,g,b); //Q
         drawHalfCircle(-0.885f, -0.018f, 0.021f, 100, r,g,b); //R
         drawHalfCircle(-0.855f, -0.026f, 0.016f, 100, r,g,b); //S
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.839f, -0.026f);
@@ -3576,8 +3483,7 @@ public:
         glEnd();
     }
 
-    void drawShrub5()
-    {
+    void drawShrub5() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
@@ -3587,7 +3493,6 @@ public:
         drawHalfCircle(-0.634f, -0.024f, 0.020f, 100, r,g,b); //V
         drawHalfCircle(-0.602f, -0.029f, 0.014f, 100, r,g,b); //W
         drawHalfCircle(-0.585f, -0.035f, 0.007f, 100, r,g,b); //Z
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.725f, -0.031f);
@@ -3601,15 +3506,13 @@ public:
         glEnd();
     }
 
-    void drawShrub6()
-    {
+    void drawShrub6() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
 
         drawHalfCircle(-0.534f, -0.023f, 0.015f, 100, r,g,b); //A1
         drawHalfCircle(-0.508f, -0.032f, 0.017f, 100, r,g,b); //B1
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.549f, -0.023f);
@@ -3619,8 +3522,7 @@ public:
         glEnd();
     }
 
-    void drawShrub7()
-    {
+    void drawShrub7() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
@@ -3631,7 +3533,6 @@ public:
         drawHalfCircle(-0.322f, -0.024f, 0.017f, 100, r,g,b); //F1
         drawHalfCircle(-0.272f, -0.027f, 0.034f, 100, r,g,b); //I1
         drawHalfCircle(-0.222f, -0.034f, 0.024f, 100, r,g,b); //J1
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.432f, -0.038f);
@@ -3647,8 +3548,7 @@ public:
         glEnd();
     }
 
-    void drawShrub8()
-    {
+    void drawShrub8() {
         float r = 51.0f/255.0f;
         float g = 97.0f/255.0f;
         float b = 11.0f/255.0f;
@@ -3693,11 +3593,9 @@ public:
     }
 
     //Sky
-    void drawSky()
-    {
+    void drawSky() {
         glColor3f(98.0/255.0f, 180.0/255.0f, 168.0/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f( -1.0f, 0.5625f);
         glVertex2f( 1.0f, 0.5625f);
         //glColor3f(98.0/255.0f, 150.0/255.0f, 180.0/255.0f);
@@ -3708,8 +3606,7 @@ public:
     }
 
     //Building Window
-    void drawBuildingWindow(float x, float y, bool windowLine_x, bool windowLine_y, float r, float g, float b)
-    {
+    void drawBuildingWindow(float x, float y, bool windowLine_x, bool windowLine_y, float r, float g, float b) {
         //Shadow Color
         float r_S = 25.0f/255.0f;
         float g_S = 43.0f/255.0f;
@@ -3717,22 +3614,18 @@ public:
 
         glColor3f(r_S,g_S,b_S);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + -0.031f, y + 0.09f); //E4
-        glVertex2f(x + 0.030f, y + 0.09f);  //F4
-        glVertex2f(x + 0.030f, y + 0.054f); //G4
-        glVertex2f(x + -0.031f, y + 0.054f); //H4
-
+            glVertex2f(x + -0.031f, y + 0.09f); //E4
+            glVertex2f(x + 0.030f, y + 0.09f);  //F4
+            glVertex2f(x + 0.030f, y + 0.054f); //G4
+            glVertex2f(x + -0.031f, y + 0.054f); //H4
         glEnd();
-
 
         //Building Color
         float r_B = r;
         float g_B = g;
         float b_B = b;
 
-        if(windowLine_x)
-        {
+        if(windowLine_x) {
             glColor3f(r_B, g_B, b_B);
             glLineWidth(2.0f);
             glBegin(GL_LINES);
@@ -3744,8 +3637,7 @@ public:
             glEnd();
         }
 
-        if(windowLine_y)
-        {
+        if(windowLine_y) {
             glColor3f(r_B, g_B, b_B);
             glLineWidth(2.0f);
             glBegin(GL_LINES);
@@ -3758,8 +3650,7 @@ public:
     }
 
     //Building Broken Part
-    void drawBuildingInnerBrokenPart(float x, float y)
-    {
+    void drawBuildingInnerBrokenPart(float x, float y) {
         //Shadow Color
         float r_S = 25.0f/255.0f;
         float g_S = 43.0f/255.0f;
@@ -3767,7 +3658,6 @@ public:
 
         glColor3f(r_S,g_S,b_S);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.011f, y + 0.187f); //M4
         glVertex2f(x + -0.005f, y + 0.186f); //N4
         glVertex2f(x + -0.006f, y + 0.186f); //O4
@@ -3798,8 +3688,7 @@ public:
     }
 
     //Building 1 Smoke
-    void drawBuilding1Smoke()
-    {
+    void drawBuilding1Smoke() {
         float r = 89.0f/255.0f;
         float g = 111.0f/255.0f;
         float b = 72.0f/255.0f;
@@ -3817,8 +3706,7 @@ public:
     }
 
     //Building
-    void drawBuilding1(float x, float y, float r, float g, float b)
-    {
+    void drawBuilding1(float x, float y, float r, float g, float b) {
         //Broken Part Color
         float r_S = 25.0f/255.0f;
         float g_S = 43.0f/255.0f;
@@ -3828,141 +3716,125 @@ public:
         glColor3f(r_S,g_S,b_S);
         glLineWidth(0.05f);
         glBegin(GL_LINE_STRIP);
-
-        glVertex2f(x + -0.077f, y + 0.0f); //E3
-        glVertex2f(x + -0.077f, y + 0.142f); //F3
-        glVertex2f(x + -0.059f, y + 0.159f); //G3
-        glVertex2f(x + -0.067f, y + 0.17f); //H3
-        glVertex2f(x + -0.054f, y + 0.18f); //I3
-        glVertex2f(x + -0.061f, y + 0.186f); //J3
-        glVertex2f(x + -0.075f, y + 0.188f); //K3
-        glVertex2f(x + -0.076f, y + 0.266f); //L3
-        glVertex2f(x + -0.060f, y + 0.275f); //M3
-        glVertex2f(x + -0.078f, y + 0.281f); //T1
-
+            glVertex2f(x + -0.077f, y + 0.0f); //E3
+            glVertex2f(x + -0.077f, y + 0.142f); //F3
+            glVertex2f(x + -0.059f, y + 0.159f); //G3
+            glVertex2f(x + -0.067f, y + 0.17f); //H3
+            glVertex2f(x + -0.054f, y + 0.18f); //I3
+            glVertex2f(x + -0.061f, y + 0.186f); //J3
+            glVertex2f(x + -0.075f, y + 0.188f); //K3
+            glVertex2f(x + -0.076f, y + 0.266f); //L3
+            glVertex2f(x + -0.060f, y + 0.275f); //M3
+            glVertex2f(x + -0.078f, y + 0.281f); //T1
         glEnd();
-
 
         //Building Right Side Broken Part
         glColor3f(r_S,g_S,b_S);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.175f, y + 0.305f); //S2
-        glVertex2f(x + 0.171f, y + 0.332f); //R2
-        glVertex2f(x + 0.227f, y + 0.293f); //T2
-        glVertex2f(x + 0.2155f, y + 0.274f); //U2
-        glVertex2f(x + 0.2159f, y + 0.266f); //V2
-        glVertex2f(x + 0.226f, y + 0.26f); //W2
-        glVertex2f(x + 0.234f, y + 0.245f); //Z2
-        glVertex2f(x + 0.223f, y + 0.224f); //Z
-        glVertex2f(x + 0.222f, y + 0.198f); //A1
-        glVertex2f(x + 0.201f, y + 0.214f); //B1
-        glVertex2f(x + 0.175f, y + 0.214f); //C1
-        glVertex2f(x + 0.1651f, y + 0.237f); //D1
-        glVertex2f(x + 0.1555f, y + 0.273f); //E1
-        glVertex2f(x + 0.1251f, y + 0.257f); //F1
-        glVertex2f(x + 0.1251f, y + 0.296f); //G1
-        glVertex2f(x + 0.113f, y + 0.334f); //H1
-        glVertex2f(x + 0.122f, y + 0.377f); //I1
-        glVertex2f(x + 0.122f, y + 0.413f); //A3
-        glVertex2f(x + 0.132f, y + 0.413f); //B3
-        glVertex2f(x + 0.153f, y + 0.393f); //C3
-        glVertex2f(x + 0.1851f, y + 0.347f); //D3
-
+            glVertex2f(x + 0.175f, y + 0.305f); //S2
+            glVertex2f(x + 0.171f, y + 0.332f); //R2
+            glVertex2f(x + 0.227f, y + 0.293f); //T2
+            glVertex2f(x + 0.2155f, y + 0.274f); //U2
+            glVertex2f(x + 0.2159f, y + 0.266f); //V2
+            glVertex2f(x + 0.226f, y + 0.26f); //W2
+            glVertex2f(x + 0.234f, y + 0.245f); //Z2
+            glVertex2f(x + 0.223f, y + 0.224f); //Z
+            glVertex2f(x + 0.222f, y + 0.198f); //A1
+            glVertex2f(x + 0.201f, y + 0.214f); //B1
+            glVertex2f(x + 0.175f, y + 0.214f); //C1
+            glVertex2f(x + 0.1651f, y + 0.237f); //D1
+            glVertex2f(x + 0.1555f, y + 0.273f); //E1
+            glVertex2f(x + 0.1251f, y + 0.257f); //F1
+            glVertex2f(x + 0.1251f, y + 0.296f); //G1
+            glVertex2f(x + 0.113f, y + 0.334f); //H1
+            glVertex2f(x + 0.122f, y + 0.377f); //I1
+            glVertex2f(x + 0.122f, y + 0.413f); //A3
+            glVertex2f(x + 0.132f, y + 0.413f); //B3
+            glVertex2f(x + 0.153f, y + 0.393f); //C3
+            glVertex2f(x + 0.1851f, y + 0.347f); //D3
         glEnd();
 
         //Building Left Side Broken Part
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + -0.197f, y + 0.341f); //N3
-        glVertex2f(x + -0.183f, y + 0.362f); //O3
-        glVertex2f(x + -0.167f, y + 0.344f); //P3
-        glVertex2f(x + -0.151f, y + 0.353f); //Q3
-        glVertex2f(x + -0.134f, y + 0.333f); //R3
-        glVertex2f(x + -0.123f, y + 0.342f); //S3
-        glVertex2f(x + -0.100f, y + 0.287f); //T3
-        glVertex2f(x + -0.113f, y + 0.294f); //U1
-        glVertex2f(x + -0.137f, y + 0.283f); //V1
-        glVertex2f(x + -0.156f, y + 0.302f); //W1
-        glVertex2f(x + -0.180f, y + 0.297f); //Z1
-        glVertex2f(x + -0.213f, y + 0.309f); //A2
-        glVertex2f(x + -0.241f, y + 0.345f); //B2
-        glVertex2f(x + -0.242f, y + 0.416f); //C2
-        glVertex2f(x + -0.231f, y + 0.412f); //U3
-        glVertex2f(x + -0.220f, y + 0.406f); //V3
-        glVertex2f(x + -0.209f, y + 0.376f); //W3
-        glVertex2f(x + -0.183f, y + 0.362f); //O3
-
+            glVertex2f(x + -0.197f, y + 0.341f); //N3
+            glVertex2f(x + -0.183f, y + 0.362f); //O3
+            glVertex2f(x + -0.167f, y + 0.344f); //P3
+            glVertex2f(x + -0.151f, y + 0.353f); //Q3
+            glVertex2f(x + -0.134f, y + 0.333f); //R3
+            glVertex2f(x + -0.123f, y + 0.342f); //S3
+            glVertex2f(x + -0.100f, y + 0.287f); //T3
+            glVertex2f(x + -0.113f, y + 0.294f); //U1
+            glVertex2f(x + -0.137f, y + 0.283f); //V1
+            glVertex2f(x + -0.156f, y + 0.302f); //W1
+            glVertex2f(x + -0.180f, y + 0.297f); //Z1
+            glVertex2f(x + -0.213f, y + 0.309f); //A2
+            glVertex2f(x + -0.241f, y + 0.345f); //B2
+            glVertex2f(x + -0.242f, y + 0.416f); //C2
+            glVertex2f(x + -0.231f, y + 0.412f); //U3
+            glVertex2f(x + -0.220f, y + 0.406f); //V3
+            glVertex2f(x + -0.209f, y + 0.376f); //W3
+            glVertex2f(x + -0.183f, y + 0.362f); //O3
         glEnd();
 
         //Building Upper Broken Part
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.032f, y + 0.433f); //Z3
-        glVertex2f(x + 0.051f, y + 0.445f); //A4
-        glVertex2f(x + 0.079f, y + 0.424f); //B4
-        glVertex2f(x + 0.058f, y + 0.421f); //L1
-        glVertex2f(x + 0.0452f, y + 0.4002f); //M1
-        glVertex2f(x + 0.018f, y + 0.421f); //N1
-        glVertex2f(x + -0.006f, y + 0.417f); //O1
-        glVertex2f(x + 0.013f, y + 0.425f); //C4
-        glVertex2f(x + 0.024f, y + 0.44f); //D4
-
+            glVertex2f(x + 0.032f, y + 0.433f); //Z3
+            glVertex2f(x + 0.051f, y + 0.445f); //A4
+            glVertex2f(x + 0.079f, y + 0.424f); //B4
+            glVertex2f(x + 0.058f, y + 0.421f); //L1
+            glVertex2f(x + 0.0452f, y + 0.4002f); //M1
+            glVertex2f(x + 0.018f, y + 0.421f); //N1
+            glVertex2f(x + -0.006f, y + 0.417f); //O1
+            glVertex2f(x + 0.013f, y + 0.425f); //C4
+            glVertex2f(x + 0.024f, y + 0.44f); //D4
         glEnd();
-
 
         //Smoke
         glPushMatrix();
         glScalef(1.25f, 1.25f, 1.25f);
         glTranslatef(0.205f, 0.02f, 0.0f);
-
             drawBuilding1Smoke();
-
         glPopMatrix();
-
 
         //Building Main Shape
         glColor3f(r, g, b);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.002f, y + 0.0f); //Q2
-        glVertex2f(x + 0.266f, y + 0.0f); //T
-        glVertex2f(x + 0.266f, y + 0.237f); //U
-        glVertex2f(x + 0.249f, y + 0.217f); //V
-        glVertex2f(x + 0.244f, y + 0.249f); //W
-        glVertex2f(x + 0.223f, y + 0.224f); //Z
-        glVertex2f(x + 0.222f, y + 0.198f); //A1
-        glVertex2f(x + 0.201f, y + 0.214f); //B1
-        glVertex2f(x + 0.175f, y + 0.214f); //C1
-        glVertex2f(x + 0.1651f, y + 0.237f); //D1
-        glVertex2f(x + 0.1555f, y + 0.273f); //E1
-        glVertex2f(x + 0.1251f, y + 0.257f); //F1
-        glVertex2f(x + 0.1251f, y + 0.296f); //G1
-        glVertex2f(x + 0.113f, y + 0.334f); //H1
-        glVertex2f(x + 0.122f, y + 0.377f); //I1
-        glVertex2f(x + 0.122f, y + 0.429f); //J1
-        glVertex2f(x + 0.094f, y + 0.429f); //K1
-        glVertex2f(x + 0.058f, y + 0.421f); //L1
-        glVertex2f(x + 0.0452f, y + 0.4002f); //M1
-        glVertex2f(x + 0.018f, y + 0.421f); //N1
-        glVertex2f(x + -0.006f, y + 0.417f); //O1
-        glVertex2f(x + -0.022f, y + 0.44f); //P1
-        glVertex2f(x + -0.073f, y + 0.413f); //Q1
-        glVertex2f(x + -0.073f, y + 0.329f); //R1
-        glVertex2f(x + -0.065f, y + 0.302f); //S1
-        glVertex2f(x + -0.078f, y + 0.281f); //T1
-        glVertex2f(x + -0.113f, y + 0.294f); //U1
-        glVertex2f(x + -0.137f, y + 0.283f); //V1
-        glVertex2f(x + -0.156f, y + 0.302f); //W1
-        glVertex2f(x + -0.18f, y + 0.297f); //Z1
-        glVertex2f(x + -0.213f, y + 0.309f); //A2
-        glVertex2f(x + -0.241f, y + 0.345f); //B2
-        glVertex2f(x + -0.242f, y + 0.416f); //C2
-        glVertex2f(x + -0.266f, y + 0.416f); //D2
-        glVertex2f(x + -0.266f, y + 0.000f); //S
-
+            glVertex2f(x + 0.002f, y + 0.0f); //Q2
+            glVertex2f(x + 0.266f, y + 0.0f); //T
+            glVertex2f(x + 0.266f, y + 0.237f); //U
+            glVertex2f(x + 0.249f, y + 0.217f); //V
+            glVertex2f(x + 0.244f, y + 0.249f); //W
+            glVertex2f(x + 0.223f, y + 0.224f); //Z
+            glVertex2f(x + 0.222f, y + 0.198f); //A1
+            glVertex2f(x + 0.201f, y + 0.214f); //B1
+            glVertex2f(x + 0.175f, y + 0.214f); //C1
+            glVertex2f(x + 0.1651f, y + 0.237f); //D1
+            glVertex2f(x + 0.1555f, y + 0.273f); //E1
+            glVertex2f(x + 0.1251f, y + 0.257f); //F1
+            glVertex2f(x + 0.1251f, y + 0.296f); //G1
+            glVertex2f(x + 0.113f, y + 0.334f); //H1
+            glVertex2f(x + 0.122f, y + 0.377f); //I1
+            glVertex2f(x + 0.122f, y + 0.429f); //J1
+            glVertex2f(x + 0.094f, y + 0.429f); //K1
+            glVertex2f(x + 0.058f, y + 0.421f); //L1
+            glVertex2f(x + 0.0452f, y + 0.4002f); //M1
+            glVertex2f(x + 0.018f, y + 0.421f); //N1
+            glVertex2f(x + -0.006f, y + 0.417f); //O1
+            glVertex2f(x + -0.022f, y + 0.44f); //P1
+            glVertex2f(x + -0.073f, y + 0.413f); //Q1
+            glVertex2f(x + -0.073f, y + 0.329f); //R1
+            glVertex2f(x + -0.065f, y + 0.302f); //S1
+            glVertex2f(x + -0.078f, y + 0.281f); //T1
+            glVertex2f(x + -0.113f, y + 0.294f); //U1
+            glVertex2f(x + -0.137f, y + 0.283f); //V1
+            glVertex2f(x + -0.156f, y + 0.302f); //W1
+            glVertex2f(x + -0.18f, y + 0.297f); //Z1
+            glVertex2f(x + -0.213f, y + 0.309f); //A2
+            glVertex2f(x + -0.241f, y + 0.345f); //B2
+            glVertex2f(x + -0.242f, y + 0.416f); //C2
+            glVertex2f(x + -0.266f, y + 0.416f); //D2
+            glVertex2f(x + -0.266f, y + 0.000f); //S
         glEnd();
-
 
         //Window
         drawBuildingWindow(x + -0.15f, y + 0.0f, false, false, r, g, b);
@@ -3981,21 +3853,16 @@ public:
 
         drawBuildingWindow(x + 0.05f, y + 0.28f, false, true, r, g, b);
 
-
         //Inner Broken Part
         drawBuildingInnerBrokenPart(x + 0.0f, y + 0.0f);
         drawBuildingInnerBrokenPart(x + 0.08f, y + 0.11f);
         drawBuildingInnerBrokenPart(x + 0.22f, y - 0.01f);
-
-
     }
 
-    void drawBuilding2(float x, float y, float r, float g, float b)
-    {
-    //Building Main Shape
+    void drawBuilding2(float x, float y, float r, float g, float b) {
+        //Building Main Shape
         glColor3f(r, g, b);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.084f, y + 0.0f); //Q2
         glVertex2f(x + 0.266f, y + 0.0f); //T
         glVertex2f(x + 0.266f, y + 0.237f); //U
@@ -4028,7 +3895,6 @@ public:
         glVertex2f(x + -0.077f, y + 0.0f); //E3
         glEnd();
 
-
         //Broken Part Color
         float r_S = 25.0f/255.0f;
         float g_S = 43.0f/255.0f;
@@ -4038,38 +3904,31 @@ public:
 
         //Building Right Side Broken Part
         glBegin(GL_POLYGON);
+            glVertex2f(x + 0.249f, y + 0.4009f); //D1
+            glVertex2f(x + 0.267f, y + 0.371f); //C1
 
+            glVertex2f(x + 0.264f, y + 0.425f); //S2
+            glVertex2f(x + 0.234f, y + 0.418f); //D3
+            glVertex2f(x + 0.208f, y + 0.426f); //C3
 
-        glVertex2f(x + 0.249f, y + 0.4009f); //D1
-        glVertex2f(x + 0.267f, y + 0.371f); //C1
-
-        glVertex2f(x + 0.264f, y + 0.425f); //S2
-        glVertex2f(x + 0.234f, y + 0.418f); //D3
-        glVertex2f(x + 0.208f, y + 0.426f); //C3
-
-        glVertex2f(x + 0.177f, y + 0.416f); //H1
-        glVertex2f(x + 0.182f, y + 0.391f); //G1
-        glVertex2f(x + 0.216f, y + 0.4f); //F1
-
+            glVertex2f(x + 0.177f, y + 0.416f); //H1
+            glVertex2f(x + 0.182f, y + 0.391f); //G1
+            glVertex2f(x + 0.216f, y + 0.4f); //F1
         glEnd();
 
 
         //Building Upper Broken Part
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.032f, y + 0.433f); //Z3
-        glVertex2f(x + 0.051f, y + 0.445f); //A4
-        glVertex2f(x + 0.079f, y + 0.424f); //B4
-        glVertex2f(x + 0.058f, y + 0.421f); //L1
-        glVertex2f(x + 0.0452f, y + 0.4002f); //M1
-        glVertex2f(x + 0.018f, y + 0.421f); //N1
-        glVertex2f(x + -0.006f, y + 0.417f); //O1
-        glVertex2f(x + 0.013f, y + 0.425f); //C4
-        glVertex2f(x + 0.024f, y + 0.44f); //D4
-
+            glVertex2f(x + 0.032f, y + 0.433f); //Z3
+            glVertex2f(x + 0.051f, y + 0.445f); //A4
+            glVertex2f(x + 0.079f, y + 0.424f); //B4
+            glVertex2f(x + 0.058f, y + 0.421f); //L1
+            glVertex2f(x + 0.0452f, y + 0.4002f); //M1
+            glVertex2f(x + 0.018f, y + 0.421f); //N1
+            glVertex2f(x + -0.006f, y + 0.417f); //O1
+            glVertex2f(x + 0.013f, y + 0.425f); //C4
+            glVertex2f(x + 0.024f, y + 0.44f); //D4
         glEnd();
-
-
 
         //Window
         drawBuildingWindow(x + 0.02f, y + 0.0f, false, true, r, g, b);
@@ -4087,66 +3946,50 @@ public:
         drawBuildingWindow(x + 0.02f, y + 0.28f, false, true, r, g, b);
         drawBuildingWindow(x + 0.18f, y + 0.28f, false, true, r, g, b);
 
-
-
         //Inner Broken Part
         drawBuildingInnerBrokenPart(x + 0.06f, y + 0.06f);
         drawBuildingInnerBrokenPart(x + 0.22f, y - 0.035f);
-
-
     }
 
-    void drawHouse1(float x, float y)
-    {
+    void drawHouse1(float x, float y) {
         //Right
         glColor3f(34.0f/255.0f, 81.0f/255.0f, 63.0f/255.0f);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.874f, y + -0.023f); //P
-        glVertex2f(x + 1.0f, y + -0.015f); //S
-        glVertex2f(x + 1.0f, y + 0.113f); //T
-        glVertex2f(x + 0.850f, y + 0.1084f); //U
-        glVertex2f(x + 0.518f, y + 0.1087f); //V
-        glVertex2f(x + 0.519f, y + -0.023f); //O
-
+            glVertex2f(x + 0.874f, y + -0.023f); //P
+            glVertex2f(x + 1.0f, y + -0.015f); //S
+            glVertex2f(x + 1.0f, y + 0.113f); //T
+            glVertex2f(x + 0.850f, y + 0.1084f); //U
+            glVertex2f(x + 0.518f, y + 0.1087f); //V
+            glVertex2f(x + 0.519f, y + -0.023f); //O
         glEnd();
-
 
         //Front
         glColor3f(49.0f/255.0f, 92.0f/255.0f, 73.0f/255.0f);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.519f, y + -0.023f); //O
-        glVertex2f(x + 0.874f, y + -0.023f); //P
-        glVertex2f(x + 0.874f, y + 0.093f); //Q
-        glVertex2f(x + 0.519f, y + 0.093f); //R
-
+            glVertex2f(x + 0.519f, y + -0.023f); //O
+            glVertex2f(x + 0.874f, y + -0.023f); //P
+            glVertex2f(x + 0.874f, y + 0.093f); //Q
+            glVertex2f(x + 0.519f, y + 0.093f); //R
         glEnd();
-
 
         //Front Roof Top
         glColor3f(70.0f/255.0f, 63.0f/255.0f, 7.0f/255.0f);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.850f, y + 0.1084f); //U
-        glVertex2f(x + 0.507f, y + 0.1087f); //A1
-        glVertex2f(x + 0.608f, y + 0.224f); //W
-        glVertex2f(x + 0.931f, y + 0.224f); //Z
-
+            glVertex2f(x + 0.850f, y + 0.1084f); //U
+            glVertex2f(x + 0.507f, y + 0.1087f); //A1
+            glVertex2f(x + 0.608f, y + 0.224f); //W
+            glVertex2f(x + 0.931f, y + 0.224f); //Z
         glEnd();
 
 
         //Roof Top Right Side
         glColor3f(31.0f/255.0f, 65.0f/255.0f, 32.0f/255.0f);
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.850f, y + 0.1084f); //U
-        glVertex2f(x + 1.0f, y + 0.113f); //T
-        glVertex2f(x + 1.0f, y + 0.134f); //B1
-        glVertex2f(x + 0.931f, y + 0.224f); //Z
-
+            glVertex2f(x + 0.850f, y + 0.1084f); //U
+            glVertex2f(x + 1.0f, y + 0.113f); //T
+            glVertex2f(x + 1.0f, y + 0.134f); //B1
+            glVertex2f(x + 0.931f, y + 0.224f); //Z
         glEnd();
-
 
         //Window Color
         float rW = 29.0f/255.0f;
@@ -4156,59 +3999,43 @@ public:
 
         //Front Left Window
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.546f, y + 0.075f); //C1
-        glVertex2f(x + 0.590f, y + 0.075f); //D1
-        glVertex2f(x + 0.590f, y + 0.019f); //E1
-        glVertex2f(x + 0.546f, y + 0.019f); //F1
-
+            glVertex2f(x + 0.546f, y + 0.075f); //C1
+            glVertex2f(x + 0.590f, y + 0.075f); //D1
+            glVertex2f(x + 0.590f, y + 0.019f); //E1
+            glVertex2f(x + 0.546f, y + 0.019f); //F1
         glEnd();
-
 
         //Front Right Window
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.792f, y + 0.075f); //O1
-        glVertex2f(x + 0.847f, y + 0.075f); //P1
-        glVertex2f(x + 0.847f, y + 0.019f); //K1
-        glVertex2f(x + 0.792f, y + 0.019f); //R1
-
+            glVertex2f(x + 0.792f, y + 0.075f); //O1
+            glVertex2f(x + 0.847f, y + 0.075f); //P1
+            glVertex2f(x + 0.847f, y + 0.019f); //K1
+            glVertex2f(x + 0.792f, y + 0.019f); //R1
         glEnd();
-
 
         //Front Door
         glBegin(GL_POLYGON);
-
-        glVertex2f(x + 0.656f, y + 0.075f); //G1
-        glVertex2f(x + 0.712f, y + 0.075f); //H1
-        glVertex2f(x + 0.712f, y + -0.023f); //I1
-        glVertex2f(x + 0.656f, y + -0.023f); //J1
-
+            glVertex2f(x + 0.656f, y + 0.075f); //G1
+            glVertex2f(x + 0.712f, y + 0.075f); //H1
+            glVertex2f(x + 0.712f, y + -0.023f); //I1
+            glVertex2f(x + 0.656f, y + -0.023f); //J1
         glEnd();
-
 
         //Right Side Left  Window
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.903f, y + 0.075f); //S1
         glVertex2f(x + 0.931f, y + 0.075f); //T1
         glVertex2f(x + 0.931f, y + 0.021f); //U1
         glVertex2f(x + 0.903f, y + 0.02f); //V1
-
         glEnd();
-
 
         //Right Side Right  Window
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.951f, y + 0.075f); //W1
         glVertex2f(x + 0.979f, y + 0.075f); //Z1
         glVertex2f(x + 0.979f, y + 0.021f); //A2
         glVertex2f(x + 0.951f, y + 0.02f); //B2
-
         glEnd();
-
-
 
         //Broken Part Color
         float r_S = 25.0f/255.0f;
@@ -4218,7 +4045,6 @@ public:
         //Broken Part
         glColor3f(r_S, g_S, b_S);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.509f, y + 0.110f); //O
         glVertex2f(x + 0.556f, y + 0.167f); //P
         glVertex2f(x + 0.569f, y + 0.167f); //Q
@@ -4237,12 +4063,9 @@ public:
         glVertex2f(x + 0.603f, y + 0.121f); //F1
         glVertex2f(x + 0.603f, y + 0.113f); //G1
         glVertex2f(x + 0.594f, y + 0.109f); //H1
-
         glEnd();
 
-
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.758f, y + 0.210f); //J1
         glVertex2f(x + 0.75f, y + 0.2f); //K1
         glVertex2f(x + 0.764f, y + 0.199f); //L1
@@ -4252,40 +4075,29 @@ public:
         glVertex2f(x + 0.829f, y + 0.215f); //P1
         glVertex2f(x + 0.818f, y + 0.224f); //Q1
         glVertex2f(x + 0.755f, y + 0.224f); //I1
-
         glEnd();
-
-
-
-
     }
 
-    void drawHouse2(float x, float y)
-    {
+    void drawHouse2(float x, float y) {
         //Front
         glColor3f(78.0f/255.0f, 66.0f/255.0f, 6.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.144f, y + 0.0018f); //M
         glVertex2f(x + 0.347f, y + 0.0018f); //O
         glVertex2f(x + 0.347f, y + 0.09f); //P
         glVertex2f(x + 0.248f, y + 0.197f); //Q
         glVertex2f(x + 0.143f, y + 0.09f); //R
-
         glEnd();
-
 
         //Roof Top
         glColor3f(41.0f/255.0f, 65.0f/255.0f, 14.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.248f, y + 0.187f); //T
         glVertex2f(x + 0.352f, y + 0.075f); //U
         glVertex2f(x + 0.369f, y + 0.090f); //V
         glVertex2f(x + 0.248f, y + 0.218f); //W
         glVertex2f(x + 0.122f, y + 0.090f); //Z
         glVertex2f(x + 0.137f, y + 0.075f); //S
-
         glEnd();
 
         //Window Color
@@ -4293,173 +4105,132 @@ public:
 
         //Left Window
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.184f, y + 0.092f); //A1
         glVertex2f(x + 0.232f, y + 0.092f); //B1
         glVertex2f(x + 0.232f, y + 0.042f); //C1
         glVertex2f(x + 0.184f, y + 0.042f); //D1
-
         glEnd();
 
         //Right Window
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.259f, y + 0.092f); //E1
         glVertex2f(x + 0.304f, y + 0.092f); //F1
         glVertex2f(x + 0.304f, y + 0.041f); //G1
         glVertex2f(x + 0.259f, y + 0.041f); //H1
-
         glEnd();
-
     }
 
-    void drawHouse3(float x, float y)
-    {
+    void drawHouse3(float x, float y) {
         //Front
         glColor3f(83.0f/255.0f, 78.0f/255.0f, 12.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.034f, y + 0.163f); //S1
         glVertex2f(x + 0.034f, y + 0.020f); //T1
         glVertex2f(x + 0.199f, y + 0.020f); //U1
         glVertex2f(x + 0.199f, y + 0.161f); //V1
         glVertex2f(x + 0.113f, y + 0.244f); //W1
-
         glEnd();
-
 
         //Roof Top
         glColor3f(41.0f/255.0f, 65.0f/255.0f, 14.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.111f, y + 0.228f); //M1
         glVertex2f(x + 0.191f, y + 0.152f); //L1
         glVertex2f(x + 0.203f, y + 0.166f); //K1
         glVertex2f(x + 0.111f, y + 0.257f); //J1
         glVertex2f(x + 0.021f, y + 0.166f); //I1
         glVertex2f(x + 0.033f, y + 0.151f); //N1
-
         glEnd();
-
 
         //Window
         glColor3f(54.0f/255.0f, 71.0f/255.0f, 19.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.092f, y + 0.168f); //O1
         glVertex2f(x + 0.129f, y + 0.168f); //P1
         glVertex2f(x + 0.129f, y + 0.122f); //Q1
         glVertex2f(x + 0.092f, y + 0.122f); //R1
-
         glEnd();
 
     }
 
-    void drawHouse4(float x, float y)
-    {
+    void drawHouse4(float x, float y) {
         //Front
         glColor3f(112.0f/255.0f, 84.0f/255.0f, 10.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + 0.072f, y + 0.083f); //F2
         glVertex2f(x + 0.072f, y + 0.002f); //G2
         glVertex2f(x + -0.061f, y + 0.002f); //H2
         glVertex2f(x + -0.061f, y + 0.083f); //I2
         glVertex2f(x + -0.0009f, y + 0.185f); //J2
-
         glEnd();
-
 
         //Roof Top
         glColor3f(51.0f/255.0f, 62.0f/255.0f, 10.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.001f, y + 0.172f); //Z1
         glVertex2f(x + 0.077f, y + 0.068f); //A2
         glVertex2f(x + 0.102f, y + 0.068f); //B2
         glVertex2f(x + -0.001f, y + 0.206f); //C2
         glVertex2f(x + -0.093f, y + 0.070f); //D2
         glVertex2f(x + -0.066f, y + 0.071f); //E2
-
         glEnd();
-
 
         //Window
         glColor3f(69.0f/255.0f, 66.0f/255.0f, 7.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.019f, y + 0.090f); //K2
         glVertex2f(x + 0.024f, y + 0.090f); //L2
         glVertex2f(x + 0.024f, y + 0.046f); //M2
         glVertex2f(x + -0.019f, y + 0.046f); //N2
-
         glEnd();
-
     }
 
-    void drawHouse5(float x, float y)
-    {
+    void drawHouse5(float x, float y) {
         //Front
         glColor3f(153.0f/255.0f, 98.0f/255.0f, 8.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.202f, y + 0.116f); //U2
         glVertex2f(x + -0.120f, y + 0.216f); //V2
         glVertex2f(x + -0.029f, y + 0.116f); //W2
         glVertex2f(x + -0.029f, y + 0.006f); //Z2
         glVertex2f(x + -0.202f, y + 0.006f); //A3
-
         glEnd();
-
 
         //Roof Top
         glColor3f(108.0f/255.0f, 83.0f/255.0f, 4.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.120f, y + 0.203f); //O2
         glVertex2f(x + -0.050f, y + 0.122f); //P2
         glVertex2f(x + -0.038f, y + 0.139f); //Q2
         glVertex2f(x + -0.120f, y + 0.236f); //R2
         glVertex2f(x + -0.234f, y + 0.095f); //S2
         glVertex2f(x + -0.208f, y + 0.095f); //T2
-
         glEnd();
-
 
         //Window
         glColor3f(84.0f/255.0f, 72.0f/255.0f, 8.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(x + -0.161f, y + 0.026f); //B3
         glVertex2f(x + -0.089f, y + 0.026f); //C3
         glVertex2f(x + -0.089f, y + 0.079f); //D3
         glVertex2f(x + -0.161f, y + 0.079f); //E3
-
         glEnd();
 
         drawHalfCircle(-0.125f, 0.079f, 0.036f, 100, 84.0f/255.0f, 72.0f/255.0f, 8.0f/255.0f);
-
     }
 
     //All Buildings
-    void drawBuildings()
-    {
-        //
+    void drawBuildings() {
         glPushMatrix();
         glScalef(0.75f, 0.75f, 0.75f);
         glTranslatef(-0.3f, 0.0f, 0.0f);
-
             drawBuilding1(-0.6f, -0.04f, 176.0f/255.0f, 144.0f/255.0f, 23.0f/255.0f);
-
         glPopMatrix();
 
-        //
         glPushMatrix();
         glScalef(0.65f, 0.65f, 0.65f);
         glTranslatef(0.38f, 0.04f, 0.0f);
-
             drawBuilding2(0.36f, -0.04f, 76.0f/255.0f, 106.0f/255.0f, 58.0f/255.0f);
-
         glPopMatrix();
 
         //Shrubs
@@ -4468,48 +4239,35 @@ public:
             drawShrub5();
         glPopMatrix();
 
-        //
         glPushMatrix();
         glScalef(0.75f, 0.75f, 0.75f);
 
         glPushMatrix();
         glTranslatef(0.34f, 0.0f, 0.0f);
-
             drawHouse1(0.0f, -0.03f);
-
         glPopMatrix();
 
-        //
         glPushMatrix();
         glTranslatef(0.2f, -0.04f, 0.0f);
-
             drawHouse3(0.0f, 0.0f);
             drawHouse2(0.0f, 0.0f);
             drawHouse5(0.0f, 0.0f);
             drawHouse4(0.0f, 0.0f);
-
         glPopMatrix();
 
-
-        //
         glPushMatrix();
         glScalef(0.65f, 0.65f, 0.65f);
         glTranslatef(-0.6f, 0.0f, 0.0f);
-
             drawHouse3(0.0f, 0.0f);
             drawHouse2(0.0f, 0.0f);
             drawHouse5(0.0f, 0.0f);
             drawHouse4(0.0f, 0.0f);
-
         glPopMatrix();
-
         glPopMatrix();
-
     }
 
     //Trees
-    void drawTree1()
-    {
+    void drawTree1() {
         glColor3f(78.0f/255.0f, 73.0f/255.0f, 4.0f/255.0f);
         glBegin(GL_POLYGON);
         glVertex2f(-0.892, 0.002);
@@ -4533,11 +4291,9 @@ public:
         glVertex2f(-0.940,0.039);
         glVertex2f(-0.821,0.039);
         glEnd();
-
     }
 
-    void drawTree2()
-    {
+    void drawTree2() {
         //Tree Shadow
         glPushMatrix();
         glScalef(1.0f, 0.3f, 1.0f);
@@ -4555,7 +4311,6 @@ public:
         drawCircle(-0.843f, -0.208f, 0.053f, 100, 38.0f/255.0f, 88.0f/255.0f, 15.0f/255.0f);
         drawCircle(-0.880f, -0.140f, 0.051f, 100, 38.0f/255.0f, 88.0f/255.0f, 15.0f/255.0f);
 
-
         glColor3f(79.0f/255.0f, 71.0f/255.0f, 6.0f/255.0f);
         glLineWidth(12.0f);
         glBegin(GL_LINES);
@@ -4568,11 +4323,9 @@ public:
         glVertex2f(-0.881f, -0.251f);
         glVertex2f(-0.834f, -0.201f);
         glEnd();
-
     }
 
-    void drawFlowerLeafs()
-    {
+    void drawFlowerLeafs() {
         glColor3f(40.0f/255.0f, 84.0f/255.0f, 0.10f/255.0f);
 
         glBegin(GL_POLYGON);
@@ -4683,11 +4436,9 @@ public:
         }
 
         drawCircle(cx, cy, centerRedius, 100, 133.0f/255.0f, 104.0f/255.0f, 0.0f/255.0f);
-
     }
 
-    void drawTree()
-    {
+    void drawTree() {
         drawTree1();
 
         glPushMatrix();
@@ -4696,13 +4447,11 @@ public:
         drawTree2();
         glPopMatrix();
 
-
         glPushMatrix();
         glScalef(0.68f, 0.68f, 0.68f);
         glTranslatef(0.8f, 0.0f, 0.0f);
         drawTree1();
         glPopMatrix();
-
 
         glPushMatrix();
         glScalef(0.9f, 0.9f, 0.9f);
@@ -4711,8 +4460,7 @@ public:
         glPopMatrix();
     }
 
-    void drawShrubs()
-    {
+    void drawShrubs() {
         drawShrub1();
         drawShrub4();
 
@@ -4721,13 +4469,11 @@ public:
             drawShrub5();
         glPopMatrix();
 
-
         glPushMatrix();
         glScalef(0.65f, 0.65f, 0.65f);
         glTranslatef(0.005f, 0.02f, 0.0f);
             drawShrub5();
         glPopMatrix();
-
 
         glPushMatrix();
         glScalef(0.65f, 0.65f, 0.65f);
@@ -4735,7 +4481,6 @@ public:
             drawShrub6();
             drawShrub7();
         glPopMatrix();
-
 
         glPushMatrix();
         glScalef(0.6f, 0.6f, 0.6f);
@@ -4743,20 +4488,17 @@ public:
             drawShrub5();
         glPopMatrix();
 
-
         glPushMatrix();
         glScalef(0.6f, 0.6f, 0.6f);
         glTranslatef(-0.5f, 0.022f, 0.0f);
             drawShrub8();
         glPopMatrix();
 
-
         glPushMatrix();
         glTranslatef(0.51f, -0.005f, 0.0f);
             drawShrub6();
             drawShrub7();
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(1.3f, -0.002f, 0.0f);
@@ -4782,17 +4524,12 @@ public:
         glTranslatef(1.5f, -0.018f, 0.0f);
             drawShrub5();
         glPopMatrix();
-
-
-
     }
 
     //Ground Left Side Corner
-    void drawGroundCorner()
-    {
+    void drawGroundCorner() {
         glColor3f(56.0f/255.0f, 70.0f/255.0f, 11.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.863f, -0.484f); //P1
         glVertex2f(-1.000f, -0.562f); //D
         glVertex2f(-0.525f, -0.562f); //O
@@ -4822,14 +4559,11 @@ public:
         glVertex2f(-0.920f, -0.340f); //O1
         glVertex2f(-1.000f, -0.287f); //M
         glVertex2f(-1.000f, -0.562f); //D
-
         glEnd();
-
 
         //Particles
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.978f, -0.402f); //P1
         glVertex2f(-0.949f, -0.374f); //Q1
         glVertex2f(-0.943f, -0.371f); //R1
@@ -4848,14 +4582,10 @@ public:
         glVertex2f(-0.954f, -0.410f); //G2
         glVertex2f(-0.963f, -0.409f); //H2
         glVertex2f(-0.973f, -0.405f); //I2
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.879f, -0.392f); //J2
         glVertex2f(-0.879f, -0.384f); //K2
         glVertex2f(-0.875f, -0.380f); //L2
@@ -4878,14 +4608,10 @@ public:
         glVertex2f(-0.872f, -0.410f); //E3
         glVertex2f(-0.875f, -0.401f); //F3
         glVertex2f(-0.877f, -0.396f); //G3
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.738f, -0.441f); //H3
         glVertex2f(-0.717f, -0.462f); //I3
         glVertex2f(-0.715f, -0.466f); //J3
@@ -4914,14 +4640,10 @@ public:
         glVertex2f(-0.750f, -0.432f); //J4
         glVertex2f(-0.745f, -0.433f); //K4
         glVertex2f(-0.743f, -0.435f); //L4
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.657f, -0.501f); //M4
         glVertex2f(-0.633f, -0.521f); //N4
         glVertex2f(-0.633f, -0.526f); //O4
@@ -4937,11 +4659,8 @@ public:
         glVertex2f(-0.670f, -0.500f); //A5
         glVertex2f(-0.664f, -0.499f); //B5
         glVertex2f(-0.660f, -0.500f); //C5
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
         glVertex2f(-0.840f, -0.520f); //D5
@@ -4955,14 +4674,10 @@ public:
         glVertex2f(-0.827f, -0.541f); //L5
         glVertex2f(-0.833f, -0.539f); //M5
         glVertex2f(-0.837f, -0.534f); //N5
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.894f, -0.485f); //O5
         glVertex2f(-0.889f, -0.474f); //P5
         glVertex2f(-0.881f, -0.469f); //Q5
@@ -4970,14 +4685,10 @@ public:
         glVertex2f(-0.854f, -0.483f); //S5
         glVertex2f(-0.854f, -0.490f); //T5
         glVertex2f(-0.895f, -0.491f); //U5
-
         glEnd();
 
-
-        //
         glColor3f(85.0f/255.0f, 85.0f/255.0f, 13.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.978f, -0.492f); //V5
         glVertex2f(-0.957f, -0.476f); //W5
         glVertex2f(-0.947f, -0.476f); //Z5
@@ -4989,13 +4700,11 @@ public:
         glVertex2f(-0.978f, -0.506f); //F6
         glVertex2f(-0.983f, -0.501f); //G6
         glVertex2f(-0.983f, -0.494f); //H6
-
         glEnd();
     }
 
     //Road Fractures
-    void drawCrackedRoad()
-    {
+    void drawCrackedRoad() {
         //Side Road
         glColor3f(46.0f/255.0f, 75.0f/255.0f, 32.0f/255.0f);
         glBegin(GL_POLYGON);
@@ -5005,7 +4714,6 @@ public:
         glVertex2f(-0.243f, -0.493f); //S
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.221f, -0.510f); //R
         glVertex2f(-0.205f, -0.507f); //T
@@ -5014,7 +4722,6 @@ public:
         glVertex2f(-0.216f, -0.486f); //W
         glVertex2f(-0.243f, -0.493f); //S
         glEnd();
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.200f, -0.450f); //Z
@@ -5028,7 +4735,6 @@ public:
         glVertex2f(-0.183f, -0.456f); //V
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.214f, -0.562f); //G1
         glVertex2f(-0.175f, -0.562f); //H1
@@ -5036,7 +4742,6 @@ public:
         glVertex2f(-0.165f, -0.501f); //J1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.157f, -0.519f); //I1
         glVertex2f(-0.165f, -0.501f); //J1
@@ -5044,7 +4749,6 @@ public:
         glVertex2f(-0.128f, -0.501f); //K1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.147f, -0.494f); //L1
         glVertex2f(-0.128f, -0.501f); //K1
@@ -5052,7 +4756,6 @@ public:
         glVertex2f(-0.122f, -0.459f); //N1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.115f, -0.471f); //M1
         glVertex2f(-0.122f, -0.459f); //N1
@@ -5060,7 +4763,6 @@ public:
         glVertex2f(-0.060f, -0.434f); //O1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.081f, -0.436f); //P1
         glVertex2f(-0.060f, -0.434f); //O1
@@ -5068,7 +4770,6 @@ public:
         glVertex2f(-0.085f, -0.415f); //R1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.065f, -0.415f); //Q1
         glVertex2f(-0.085f, -0.415f); //R1
@@ -5076,14 +4777,12 @@ public:
         glVertex2f(-0.056f, -0.397f); //S1
         glEnd();
 
-
         glBegin(GL_POLYGON);
         glVertex2f(-0.060f, -0.380f); //T1
         glVertex2f(-0.056f, -0.397f); //S1
         glVertex2f(0.0f, -0.380f); //U1
         glVertex2f(-0.011f, -0.371f); //V1
         glEnd();
-
 
         //Main Road
         glColor3f(17.0f/255.0f, 51.0f/255.0f, 17.0f/255.0f);
@@ -5306,15 +5005,9 @@ public:
         glVertex2f(-0.319,-0.236); //C4
         glEnd();
 
-
-
-
-
-
         //Right Fracture
         glPushMatrix();
         glTranslatef(0.5f, 0.0f, 0.0f);
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.656f, -0.106f); //R
@@ -5511,14 +5204,10 @@ public:
         glVertex2f(-0.319,-0.236); //C4
         glEnd();
 
-
-
         glPopMatrix();
-
     }
 
-    void drawRightSideVerticleFracture()
-    {
+    void drawRightSideVerticleFracture() {
         glColor3f(17.0f/255.0f, 51.0f/255.0f, 17.0f/255.0f);
 
         glBegin(GL_POLYGON);
@@ -5566,11 +5255,9 @@ public:
         glVertex2f(0.932f, -0.180f); //H1
         glVertex2f(0.942f, -0.180f); //I1
         glEnd();
-
     }
 
-    void drawBrokenParticles()
-    {
+    void drawBrokenParticles() {
         glColor3f(81.0f/255.0f, 86.0f/255.0f, 20.0f/255.0f);
         glBegin(GL_POLYGON);
         glVertex2f(-0.791f, -0.365f); //H1
@@ -5580,7 +5267,6 @@ public:
         glVertex2f(-0.730f, -0.370f); //L1
         glVertex2f(-0.770f, -0.370f); //M1
         glEnd();
-
 
         glBegin(GL_POLYGON);
         glVertex2f(-0.515f, -0.399f); //N1
@@ -5632,7 +5318,6 @@ public:
             glEnd();
         glPopMatrix();
 
-
         glPushMatrix();
         glTranslatef(0.15f, 0.0f, 0.0f);
             glColor3f(87.0f/255.0f, 89.0f/255.0f, 27.0f/255.0f);
@@ -5682,7 +5367,6 @@ public:
             glEnd();
         glPopMatrix();
 
-
         glPushMatrix();
         glTranslatef(0.05f, 0.0f, 0.0f);
             glColor3f(85.0f/255.0f, 90.0f/255.0f, 32.0f/255.0f);
@@ -5693,7 +5377,6 @@ public:
             glVertex2f(-0.775f, -0.139f); //H6
             glEnd();
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(0.45f, 0.03f, 0.0f);
@@ -5711,8 +5394,6 @@ public:
             glVertex2f(0.005f, -0.134f); //R6
             glEnd();
         glPopMatrix();
-
-
 
         glPushMatrix();
         glTranslatef(-0.15f, 0.02f, 0.0f);
@@ -5734,7 +5415,6 @@ public:
             glEnd();
         glPopMatrix();
 
-
         glPushMatrix();
         glTranslatef(0.25f, 0.035f, 0.0f);
             glColor3f(83.0f/255.0f, 91.0f/255.0f, 29.0f/255.0f);
@@ -5748,7 +5428,6 @@ public:
             glVertex2f(0.563f, -0.317f); //T5
             glEnd();
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(0.2f, 0.015f, 0.0f);
@@ -5803,15 +5482,7 @@ public:
             glVertex2f(0.571f, -0.194f); //S11
             glEnd();
 
-
-
-            /////
-
-
-
-
             glColor3f(83.0f/255.0f, 91.0f/255.0f, 29.0f/255.0f);
-
             glBegin(GL_POLYGON);
             glVertex2f(0.429f, -0.291f); //U5
             glVertex2f(0.454f, -0.274f); //V5
@@ -5845,7 +5516,6 @@ public:
             glVertex2f(0.099f, -0.227f); //H7
             glEnd();
 
-
             glBegin(GL_POLYGON);
             glVertex2f(0.166f, -0.161f); //N7
             glVertex2f(0.184f, -0.147f); //O7
@@ -5877,7 +5547,6 @@ public:
             glVertex2f(0.571f, -0.220f); //L9
             glEnd();
 
-
             glColor3f(77.0f/255.0f, 80.0f/255.0f, 17.0f/255.0f);
             glBegin(GL_POLYGON);
             glVertex2f(0.149f, -0.220f); //I7
@@ -5886,7 +5555,6 @@ public:
             glVertex2f(0.183f, -0.196f); //L7
             glVertex2f(0.172f, -0.194f); //M7
             glEnd();
-
 
             glColor3f(115.0f/255.0f, 114.0f/255.0f, 38.0f/255.0f);
             glBegin(GL_POLYGON);
@@ -5972,12 +5640,10 @@ public:
             glEnd();
 
         glPopMatrix();
-
     }
 
     //Warnings
-    void WaringBoard()
-    {
+    void WaringBoard() {
         //Stand Shadow
         glPushMatrix();
         glScalef(1.0f, 0.3f, 1.0f);
@@ -6019,7 +5685,6 @@ public:
         glEnd();
         glPopMatrix();
 
-
         //Sign
         glColor3f(45.0f/255.0f, 73.0f/255.0f, 26.0f/255.0f);
         glBegin(GL_POLYGON);
@@ -6033,13 +5698,10 @@ public:
         drawHalfCircle(-0.5685f, -0.218f, 0.0065f, 100, 45.0f/255.0f, 73.0f/255.0f, 26.0f/255.0f);
         drawCircle(-0.5685f, -0.263f, 0.0065f, 100, 45.0f/255.0f, 73.0f/255.0f, 26.0f/255.0f);
 
-
         drawCircle(-0.5685f, -0.280f, 0.0065f, 100, 45.0f/255.0f, 73.0f/255.0f, 26.0f/255.0f);
-
     }
 
-    void WaringBarrier()
-    {
+    void WaringBarrier() {
         //Barrier Shadow
         glPushMatrix();
         glScalef(1.0f, 0.12f, 1.0f);
@@ -6052,14 +5714,12 @@ public:
         //Barrier
         glColor3f(205.0f/255.0f, 179.0f/255.0f, 82.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(0.120f, -0.257f); //M
         glVertex2f(0.460f, -0.257f); //O
         glVertex2f(0.460f, -0.330f); //P
         glVertex2f(0.120f, -0.330f); //Q
 
         glEnd();
-
 
         glColor3f(148.0f/255.0f, 90.0f/255.0f, 8.0f/255.0f);
         glBegin(GL_POLYGON);
@@ -6069,7 +5729,6 @@ public:
         glVertex2f(0.129f, -0.330f); //R
 
         glEnd();
-
 
         glPushMatrix();
         glTranslatef(0.08f, 0.0f, 0.0f);
@@ -6083,7 +5742,6 @@ public:
         glEnd();
         glPopMatrix();
 
-
         glPushMatrix();
         glTranslatef(0.16f, 0.0f, 0.0f);
 
@@ -6095,7 +5753,6 @@ public:
 
         glEnd();
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(0.24f, 0.0f, 0.0f);
@@ -6146,16 +5803,12 @@ public:
         glVertex2f(0.403f, -0.402f); //W
 
         glEnd();
-
-
     }
 
     //Hole
-    void drawHole()
-    {
+    void drawHole() {
         glColor3f(41.0f/255.0f, 37.0f/255.0f, 24.0f/255.0f);
         glBegin(GL_POLYGON);
-
         glVertex2f(-0.021f, -0.280f); //Q
         glVertex2f(0.052f, -0.368f); //R
         glVertex2f(0.052f, -0.380f); //S
@@ -6227,7 +5880,6 @@ public:
 
         glEnd();
 
-
         //Hole Shadow
         //Shadow Upper Color
         float r_S_U = 85.0f/255.0f;
@@ -6239,7 +5891,6 @@ public:
         float g_S_L = 42.0f/255.0f;
         float b_S_L = 22.0f/255.0f;
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(0.172f, -0.201f); //Q1
@@ -6247,7 +5898,6 @@ public:
         glColor3f(r_S_L, g_S_L, b_S_L);
         glVertex2f(0.153f, -0.288f); //L3
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6257,7 +5907,6 @@ public:
         glVertex2f(0.225f, -0.293f); //N3
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(0.214f, -0.267f); //O1
@@ -6266,7 +5915,6 @@ public:
         glVertex2f(0.195f, -0.321f); //Q3
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(0.247f, -0.334f); //R3
@@ -6274,7 +5922,6 @@ public:
         glColor3f(r_S_L, g_S_L, b_S_L);
         glVertex2f(0.260f, -0.317f); //B1
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6285,7 +5932,6 @@ public:
         glVertex2f(0.315f, -0.286f); //S3
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(0.161f, -0.364f); //T3
@@ -6293,14 +5939,12 @@ public:
         glVertex2f(0.169f, -0.345f); //W
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(-0.200f, -0.360f); //U3
         glVertex2f(-0.210f, -0.343f); //F3
         glVertex2f(-0.243f, -0.359f); //G3
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6319,7 +5963,6 @@ public:
         glVertex2f(-0.309f, -0.259f); //R2
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(-0.253f, -0.226f); //L2
@@ -6327,7 +5970,6 @@ public:
         glColor3f(r_S_L, g_S_L, b_S_L);
         glVertex2f(-0.224f, -0.272f); //A4
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6348,9 +5990,7 @@ public:
         glVertex2f(-0.196f, -0.229f); //L4
         glVertex2f(-0.199f, -0.212f); //I2
         glVertex2f(-0.186f, -0.207f); //H2
-
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6360,7 +6000,6 @@ public:
         glVertex2f(-0.114f, -0.273f); //M4
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(-0.049f, -0.180f); //C2
@@ -6369,7 +6008,6 @@ public:
         glVertex2f(-0.066f, -0.267f); //N4
         glEnd();
 
-
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
         glVertex2f(-0.009f, -0.230f); //P4
@@ -6377,7 +6015,6 @@ public:
         glColor3f(r_S_L, g_S_L, b_S_L);
         glVertex2f(-0.004f, -0.284f); //Q4
         glEnd();
-
 
         glColor3f(r_S_U, g_S_U, b_S_U);
         glBegin(GL_POLYGON);
@@ -6389,12 +6026,8 @@ public:
         glEnd();
     }
 
-
-
-
     //House 1 Smoke
-    void drawHouse1Smoke()
-    {
+    void drawHouse1Smoke() {
         float r = 89.0f/255.0f;
         float g = 111.0f/255.0f;
         float b = 72.0f/255.0f;
@@ -6456,13 +6089,10 @@ public:
             glVertex2f(0.719f, 0.066f); //D1
             glEnd();
         glPopMatrix();
-
-
     }
 
     //Smoke
-    void drawSmoke1()
-    {
+    void drawSmoke1() {
         float r = 89.0f/255.0f;
         float g = 111.0f/255.0f;
         float b = 72.0f/255.0f;
@@ -6516,15 +6146,12 @@ public:
         drawCircle(XSmoke1[46], YSmoke1[46], 0.012f, 100, r, g, b); //A3
         drawCircle(XSmoke1[47], YSmoke1[47], 0.032f, 100, r, g, b); //B3
         drawCircle(XSmoke1[48], YSmoke1[48], 0.033f, 100, r, g, b); //C3
-
     }
 
-    void drawSmoke2()
-    {
+    void drawSmoke2() {
         float r = 89.0f/255.0f;
         float g = 111.0f/255.0f;
         float b = 72.0f/255.0f;
-
 
         drawCircle(XSmoke2[0] , YSmoke2[0] , 0.029f, 100, r, g, b); //G3
         drawCircle(XSmoke2[1] , YSmoke2[1] , 0.030f, 100, r, g, b); //H3
@@ -6543,27 +6170,18 @@ public:
         drawCircle(XSmoke2[10], YSmoke2[10], 0.017f, 100, r, g, b); //U3
         drawCircle(XSmoke2[10], YSmoke2[10], 0.012f, 100, r, g, b); //V3
         drawCircle(XSmoke2[10], YSmoke2[10], 0.010f, 100, r, g, b); //W3
-
-
     }
 
-
-    void sound()
-    {
+    void sound() {
         if (!scene4Sound) { return; }
         PlaySound(TEXT("fire.wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
     }
 
-
-
-    void update()
-    {
-
+    void update() {
         //cloud
         if(cloudPosition > 1.0)
             cloudPosition = -1.0f;
         cloudPosition += cloudSpeed;
-
 
         //Building 1 Smoke
         bool flagBuilding1Smoke = false;
@@ -6591,10 +6209,8 @@ public:
 
                 XBuilding1Smoke[i]+=Building1SmokeSpeed;
                 YBuilding1Smoke[i]+=Building1SmokeSpeed;
-
             }
         }
-
 
         //smoke1
         bool flagSmoke1 = false;
@@ -6618,13 +6234,10 @@ public:
                     XSmoke1[i] += smoke1Speed * dx / dist;
                     YSmoke1[i] += smoke1Speed * dy / dist;
                 }
-
                 XSmoke1[i]+=smoke1Speed;
                 YSmoke1[i]+=smoke1Speed;
-
             }
         }
-
 
         //smoke2
         bool flagSmoke2 = false;
@@ -6651,10 +6264,8 @@ public:
 
                 XSmoke2[i]+=smoke2Speed;
                 YSmoke2[i]+=smoke2Speed;
-
             }
         }
-
 
         cout << "Updating Scene 4: Memory Pulse" << endl;
         // glutPostRedisplay();
@@ -6665,14 +6276,7 @@ public:
         }
     }
 
-    void Idle()
-    {
-        glutPostRedisplay();//// marks the current window as needing to be redisplayed
-    }
-
-
-    void display()
-    {
+    void display() {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
         glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
 
@@ -6727,31 +6331,24 @@ public:
 
         drawShrubs();
 
-
-
-
         glFlush(); // Render now
         glutSwapBuffers(); // Swap buffers (double buffering)
-
     }
 
-    void SceneInfoDisplay()
-    {
+    void SceneInfoDisplay() {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
         glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer (background)
-
 
         glColor3f(1.0f, 1.0f, 1.0f);
 
         renderBitmapString(-0.155f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
         renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 4: Memory Pulse");
-
+        renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Siam");
+        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'D' to continue");
 
         glFlush(); // Render now
         glutSwapBuffers(); // Swap buffers (double buffering)
-
     }
-
 
     void changeDisplay(unsigned char key, int x, int y) {
         if (key == 27) { // Escape key
@@ -6833,11 +6430,11 @@ Scene4* Scene4::instance = nullptr;
 void displayScene(int sceneKey) {
     cout << "Displaying Scene: " << sceneKey << endl;
     SceneManager::resetSound(sceneKey); // turn on sound for only current scene
-    cout << "Scene 1 Sound " << SceneManager::scene1Sound << endl;
-    cout << "Scene 2 Sound " << SceneManager::scene2Sound << endl;
-    cout << "Scene 3 Sound " << SceneManager::scene3Sound << endl;
-    cout << "Scene 4 Sound " << SceneManager::scene4Sound << endl;
-    cout << "Scene 5 Sound " << SceneManager::scene5Sound << endl;
+    // cout << "Scene 1 Sound " << SceneManager::scene1Sound << endl;
+    // cout << "Scene 2 Sound " << SceneManager::scene2Sound << endl;
+    // cout << "Scene 3 Sound " << SceneManager::scene3Sound << endl;
+    // cout << "Scene 4 Sound " << SceneManager::scene4Sound << endl;
+    // cout << "Scene 5 Sound " << SceneManager::scene5Sound << endl;
 
     switch (sceneKey) {
     case 1:
@@ -6898,7 +6495,6 @@ void displayScene(int sceneKey) {
         cout << "Scene 4: Memory Pulse " << sizeof scene4 << endl;
 
         glutDisplayFunc(Scene4::SceneInfoDisplayWrapper); // Register display callback handler for window re-paint
-        // glutIdleFunc(Scene4::IdleWrapper);
         glutKeyboardFunc(Scene4::changeDisplayWrapper); // Register special key callback handler
 
         break;
@@ -6912,7 +6508,6 @@ void displayScene(int sceneKey) {
 
 int sceneKey = 0; // Global variable to track the scene
 void changeScene(int key, int x, int y) {
-
     if (key == GLUT_KEY_RIGHT) {
         sceneKey++;
         sceneKey = min(sceneKey, 5);
@@ -6964,14 +6559,10 @@ void mainScene() {
 
     glColor3f(1.0f, 1.0f, 1.0f);
 
-    // renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
-    // renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 3: The Fall");
-    // renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Md Hasib Askari");
-    // renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow' to continue");
-
+    renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
+    renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow' to continue");
 
     glFlush(); // Render now
-
     glutSwapBuffers(); // Swap buffers (double buffering)
 }
 

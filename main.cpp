@@ -1466,13 +1466,15 @@ public:
     int vehicleSoundTimer = 0;
 
     void sound(int soundIdx) {
+        cout << "Scene2 sound function called with soundIdx: " << soundIdx << endl;
+
         if (!scene2Sound) { return; }
 
         switch (soundIdx) {
             case 1: PlaySound(TEXT("traffic-2.wav"), NULL, SND_ASYNC | SND_FILENAME); break;
             case 2: PlaySound(TEXT("jet-2.wav"), NULL, SND_ASYNC | SND_FILENAME); break;
             case 3: PlaySound(TEXT("explosion-2.wav"), NULL, SND_ASYNC | SND_FILENAME); break;
-            case 4: PlaySound(TEXT("fire-2.wav"), NULL, SND_ASYNC | SND_FILENAME); break;
+            case 4: PlaySound(TEXT("fire-2.wav"), NULL, SND_ASYNC | SND_FILENAME | SND_LOOP); break;
         }
     }
 
@@ -3332,11 +3334,11 @@ public:
             jetSoundPlaying = true;
         }
 
-        // Stop sound after 12 sec total (6 sec of playing)
-        if (jetSoundPlaying && jetSoundTimer >= 12000) {
-            PlaySound(NULL, 0, 0); // stop sound
-            jetSoundPlaying = false;
-        }
+        // // Stop sound after 12 sec total (6 sec of playing)
+        // if (jetSoundPlaying && jetSoundTimer >= 12000) {
+        //     PlaySound(NULL, 0, 0); // stop sound
+        //     jetSoundPlaying = false;
+        // }
 
         // === JET MOVEMENT ===
         if (jetPlaneOffsetX < 150.0f) {
@@ -3364,13 +3366,6 @@ public:
         if (!vehicleSoundPlayed) {
             sound(1); // Play traffic sound
             vehicleSoundPlayed = true;
-            vehicleSoundTimer = 0;
-        }
-
-        if (vehicleSoundPlayed && vehicleSoundTimer < 10000) {
-            vehicleSoundTimer += 16;
-        } else if (vehicleSoundTimer >= 10000) {
-            PlaySound(NULL, NULL, 0); // Stop sound
         }
 
         // CAR MOVEMENT

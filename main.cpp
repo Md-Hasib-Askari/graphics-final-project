@@ -9803,12 +9803,12 @@ public:
             glutPostRedisplay();
             break;
         case 'n':
-        case 'N':
+        case 'N': // night
             isNight = true;
             glutPostRedisplay();
             break;
         case 'm':
-        case 'M':
+        case 'M': // day
             isNight = false;
             glutPostRedisplay();
             break;
@@ -9925,6 +9925,186 @@ public:
     }
 };
 
+class CoverScene
+{
+public:
+    static CoverScene *instance;
+
+    void MainScene()
+    {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+        glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
+
+        glColor3f(1.0f, 1.0f, 1.0f);
+        renderBitmapString(-0.155f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
+        renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Cover Scene");
+        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow (->)' to continue");
+
+        glFlush();         // Render now
+        glutSwapBuffers(); // Swap buffers (double buffering)
+    }
+
+    void drawTable()
+    {
+        // Draw grid manually (smaller cells)
+        glColor3f(1, 1, 1);
+        glBegin(GL_LINES);
+        // Horizontal lines (7 rows)
+        glVertex2f(-0.6f, 0.28f);
+        glVertex2f(0.6f, 0.28f);
+        glVertex2f(-0.6f, 0.20f);
+        glVertex2f(0.6f, 0.20f);
+        glVertex2f(-0.6f, 0.12f);
+        glVertex2f(0.6f, 0.12f);
+        glVertex2f(-0.6f, 0.04f);
+        glVertex2f(0.6f, 0.04f);
+        glVertex2f(-0.6f, -0.04f);
+        glVertex2f(0.6f, -0.04f);
+        glVertex2f(-0.6f, -0.12f);
+        glVertex2f(0.6f, -0.12f);
+        glVertex2f(-0.6f, -0.2f);
+        glVertex2f(0.6f, -0.2f);
+
+        // Vertical lines (4 columns)
+        glVertex2f(-0.6f, 0.28f);
+        glVertex2f(-0.6f, -0.2f);
+        glVertex2f(-0.47f, 0.28f);
+        glVertex2f(-0.47f, -0.2f);
+        glVertex2f(0.0f, 0.28f);
+        glVertex2f(0.0f, -0.2f);
+        glVertex2f(0.3f, 0.28f);
+        glVertex2f(0.3f, -0.2f);
+        glVertex2f(0.6f, 0.28f);
+        glVertex2f(0.6f, -0.2f);
+        glEnd();
+
+        renderBitmapString(-0.55f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "SL");
+        renderBitmapString(-0.27f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Name");
+        renderBitmapString(0.14f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "ID");
+        renderBitmapString(0.4f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Contribution");
+
+        renderBitmapString(-0.55f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "10");
+        renderBitmapString(-0.4f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Kahium Ahamed Fahim");
+        renderBitmapString(0.1f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48593-3");
+        renderBitmapString(0.42f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 1");
+
+        renderBitmapString(-0.55f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "11");
+        renderBitmapString(-0.4f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Zobayer Al Mahmud");
+        renderBitmapString(0.1f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-47989-2");
+        renderBitmapString(0.42f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 2");
+
+        renderBitmapString(-0.55f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "12");
+        renderBitmapString(-0.4f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Md. Hasib Askari");
+        renderBitmapString(0.1f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48472-3");
+        renderBitmapString(0.42f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 3");
+
+        renderBitmapString(-0.55f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "13");
+        renderBitmapString(-0.4f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Md. Shahariar Islam Siam");
+        renderBitmapString(0.1f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48523-3");
+        renderBitmapString(0.42f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 4");
+
+        renderBitmapString(-0.55f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "14");
+        renderBitmapString(-0.4f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Purnandu Bikash Das");
+        renderBitmapString(0.1f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-49609-3");
+        renderBitmapString(0.42f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 5");
+    }
+
+    void CoverPage()
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        glColor3f(1, 1, 1);
+
+        renderBitmapString(-0.25f, 0.49f, 0.0f, GLUT_BITMAP_HELVETICA_18, "American International University-Bangladesh");
+        renderBitmapString(-0.18f, 0.44f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Faculty of Science and Engineering");
+        renderBitmapString(-0.04f, 0.41f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Session: 2024-25");
+
+        renderBitmapString(-0.13f, 0.36f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Course: Computer Graphics");
+        renderBitmapString(-0.025f, 0.32f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Section: J");
+
+        drawTable();
+
+        renderBitmapString(-0.54f, -0.26f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Submitted to:");
+        renderBitmapString(-0.48f, -0.32f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Mahfujur Rahman");
+        renderBitmapString(-0.48f, -0.36f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Assistant Professor");
+        renderBitmapString(-0.48f, -0.4f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Department of Computer Science");
+
+        renderBitmapString(-0.54f, -0.48f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Submission Date: 26 June 2025");
+        renderBitmapString(0.24f, -0.36f, 0.0f, GLUT_BITMAP_HELVETICA_18, "For Instructions, Press \"F1\"");
+        renderBitmapString(0.24f, -0.4f, 0.0f, GLUT_BITMAP_HELVETICA_18, "For Main Scene, Press \"Right Key\"");
+
+        glFlush();
+        glutSwapBuffers(); // Swap buffers (double buffering)
+    }
+
+    void InstructionsPage()
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // rectangle box for title
+        glColor3f(1, 1, 1);
+        glBegin(GL_LINE_LOOP);
+        glVertex2f(-0.3f, 0.5f);
+        glVertex2f(0.3f, 0.5f);
+        glVertex2f(0.3f, 0.43f);
+        glVertex2f(-0.3f, 0.43f);
+        glEnd();
+        renderBitmapString(-0.08f, 0.45f, 0.0f, GLUT_BITMAP_HELVETICA_18, "INSTRUCTIONS");
+
+        // Instructions text
+        renderBitmapString(-0.9f, 0.3f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Common Keys:");
+        renderBitmapString(-0.8f, 0.25f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Next Scene -> right key");
+        renderBitmapString(-0.8f, 0.2f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Previous Scene -> left key");
+
+        renderBitmapString(-0.9f, 0.1f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Internal Scene Change:");
+        renderBitmapString(-0.8f, 0.05f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Cover to Main Scene -> A");
+        renderBitmapString(-0.8f, 0.0f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Main Scene to Cover -> D");
+
+        renderBitmapString(-0.9f, -0.1f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 3:");
+        renderBitmapString(-0.8f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Speed Up -> W");
+        renderBitmapString(-0.8f, -0.2f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Speed Down -> S");
+
+        renderBitmapString(-0.9f, -0.3f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 5:");
+        renderBitmapString(-0.8f, -0.35f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Day -> M");
+        renderBitmapString(-0.8f, -0.4f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Night -> N");
+        renderBitmapString(-0.8f, -0.45f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Start Moving -> G");
+        renderBitmapString(-0.8f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Stop Moving -> L");
+
+        renderBitmapString(0.7f, -0.47f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Main Scene -> Home Key");
+        renderBitmapString(0.7f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Go Back -> End Key");
+
+        glFlush();
+        glutSwapBuffers();
+    }
+
+    static void MainSceneWrapper()
+    {
+        if (CoverScene::instance == nullptr)
+        {
+            cout << "CoverScene instance is null, cannot display main scene." << endl;
+            return;
+        }
+        CoverScene::instance->MainScene();
+    }
+    static void CoverSceneWrapper()
+    {
+        if (CoverScene::instance == nullptr)
+        {
+            cout << "CoverScene instance is null, cannot display cover." << endl;
+            return;
+        }
+        CoverScene::instance->CoverPage();
+    }
+    static void InstructionsWrapper()
+    {
+        if (CoverScene::instance == nullptr)
+        {
+            cout << "CoverScene instance is null, cannot display instructions." << endl;
+            return;
+        }
+        CoverScene::instance->InstructionsPage();
+    }
+};
+
 // Main Controller for Scene Management
 
 // Sound Manager
@@ -9935,6 +10115,7 @@ bool SceneManager::scene4Sound = false;
 bool SceneManager::scene5Sound = false;
 
 // Scene Instances
+CoverScene *CoverScene::instance = nullptr;
 Scene1 *Scene1::instance = nullptr;
 Scene2 *Scene2::instance = nullptr;
 Scene3 *Scene3::instance = nullptr;
@@ -10109,6 +10290,30 @@ void changeScene(int key, int x, int y)
             Scene5::instance->pause = true; // Pause Scene 5
         }
     }
+    else if (key == GLUT_KEY_HOME)
+    {
+        // Show main scene
+        glutDisplayFunc(CoverScene::MainSceneWrapper); // Display the main scene
+        glutPostRedisplay();                           // Request a redraw of the current window
+
+        return;
+    }
+    else if (key == GLUT_KEY_F1)
+    {
+        // Show instructions
+        glutDisplayFunc(CoverScene::InstructionsWrapper); // Display the instructions page
+        glutPostRedisplay();                              // Request a redraw of the current window
+
+        return;
+    }
+    else if (key == GLUT_KEY_END)
+    {
+        // Show cover page
+        glutDisplayFunc(CoverScene::CoverSceneWrapper); // Display the cover page
+        glutPostRedisplay();                            // Request a redraw of the current window
+
+        return;
+    }
     // pause any scene that is not the current one
     if (sceneKey != 1 && Scene1::instance != nullptr)
     {
@@ -10133,22 +10338,6 @@ void mainScene()
 {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
-
-    glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // Set text color to black
-    glBegin(GL_QUADS);
-    glVertex2f(-1.0f, -1.0f); // Bottom left
-    glVertex2f(1.0f, -1.0f);  // Bottom right
-    glVertex2f(1.0f, 1.0f);   // Top right
-    glVertex2f(-1.0f, 1.0f);  // Top left
-    glEnd();
-
-    glColor3f(1.0f, 1.0f, 1.0f);
-
-    renderBitmapString(-0.19f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
-    renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow' to continue");
-
-    glFlush();         // Render now
-    glutSwapBuffers(); // Swap buffers (double buffering)
 }
 
 // Window resize callback
@@ -10165,6 +10354,17 @@ void reshape(int width, int height)
 
 int main(int argc, char **argv)
 {
+    // Initialize CoverScene instance
+    static CoverScene coverScene;
+    if (CoverScene::instance == nullptr)
+    {
+        CoverScene::instance = &coverScene; // Set the instance only if it's not already set
+    }
+    else
+    {
+        cout << "CoverScene instance already exists, not reinitializing." << endl;
+    }
+
     // Initialize GLUT and create the window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -10172,7 +10372,8 @@ int main(int argc, char **argv)
     glutCreateWindow("Ashes and Echoes");
 
     // Control Scene
-    glutDisplayFunc(mainScene);
+    // glutDisplayFunc(mainScene);
+    glutDisplayFunc(CoverScene::CoverSceneWrapper); // Display the Cover Scene
     glutSpecialFunc(changeScene);
     glutReshapeFunc(reshape);
 

@@ -1420,7 +1420,7 @@ public:
 
         glColor3f(1.0f, 1.0f, 1.0f);
         renderBitmapString(-0.155f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
-        renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 1:Peaceful vibrations");
+        renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Scene 1: Peaceful vibrations");
         renderBitmapString(-0.18f, -0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Created by: Fahim");
         renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'D' to continue");
 

@@ -109,8 +109,6 @@ public:
     GLfloat wheelRadius2 = 0.01f;
 
     bool pause = false;
-
-    // static Scene1* instance;
     static Scene1 *instance;
 
     void sound()
@@ -9930,20 +9928,6 @@ class CoverScene
 public:
     static CoverScene *instance;
 
-    void MainScene()
-    {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
-        glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
-
-        glColor3f(1.0f, 1.0f, 1.0f);
-        renderBitmapString(-0.155f, 0.05f, 0.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Ashes and Echoes");
-        renderBitmapString(-0.17f, -0.05f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Cover Scene");
-        renderBitmapString(-0.18f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Press 'Right Arrow (->)' to continue");
-
-        glFlush();         // Render now
-        glutSwapBuffers(); // Swap buffers (double buffering)
-    }
-
     void drawTable()
     {
         // Draw grid manually (smaller cells)
@@ -9983,27 +9967,27 @@ public:
         renderBitmapString(0.14f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "ID");
         renderBitmapString(0.4f, 0.23f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Contribution");
 
-        renderBitmapString(-0.55f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "10");
+        renderBitmapString(-0.55f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "16");
         renderBitmapString(-0.4f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Kahium Ahamed Fahim");
         renderBitmapString(0.1f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48593-3");
         renderBitmapString(0.42f, 0.15f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 1");
 
-        renderBitmapString(-0.55f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "11");
+        renderBitmapString(-0.55f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "12");
         renderBitmapString(-0.4f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Zobayer Al Mahmud");
         renderBitmapString(0.1f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-47989-2");
         renderBitmapString(0.42f, 0.07f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 2");
 
-        renderBitmapString(-0.55f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "12");
+        renderBitmapString(-0.55f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "14");
         renderBitmapString(-0.4f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Md. Hasib Askari");
         renderBitmapString(0.1f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48472-3");
         renderBitmapString(0.42f, -0.01f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 3");
 
-        renderBitmapString(-0.55f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "13");
+        renderBitmapString(-0.55f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "15");
         renderBitmapString(-0.4f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Md. Shahariar Islam Siam");
         renderBitmapString(0.1f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-48523-3");
         renderBitmapString(0.42f, -0.09f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 4");
 
-        renderBitmapString(-0.55f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "14");
+        renderBitmapString(-0.55f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "24");
         renderBitmapString(-0.4f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Purnandu Bikash Das");
         renderBitmapString(0.1f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "22-49609-3");
         renderBitmapString(0.42f, -0.17f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Scene 5");
@@ -10018,8 +10002,8 @@ public:
         renderBitmapString(-0.18f, 0.44f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Faculty of Science and Engineering");
         renderBitmapString(-0.04f, 0.41f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Session: 2024-25");
 
-        renderBitmapString(-0.13f, 0.36f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Course: Computer Graphics");
-        renderBitmapString(-0.025f, 0.32f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Section: J");
+        renderBitmapString(-0.13f, 0.36f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Course: Computer Graphics (J)");
+        renderBitmapString(-0.1f, 0.32f, 0.0f, GLUT_BITMAP_HELVETICA_18, "Project: Ashes and Echoes");
 
         drawTable();
 
@@ -10069,22 +10053,13 @@ public:
         renderBitmapString(-0.8f, -0.45f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Start Moving -> G");
         renderBitmapString(-0.8f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Stop Moving -> L");
 
-        renderBitmapString(0.7f, -0.47f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Main Scene -> Home Key");
+        renderBitmapString(0.7f, -0.47f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Main Scene -> Right Key");
         renderBitmapString(0.7f, -0.5f, 0.0f, GLUT_BITMAP_HELVETICA_12, "Go Back -> End Key");
 
         glFlush();
         glutSwapBuffers();
     }
 
-    static void MainSceneWrapper()
-    {
-        if (CoverScene::instance == nullptr)
-        {
-            cout << "CoverScene instance is null, cannot display main scene." << endl;
-            return;
-        }
-        CoverScene::instance->MainScene();
-    }
     static void CoverSceneWrapper()
     {
         if (CoverScene::instance == nullptr)
@@ -10290,14 +10265,6 @@ void changeScene(int key, int x, int y)
             Scene5::instance->pause = true; // Pause Scene 5
         }
     }
-    else if (key == GLUT_KEY_HOME)
-    {
-        // Show main scene
-        glutDisplayFunc(CoverScene::MainSceneWrapper); // Display the main scene
-        glutPostRedisplay();                           // Request a redraw of the current window
-
-        return;
-    }
     else if (key == GLUT_KEY_F1)
     {
         // Show instructions
@@ -10334,12 +10301,6 @@ void changeScene(int key, int x, int y)
     glutPostRedisplay(); // Request a redraw of the current window
 }
 
-void mainScene()
-{
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
-    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
-}
-
 // Window resize callback
 void reshape(int width, int height)
 {
@@ -10372,7 +10333,6 @@ int main(int argc, char **argv)
     glutCreateWindow("Ashes and Echoes");
 
     // Control Scene
-    // glutDisplayFunc(mainScene);
     glutDisplayFunc(CoverScene::CoverSceneWrapper); // Display the Cover Scene
     glutSpecialFunc(changeScene);
     glutReshapeFunc(reshape);
